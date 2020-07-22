@@ -1,0 +1,20 @@
+@foreach(session("messages") ?? [] as $message)
+
+    <div class="my-3 alert alert-{{ $message['state'] ?? \App\Enums\MessageState::STATE_INFO }}">
+        @switch($message['state'] ?? 'primary')
+        @case(\App\Enums\MessageState::STATE_INFO)
+        <i class="fas fa-info-circle"></i>
+        @break
+        @case(\App\Enums\MessageState::STATE_SUCCESS)
+        <i class="fas fa-check-circle"></i>
+        @break
+        @case(\App\Enums\MessageState::STATE_WARNING)
+        <i class="fas fa-exclamation-circle"></i>
+        @break
+        @case(\App\Enums\MessageState::STATE_DANGER)
+        <i class="fas fa-times-circle"></i>
+        @break
+        @endswitch
+        {{ $message['content'] ?? 'Default message content.' }}
+    </div>
+@endforeach

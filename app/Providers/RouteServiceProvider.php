@@ -32,6 +32,8 @@ class RouteServiceProvider extends ServiceProvider
                 return route("tempat-penyewaan.index");
             case UserLevel::ADMIN_PENYEWA:
                 return route("tempat-penyewaan.index");
+            case UserLevel::PENYEWA:
+                return route("penyewa-profile-management");
             default:
                 return route("home");
         }
