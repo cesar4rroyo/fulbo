@@ -14,7 +14,7 @@ class TempatPenyewaanController extends Controller
      */
     public function index()
     {
-        //
+        return response()->view("tempat-penyewaan.index");
     }
 
     /**

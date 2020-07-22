@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Enums\UserLevel;
+use App\User;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
@@ -21,7 +23,19 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/home';
+    public const HOME = '/tempat-penyewaan';
+
+    public static function defaultRoute(User $user)
+    {
+        switch ($user->level) {
+            case UserLevel::ADMIN_UTAMA:
+                return route("tempat-penyewaan.index");
+            case UserLevel::ADMIN_PENYEWA:
+                return route("tempat-penyewaan.index");
+            default:
+                return route("home");
+        }
+    }
 
     /**
      * Define your route model bindings, pattern filters, etc.
