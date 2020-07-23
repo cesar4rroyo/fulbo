@@ -1,4 +1,6 @@
 <div class="container">
+    @include("shared.messages")
+
     <div class="card">
         <div class="card-body">
             <table class="table table-sm table-striped table-bordered">
@@ -15,12 +17,12 @@
                 <tbody>
                 @foreach($tempatPenyewaans AS $tempatPenyewaan)
                     <tr>
-                        <td> {{ $tempatPenyewaans->lastItem() + $loop->index }} </td>
+                        <td> {{ $tempatPenyewaans->firstItem() + $loop->index }} </td>
                         <td> {{ $tempatPenyewaan->admin->name }} </td>
                         <td> {{ $tempatPenyewaan->nama }} </td>
                         <td> {{ $tempatPenyewaan->alamat }} </td>
                         <td class="text-center">
-                            <button class="btn btn-danger">
+                            <button wire:click="delete({{ $tempatPenyewaan->id }})" class="btn btn-danger">
                                 Hapus
                             </button>
                         </td>
