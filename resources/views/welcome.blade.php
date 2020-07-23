@@ -14,6 +14,7 @@
     <!-- Bootstrap core CSS -->
     <link href="{{ asset("css/app.css") }}" rel="stylesheet">
     <link href="{{ asset("css/landing-page.js") }}" rel="stylesheet">
+    @livewireStyles
 </head>
 
 <body>
@@ -38,6 +39,8 @@
                 <a href="{{ route("penyewa-registration") }}" class="btn btn-block btn-lg btn-primary">
                     Daftar
                 </a>
+
+                <livewire:front-page-search-tempat-penyewaan/>
             </div>
         </div>
     </div>
@@ -215,6 +218,7 @@
 
 <!-- Bootstrap core JavaScript -->
 <script src="{{ asset("js/app.js") }}"></script>
+@livewireScripts
 
 </body>
 
