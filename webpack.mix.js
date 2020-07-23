@@ -12,4 +12,6 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+    .sass('resources/sass/app.scss', 'public/css')
+    .js('node_modules/startbootstrap-landing-page/css/landing-page.css', 'public/css')
+    .copy('node_modules/startbootstrap-landing-page/img', 'public/img')

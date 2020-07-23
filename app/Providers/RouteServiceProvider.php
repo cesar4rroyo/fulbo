@@ -25,9 +25,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const HOME = '/tempat-penyewaan';
 
-    public static function defaultRoute(User $user)
+    public static function defaultRoute(User $user = null)
     {
-        switch ($user->level) {
+        switch ($user->level ?? null) {
             case UserLevel::ADMIN_UTAMA:
                 return route("tempat-penyewaan.index");
             case UserLevel::ADMIN_PENYEWA:
@@ -35,7 +35,7 @@ class RouteServiceProvider extends ServiceProvider
             case UserLevel::PENYEWA:
                 return route("penyewa-profile-management");
             default:
-                return route("home");
+                return route("welcome");
         }
     }
 
