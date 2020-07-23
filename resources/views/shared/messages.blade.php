@@ -1,7 +1,7 @@
-<?php foreach(session("messages") ?? [] as $message): ?>
+@foreach(session("messages") ?? [] as $message)
 
-<div class="my-3 alert alert-{{ $message['state'] ?? \App\Enums\MessageState::STATE_INFO }}">
-    @switch($message['state'] ?? 'primary')
+    <div class="my-3 alert alert-{{ $message['state'] ?? \App\Enums\MessageState::STATE_INFO }}">
+        @switch($message['state'] ?? 'primary')
         @case(\App\Enums\MessageState::STATE_INFO)
         <i class="fas fa-info-circle"></i>
         @break
@@ -14,8 +14,7 @@
         @case(\App\Enums\MessageState::STATE_DANGER)
         <i class="fas fa-times-circle"></i>
         @break
-    @endswitch
-    {{ $message['content'] ?? 'Default message content.' }}
-</div>
-
-<?php endforeach; ?>
+        @endswitch
+        {{ $message['content'] ?? 'Default message content.' }}
+    </div>
+@endforeach
