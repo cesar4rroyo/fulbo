@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class TempatPenyewaan extends Model
 {
     protected $table = "tempat_penyewaan";
+    protected $guarded = [];
 
     public function admin(): BelongsTo
     {

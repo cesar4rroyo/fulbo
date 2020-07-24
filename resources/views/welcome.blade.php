@@ -33,12 +33,21 @@
     <div class="container">
         <div class="row">
             <div class="col-xl-9 mx-auto">
-                <h1 class="mb-5"> Daftar sekarang juga untuk melakukan proses penyewaan! </h1>
+                <h1 class="mb-5"> Daftar sekarang juga! </h1>
             </div>
             <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-                <a href="{{ route("penyewa-registration") }}" class="btn btn-block btn-lg btn-primary">
-                    Daftar
-                </a>
+                <div class="row">
+                    <div class="col-md-6">
+                        <a href="{{ route("penyewa-registration") }}" class="btn btn-block btn-lg btn-primary">
+                            Daftar Penyewa
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="{{ route("tempat-penyewaan-registration") }}" class="btn btn-block btn-lg btn-primary">
+                            Daftar Tempat Penyewaan
+                        </a>
+                    </div>
+                </div>
 
                 <livewire:front-page-search-tempat-penyewaan/>
             </div>

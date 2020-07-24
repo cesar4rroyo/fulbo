@@ -2,16 +2,18 @@
 
 @section("content")
     <div class="container">
-        <div class="card"
-             style="max-width: 50rem; margin: auto">
-            <div class="card-header">
-                Registrasi Tempat Penyewaan
-            </div>
+        <h1 class="feature-title">
+            Manajemen Profil Tempat Penyewaan
+        </h1>
+
+        @include("shared.messages")
+
+        <div class="card">
             <div class="card-body">
-                <form action="{{ route("tempat-penyewaan-registration") }}"
+                <form action="{{ route("tempat-penyewaan-profile-management") }}"
                       method="POST">
                     @csrf
-                    @method("POST")
+                    @method("PUT")
 
                     <h2> Identitas Tempat Penyewaan </h2>
                     <hr>
@@ -24,7 +26,7 @@
                             placeholder="Nama Tempat Penyewaan"
                             class="form-control @error("nama") is-invalid @enderror"
                             name="nama"
-                            value="{{ old("nama") }}"
+                            value="{{ old("nama", $user->tempat_penyewaan->nama) }}"
                         />
                         @error("nama")
                         <span class="invalid-feedback">
@@ -43,7 +45,7 @@
                             id="alamat"
                             placeholder="Alamat"
                             cols="30"
-                            rows="5">{{ old("alamat") }}</textarea>
+                            rows="5">{{ old("alamat", $user->tempat_penyewaan->alamat) }}</textarea>
                         @error("alamat")
                         <span class="invalid-feedback">
                             {{ $message }}
@@ -62,7 +64,7 @@
                             placeholder="Nama Asli"
                             class="form-control @error("name") is-invalid @enderror"
                             name="name"
-                            value="{{ old("name") }}"
+                            value="{{ old("name", $user->name) }}"
                         />
                         @error("name")
                         <span class="invalid-feedback">
@@ -79,7 +81,7 @@
                             placeholder="E-Mail"
                             class="form-control @error("email") is-invalid @enderror"
                             name="email"
-                            value="{{ old("email") }}"
+                            value="{{ old("email", $user->email) }}"
                         />
                         @error("email")
                         <span class="invalid-feedback">
@@ -96,7 +98,7 @@
                             placeholder="Tanggal Lahir"
                             class="form-control @error("tanggal_lahir") is-invalid @enderror"
                             name="tanggal_lahir"
-                            value="{{ old("tanggal_lahir") }}"
+                            value="{{ old("tanggal_lahir", $user->tanggal_lahir) }}"
                         />
                         @error("tanggal_lahir")
                         <span class="invalid-feedback">
@@ -106,11 +108,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="password"> Kata Sandi:</label>
+                        <label for="password"> Kata Sandi Baru:</label>
                         <input
                             id="password"
                             type="password"
-                            placeholder="Kata Sandi"
+                            placeholder="Kata Sandi Baru"
                             class="form-control @error("password") is-invalid @enderror"
                             name="password"
                             value="{{ old("password") }}"
@@ -123,11 +125,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="password_confirmation"> Ulangi Kata Sandi:</label>
+                        <label for="password_confirmation"> Ulangi Kata Sandi Baru:</label>
                         <input
                             id="password_confirmation"
                             type="password"
-                            placeholder="Ulangi Kata Sandi"
+                            placeholder="Ulangi Kata Sandi Baru"
                             class="form-control @error("password_confirmation") is-invalid @enderror"
                             name="password_confirmation"
                             value="{{ old("password_confirmation") }}"
@@ -141,12 +143,12 @@
 
                     <div class="d-flex justify-content-end">
                         <button class="btn btn-primary">
-                            Daftar
+                            Ubah
                         </button>
                     </div>
+
                 </form>
             </div>
         </div>
     </div>
-
 @endsection

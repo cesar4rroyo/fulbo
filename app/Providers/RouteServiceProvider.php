@@ -31,7 +31,7 @@ class RouteServiceProvider extends ServiceProvider
             case UserLevel::ADMIN_UTAMA:
                 return route("tempat-penyewaan.index");
             case UserLevel::ADMIN_PENYEWA:
-                return route("tempat-penyewaan.index");
+                return route("tempat-penyewaan-profile-management");
             case UserLevel::PENYEWA:
                 return route("penyewa-profile-management");
             default:
