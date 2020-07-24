@@ -12019,3 +12019,7 @@ a.text-dark:focus {
   content: "\E620";
 }
 
+.feature-title {
+  margin-bottom: 2.5rem;
+}
+

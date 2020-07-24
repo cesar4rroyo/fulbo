@@ -2,7 +2,9 @@
 
 @section("content")
     <div class="container">
-        <h1> Manajemen Profil </h1>
+        <h1 class="feature-title">
+            Manajemen Profil
+        </h1>
 
         @include("shared.messages")
 

@@ -5,6 +5,8 @@ use App\Http\Controllers\PenyewaProfileManagementHandlerController;
 use App\Http\Controllers\PenyewaRegistrationFormController;
 use App\Http\Controllers\PenyewaRegistrationHandlerController;
 use App\Http\Controllers\TempatPenyewaanController;
+use App\Http\Controllers\TempatPenyewaanRegistrationFormController;
+use App\Http\Controllers\TempatPenyewaanRegistrationHandlerController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -19,11 +21,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name("welcome");
+Auth::routes([
+    "register" => false,
+    "reset" => false,
+    "confirm" => false,
+    "verify" => false,
+]);
 
-Auth::routes();
+Route::view("/", "welcome")->name("welcome");
 
 Route::resource('/tempat-penyewaan', class_basename(TempatPenyewaanController::class));
 Route::get('/penyewa-registration', class_basename(PenyewaRegistrationFormController::class))
@@ -35,3 +40,8 @@ Route::get('/penyewa-profile-management', class_basename(PenyewaProfileManagemen
     ->name("penyewa-profile-management");
 Route::put('/penyewa-profile-management', class_basename(PenyewaProfileManagementHandlerController::class))
     ->name('penyewa-profile-management');
+
+Route::get('/tempat-penyewaan-registration', class_basename(TempatPenyewaanRegistrationFormController::class))
+    ->name('tempat-penyewaan-registration');
+Route::post('/tempat-penyewaan-registration', class_basename(TempatPenyewaanRegistrationHandlerController::class))
+    ->name('tempat-penyewaan-registration');
