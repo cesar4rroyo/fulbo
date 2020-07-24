@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * @property TempatPenyewaan tempat_penyewaan
+ */
 class User extends Authenticatable
 {
     use Notifiable;
