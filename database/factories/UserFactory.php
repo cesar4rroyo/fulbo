@@ -1,9 +1,12 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+/** @var Factory $factory */
 
+use App\Enums\UserLevel;
 use App\User;
 use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factory;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /*
@@ -18,15 +21,15 @@ use Illuminate\Support\Str;
 */
 
 $factory->define(User::class, function (Faker $faker) {
-    $usernameOrPassword = $faker->userName;
+    $usernameOrPassword = $faker->unique()->userName;
 
     return [
         'name' => $faker->name,
         'username' => $usernameOrPassword,
-        'level' => $faker->randomElement(\App\Enums\UserLevel::LEVELS),
-        'email' => $faker->unique()->safeEmail,
+        'level' => $faker->randomElement(UserLevel::LEVELS),
+        'email' => "{$usernameOrPassword}@gmail.com",
         'email_verified_at' => now(),
-        'password' => \Illuminate\Support\Facades\Hash::make($usernameOrPassword), // password
+        'password' => Hash::make($usernameOrPassword), // password
         'remember_token' => Str::random(10),
     ];
 });

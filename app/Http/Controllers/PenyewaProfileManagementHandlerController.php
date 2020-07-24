@@ -20,7 +20,7 @@ class PenyewaProfileManagementHandlerController extends Controller
     {
         $data = $request->validate([
             "name" => ["required", "string"],
-            "username" => ["required", "string", Rule::unique(User::class)->ignoreModel(auth()->user())],
+            "email" => ["required", "string", Rule::unique(User::class)->ignoreModel(auth()->user())],
             "tanggal_lahir" => ["required", "dateformat:Y-m-d"],
             "password" => ["nullable", "string", "confirmed"],
         ]);

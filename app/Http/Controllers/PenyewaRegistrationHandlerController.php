@@ -23,7 +23,7 @@ class PenyewaRegistrationHandlerController extends Controller
     {
         $data = $request->validate([
             "name" => ["required", "string"],
-            "username" => ["required", "string", Rule::unique(User::class)],
+            "email" => ["required", "string", Rule::unique(User::class)],
             "tanggal_lahir" => ["required", "dateformat:Y-m-d"],
             "password" => ["required", "string", "confirmed"],
         ]);

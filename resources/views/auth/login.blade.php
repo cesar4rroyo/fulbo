@@ -11,16 +11,16 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="form-group">
-                            <label for="username"> Nama Pengguna:</label>
+                            <label for="email"> E-Mail:</label>
                             <input
-                                id="username"
-                                type="text"
-                                placeholder="Nama Pengguna"
-                                class="form-control @error("username") is-invalid @enderror"
-                                name="username"
-                                value="{{ old("username") }}"
+                                id="email"
+                                type="email"
+                                placeholder="E-Mail"
+                                class="form-control @error("email") is-invalid @enderror"
+                                name="email"
+                                value="{{ old("email") }}"
                             />
-                            @error("username")
+                            @error("email")
                             <span class="invalid-feedback">
                                 {{ $message }}
                             </span>
