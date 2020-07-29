@@ -11,6 +11,10 @@ class TempatPenyewaanIndex extends Component
 {
     use WithPagination;
 
+    protected $listeners = [
+        'delete' => 'delete'
+    ];
+
     public function render()
     {
         $tempatPenyewaans = TempatPenyewaan::query()

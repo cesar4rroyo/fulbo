@@ -7,6 +7,7 @@
 require('./bootstrap');
 import "alpinejs";
 
+window.Swal = require('sweetalert2')
 window.Vue = require('vue');
 
 /**

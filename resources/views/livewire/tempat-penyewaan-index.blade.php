@@ -6,10 +6,11 @@
             <table class="table table-sm table-striped table-bordered">
                 <thead>
                 <tr>
-                    <th> No.</th>
-                    <th> Nama</th>
-                    <th> Admin</th>
-                    <th> Alamat</th>
+                    <th> # </th>
+                    <th> Nama </th>
+                    <th> Admin </th>
+                    <th> Alamat </th>
+                    <th> Aktif </th>
                     <th class="text-center"> Kendali</th>
                 </tr>
                 </thead>
@@ -21,8 +22,25 @@
                         <td> {{ $tempatPenyewaan->admin->name }} </td>
                         <td> {{ $tempatPenyewaan->nama }} </td>
                         <td> {{ $tempatPenyewaan->alamat }} </td>
+                        <td>  </td>
                         <td class="text-center">
-                            <button wire:click="delete({{ $tempatPenyewaan->id }})" class="btn btn-danger">
+                            <button
+                                x-data="{}"
+                                x-on:click="
+                                    Swal.fire({
+                                        title: 'Konfirmasi',
+                                        text: 'Anda yakin?',
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                    }).then(response => {
+                                        if (!response.value) {
+                                            return
+                                        }
+
+                                        window.livewire.emit('delete', {{ $tempatPenyewaan->id }})
+                                    })
+                                "
+                                class="btn btn-danger">
                                 Hapus
                             </button>
                         </td>

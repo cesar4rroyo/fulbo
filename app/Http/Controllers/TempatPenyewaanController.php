@@ -14,6 +14,7 @@ class TempatPenyewaanController extends Controller
      */
     public function index()
     {
+        $this->authorize("viewAny", TempatPenyewaan::class);
         return response()->view("tempat-penyewaan.index");
     }
 
