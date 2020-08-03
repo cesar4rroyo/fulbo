@@ -9,5 +9,6 @@ $factory->define(TempatPenyewaan::class, function (Faker $faker) {
     return [
         'nama' => $faker->company,
         'alamat' => $faker->address,
+        'terverifikasi' => rand(0, 1),
     ];
 });

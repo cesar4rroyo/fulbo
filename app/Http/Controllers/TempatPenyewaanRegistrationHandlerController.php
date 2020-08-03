@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\UserLevel;
+use App\Providers\AuthServiceProvider;
 use App\TempatPenyewaan;
 use App\User;
 use Illuminate\Http\Request;
@@ -22,6 +23,8 @@ class TempatPenyewaanRegistrationHandlerController extends Controller
      */
     public function __invoke(Request $request)
     {
+        $this->authorize(AuthServiceProvider::ACTION_MANAGE_TEMPAT_PENYEWAAN_PROFILE);
+
         $data = $request->validate([
             "nama" => ["required", "string", Rule::unique(TempatPenyewaan::class)],
             "alamat" => ["required", "string"],

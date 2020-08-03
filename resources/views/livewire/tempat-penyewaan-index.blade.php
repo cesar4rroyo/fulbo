@@ -1,6 +1,5 @@
 <div class="container">
     @include("shared.messages")
-
     <div class="card">
         <div class="card-body">
             <table class="table table-sm table-striped table-bordered">
@@ -22,9 +21,9 @@
                         <td> {{ $tempatPenyewaan->nama }} </td>
                         <td> {{ $tempatPenyewaan->alamat }} </td>
                         <td class="text-center">
-                            <button wire:click="delete({{ $tempatPenyewaan->id }})" class="btn btn-danger">
-                                Hapus
-                            </button>
+                            @include('shared.delete-button', [
+                                "itemId" => $tempatPenyewaan->id,
+                            ])
                         </td>
                     </tr>
                 @endforeach

@@ -2,18 +2,27 @@
 
 namespace App\Providers;
 
+use App\Enums\UserLevel;
+use App\Policies\TempatPenyewaanPolicy;
+use App\TempatPenyewaan;
+use App\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
+    const ACTION_VIEW_ANY = "viewAny";
+
+    const ACTION_MANAGE_TEMPAT_PENYEWAAN_PROFILE = "manage-tempat-penyewaan-profile";
+    const ACTION_MANAGE_PENYEWA_PROFILE = "penyewa-profile";
+
     /**
      * The policy mappings for the application.
      *
      * @var array
      */
     protected $policies = [
-        // 'App\Model' => 'App\Policies\ModelPolicy',
+         TempatPenyewaan::class => TempatPenyewaanPolicy::class,
     ];
 
     /**
@@ -23,8 +32,10 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->registerPolicies();
+        Gate::define(self::ACTION_MANAGE_TEMPAT_PENYEWAAN_PROFILE, function (User $user) {
+            return $user->level === UserLevel::ADMIN_PENYEWA;
+        });
 
-        //
+        $this->registerPolicies();
     }
 }

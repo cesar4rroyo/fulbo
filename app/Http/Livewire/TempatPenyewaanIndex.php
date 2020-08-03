@@ -11,6 +11,10 @@ class TempatPenyewaanIndex extends Component
 {
     use WithPagination;
 
+    protected $listeners = [
+        "delete" => "delete",
+    ];
+
     public function render()
     {
         $tempatPenyewaans = TempatPenyewaan::query()
@@ -23,7 +27,9 @@ class TempatPenyewaanIndex extends Component
 
     public function delete(int $id)
     {
-        $tempatPenyewaan = TempatPenyewaan::query()->find($id);
+        $tempatPenyewaan = TempatPenyewaan::query()
+            ->where("verified", true)
+            ->find($id);
 
         try {
             throw_if(!isset($tempatPenyewaan), new \Exception(

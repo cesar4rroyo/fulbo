@@ -18,33 +18,41 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('welcome') }}"> Home </a>
-                        </li>
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        @include('shared.auth-links')
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        @include("navbar")
 
         <main class="py-4">
-            @yield('content')
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2">
+                        <span class="text-uppercase">
+                            Manajemen
+                        </span>
+                        <hr class="mt-0">
+
+                        @can(\App\Providers\AuthServiceProvider::ACTION_VIEW_ANY, \App\TempatPenyewaan::class)
+                            <a href="{{ route("tempat-penyewaan.index") }}">
+                                Tempat Penyewaan
+                            </a>
+                        @endcan
+
+                        @can(\App\Providers\AuthServiceProvider::ACTION_MANAGE_TEMPAT_PENYEWAAN_PROFILE)
+                            <a href="{{ route("tempat-penyewaan-profile-management") }}">
+                                Manajemen Profil
+                            </a>
+                        @endcan
+
+                        @can(\App\Providers\AuthServiceProvider::ACTION_MANAGE_PENYEWA_PROFILE)
+                            <a href="{{ route("penyewa-profile-management") }}">
+                                Manajemen Profil
+                            </a>
+                        @endcan
+                    </div>
+
+                    <div class="col-md-10">
+                        @yield('content')
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 

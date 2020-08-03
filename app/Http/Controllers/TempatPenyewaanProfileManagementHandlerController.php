@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\MessageState;
+use App\Providers\AuthServiceProvider;
 use App\TempatPenyewaan;
 use App\User;
 use Illuminate\Http\Request;
@@ -21,6 +22,8 @@ class TempatPenyewaanProfileManagementHandlerController extends Controller
      */
     public function __invoke(Request $request)
     {
+        $this->authorize(AuthServiceProvider::ACTION_MANAGE_TEMPAT_PENYEWAAN_PROFILE);
+
         /** @var User $user */
         $user = auth()->user();
 

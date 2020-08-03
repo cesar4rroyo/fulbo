@@ -20,51 +20,39 @@
 <body>
 
 <!-- Navigation -->
-<nav class="navbar navbar-light bg-light static-top">
-    <div class="container">
-        <a class="navbar-brand" href="{{ \App\Providers\RouteServiceProvider::defaultRoute() }}"> {{ config("app.name") }} </a>
-        <a class="btn btn-primary" href="{{ route("login") }}"> Masuk </a>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Left Side Of Navbar -->
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('welcome') }}"> Home </a>
-                </li>
-            </ul>
-
-            <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav ml-auto">
-                @include('shared.auth-links')
-            </ul>
-        </div>
-    </div>
-</nav>
+@include('navbar-guest')
 
 <!-- Masthead -->
 <header class="masthead text-white text-center" style="background: url('{{ asset("front.jpg") }}')">
     <div class="overlay"></div>
     <div class="container">
-        <div class="row">
-            <div class="col-xl-9 mx-auto">
-                <h1 class="mb-5"> Daftar sekarang juga! </h1>
-            </div>
-            <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-                <div class="row">
-                    <div class="col-md-6">
-                        <a href="{{ route("penyewa-registration") }}" class="btn btn-block btn-lg btn-primary">
-                            Daftar Penyewa
-                        </a>
-                    </div>
-                    <div class="col-md-6">
-                        <a href="{{ route("tempat-penyewaan-registration") }}" class="btn btn-block btn-lg btn-primary">
-                            Daftar Tempat Penyewaan
-                        </a>
-                    </div>
+        <div class="row mx-auto" style="max-width: 600px">
+            @guest
+                <div class="col-12 mb-5">
+                    <h1> Daftar sekarang juga! </h1>
                 </div>
 
-                <livewire:front-page-search-tempat-penyewaan/>
-            </div>
+                <div class="col-md-6">
+                    <a href="{{ route("penyewa-registration") }}" class="btn btn-block btn-lg btn-primary">
+                        Daftar Penyewa
+                    </a>
+                </div>
+
+                <div class="col-md-6">
+                    <a href="{{ route("tempat-penyewaan-registration") }}" class="btn btn-block btn-lg btn-primary">
+                        Daftar Tempat Penyewaan
+                    </a>
+                </div>
+
+            @else
+                <div class="col-12 mb-5">
+                    <h1> Selamat Datang! </h1>
+                </div>
+
+                <div class="col-md-12">
+                    <livewire:front-page-search-tempat-penyewaan/>
+                </div>
+            @endguest
         </div>
     </div>
 </header>
