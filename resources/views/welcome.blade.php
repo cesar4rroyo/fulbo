@@ -24,6 +24,20 @@
     <div class="container">
         <a class="navbar-brand" href="{{ \App\Providers\RouteServiceProvider::defaultRoute() }}"> {{ config("app.name") }} </a>
         <a class="btn btn-primary" href="{{ route("login") }}"> Masuk </a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Left Side Of Navbar -->
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('welcome') }}"> Home </a>
+                </li>
+            </ul>
+
+            <!-- Right Side Of Navbar -->
+            <ul class="navbar-nav ml-auto">
+                @include('shared.auth-links')
+            </ul>
+        </div>
     </div>
 </nav>
 
