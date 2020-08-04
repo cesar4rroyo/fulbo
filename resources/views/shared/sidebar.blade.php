@@ -1,7 +1,7 @@
 <div>
-                            <span class="text-uppercase">
-                                Manajemen
-                            </span>
+    <span class="text-uppercase font-weight-bold">
+        Manajemen
+    </span>
     <hr class="mt-0">
 
     @can(\App\Providers\AuthServiceProvider::ACTION_VIEW_ANY, \App\TempatPenyewaan::class)

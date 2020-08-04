@@ -9,6 +9,7 @@ use App\Http\Controllers\TempatPenyewaanProfileManagementFormController;
 use App\Http\Controllers\TempatPenyewaanProfileManagementHandlerController;
 use App\Http\Controllers\TempatPenyewaanRegistrationFormController;
 use App\Http\Controllers\TempatPenyewaanRegistrationHandlerController;
+use App\Http\Controllers\TempatPenyewaanTidakTerverifikasiIndexController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
