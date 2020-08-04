@@ -23,32 +23,13 @@
         <main class="py-4">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-2">
-                        <span class="text-uppercase">
-                            Manajemen
-                        </span>
-                        <hr class="mt-0">
+                    @auth
+                        <div class="col-md-2">
+                            @include('shared.sidebar')
+                        </div>
+                    @endauth
 
-                        @can(\App\Providers\AuthServiceProvider::ACTION_VIEW_ANY, \App\TempatPenyewaan::class)
-                            <a href="{{ route("tempat-penyewaan.index") }}">
-                                Tempat Penyewaan
-                            </a>
-                        @endcan
-
-                        @can(\App\Providers\AuthServiceProvider::ACTION_MANAGE_TEMPAT_PENYEWAAN_PROFILE)
-                            <a href="{{ route("tempat-penyewaan-profile-management") }}">
-                                Manajemen Profil
-                            </a>
-                        @endcan
-
-                        @can(\App\Providers\AuthServiceProvider::ACTION_MANAGE_PENYEWA_PROFILE)
-                            <a href="{{ route("penyewa-profile-management") }}">
-                                Manajemen Profil
-                            </a>
-                        @endcan
-                    </div>
-
-                    <div class="col-md-10">
+                    <div class="@auth col-md-10 @else col-md-12 @endauth">
                         @yield('content')
                     </div>
                 </div>
