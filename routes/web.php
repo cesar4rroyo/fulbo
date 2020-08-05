@@ -13,6 +13,7 @@ use App\Http\Controllers\TempatPenyewaanRegistrationFormController;
 use App\Http\Controllers\TempatPenyewaanRegistrationHandlerController;
 use App\Http\Controllers\TempatPenyewaanTidakTerverifikasiIndexController;
 use App\Http\Controllers\TempatPenyewaanUpdateLocationController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -34,7 +35,8 @@ Auth::routes([
     "verify" => false,
 ]);
 
-Route::view("/", "welcome")->name("welcome");
+
+Route::get("/", class_basename(WelcomeController::class))->name("welcome");
 
 Route::resource('/tempat-penyewaan', class_basename(TempatPenyewaanController::class));
 

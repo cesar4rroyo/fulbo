@@ -1,19 +1,28 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    >
+    <meta name="description"
+          content=""
+    >
+    <meta name="author"
+          content=""
+    >
 
     <title> {{ config("app.name") }} </title>
 
     <!-- Bootstrap core CSS -->
-    <link href="{{ asset("css/app.css") }}" rel="stylesheet">
-    <link href="{{ asset("css/landing-page.js") }}" rel="stylesheet">
+    <link href="{{ asset("css/app.css") }}"
+          rel="stylesheet"
+    >
+    <link href="{{ asset("css/landing-page.js") }}"
+          rel="stylesheet"
+    >
     @livewireStyles
 </head>
 
@@ -23,23 +32,31 @@
 @include('navbar-guest')
 
 <!-- Masthead -->
-<header class="masthead text-white text-center" style="background: url('{{ asset("front.jpg") }}')">
+<header class="masthead text-white text-center"
+        style="background: url('{{ asset("front.jpg") }}')"
+>
     <div class="overlay"></div>
     <div class="container">
-        <div class="row mx-auto" style="max-width: 600px">
+        <div class="row mx-auto"
+             style="max-width: 600px"
+        >
             @guest
                 <div class="col-12 mb-5">
                     <h1> Daftar sekarang juga! </h1>
                 </div>
 
                 <div class="col-md-6">
-                    <a href="{{ route("penyewa-registration") }}" class="btn btn-block btn-lg btn-primary">
+                    <a href="{{ route("penyewa-registration") }}"
+                       class="btn btn-block btn-lg btn-primary"
+                    >
                         Daftar Penyewa
                     </a>
                 </div>
 
                 <div class="col-md-6">
-                    <a href="{{ route("tempat-penyewaan-registration") }}" class="btn btn-block btn-lg btn-primary">
+                    <a href="{{ route("tempat-penyewaan-registration") }}"
+                       class="btn btn-block btn-lg btn-primary"
+                    >
                         Daftar Tempat Penyewaan
                     </a>
                 </div>
@@ -95,6 +112,21 @@
                 </div>
             </div>
         </div>
+    </div>
+</section>
+
+<section class="text-center"
+         id="app"
+>
+    <div class="container">
+        <h1 class="my-3"> Peta Persebaran Tempat Penyewaan </h1>
+    </div>
+
+    <div class="bg-dark">
+        <peta-welcome
+                :map_config='{{ json_encode(config('map')) }}'
+                :tempat_penyewaans='{{ json_encode($tempatPenyewaans) }}'
+        ></peta-welcome>
     </div>
 </section>
 
@@ -185,24 +217,25 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
-{{--                <ul class="list-inline mb-2">--}}
-{{--                    <li class="list-inline-item">--}}
-{{--                        <a href="#">About</a>--}}
-{{--                    </li>--}}
-{{--                    <li class="list-inline-item">&sdot;</li>--}}
-{{--                    <li class="list-inline-item">--}}
-{{--                        <a href="#">Contact</a>--}}
-{{--                    </li>--}}
-{{--                    <li class="list-inline-item">&sdot;</li>--}}
-{{--                    <li class="list-inline-item">--}}
-{{--                        <a href="#">Terms of Use</a>--}}
-{{--                    </li>--}}
-{{--                    <li class="list-inline-item">&sdot;</li>--}}
-{{--                    <li class="list-inline-item">--}}
-{{--                        <a href="#">Privacy Policy</a>--}}
-{{--                    </li>--}}
-{{--                </ul>--}}
-                <p class="text-muted small mb-4 mb-lg-0">&copy; {{ config("app.name") }} {{ now()->format("Y") }}. All Rights Reserved.</p>
+                {{--                <ul class="list-inline mb-2">--}}
+                {{--                    <li class="list-inline-item">--}}
+                {{--                        <a href="#">About</a>--}}
+                {{--                    </li>--}}
+                {{--                    <li class="list-inline-item">&sdot;</li>--}}
+                {{--                    <li class="list-inline-item">--}}
+                {{--                        <a href="#">Contact</a>--}}
+                {{--                    </li>--}}
+                {{--                    <li class="list-inline-item">&sdot;</li>--}}
+                {{--                    <li class="list-inline-item">--}}
+                {{--                        <a href="#">Terms of Use</a>--}}
+                {{--                    </li>--}}
+                {{--                    <li class="list-inline-item">&sdot;</li>--}}
+                {{--                    <li class="list-inline-item">--}}
+                {{--                        <a href="#">Privacy Policy</a>--}}
+                {{--                    </li>--}}
+                {{--                </ul>--}}
+                <p class="text-muted small mb-4 mb-lg-0">&copy; {{ config("app.name") }} {{ now()->format("Y") }}. All
+                    Rights Reserved.</p>
             </div>
             <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
                 <ul class="list-inline mb-0">
@@ -228,9 +261,15 @@
 </footer>
 
 <!-- Bootstrap core JavaScript -->
-<script src="{{ asset("js/app.js") }}"></script>
 @livewireScripts
+<script src="{{ asset("js/app.js") }}"></script>
 
 </body>
-
 </html>
+<script>
+    import PetaWelcome from "../js/components/PetaWelcome";
+
+    export default {
+        components: {PetaWelcome}
+    }
+</script>
