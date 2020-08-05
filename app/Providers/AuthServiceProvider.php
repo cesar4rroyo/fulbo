@@ -36,6 +36,10 @@ class AuthServiceProvider extends ServiceProvider
             return $user->level === UserLevel::ADMIN_PENYEWA;
         });
 
+        Gate::define(self::ACTION_MANAGE_PENYEWA_PROFILE, function (User $user) {
+            return $user->level === UserLevel::PENYEWA;
+        });
+
         $this->registerPolicies();
     }
 }

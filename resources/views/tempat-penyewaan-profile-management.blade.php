@@ -35,6 +35,13 @@
                         </select>
                     </div>
 
+                    @if($user->tempat_penyewaan->terverifikasi == 0)
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            Akun yang belum terverifikasi tidak dapat menggunakan fitur lengkap.
+                        </div>
+                    @endif
+
                     <div class="form-group">
                         <label for="nama"> Nama Tempat Penyewaan:</label>
                         <input
