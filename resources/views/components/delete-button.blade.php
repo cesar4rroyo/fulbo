@@ -11,4 +11,5 @@
                 })
         ">
     Hapus
+    <i class="fas fa-trash"></i>
 </button>

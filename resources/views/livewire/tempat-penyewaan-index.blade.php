@@ -5,59 +5,83 @@
 
     @include("shared.messages")
 
-    <div class="form-group">
-        <label for="filter_items">
-            Filter:
-        </label>
+    <div class="d-flex align-items-center">
+        <div class="form-inline my-3">
+            <label for="filter_items" class="mr-3">
+                Filter:
+            </label>
 
-        <select
-            class="form-control"
-            id="filter_items">
-            @foreach($options AS $option)
-                <option value="{{ $option }}" {{ $selectedOption === $option ? "selected" : "" }} >
-                    {{ $option }}
-                </option>
-            @endforeach
-        </select>
+            <select
+                class="form-control"
+                id="filter_items"
+                wire:model="selectedOption"
+            >
+                @foreach($options AS $option)
+                    <option
+                        value="{{ $option }}">
+                        {{ $option }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="form-inline flex-fill ml-2">
+            <div>
+                <livewire:index-search :key="rand()"/>
+            </div>
+        </div>
     </div>
 
+    @if($tempatPenyewaans->count() > 0)
+        <div class="table-responsive">
+            <table class="table table-sm table-striped">
+                <thead class="thead-dark">
+                <tr>
+                    <th class="align-middle"> #</th>
+                    <th class="align-middle"> Nama Tempat</th>
+                    <th class="align-middle"> Admin</th>
+                    <th class="align-middle" style="width: 100px"> Alamat</th>
+                    <th class="align-middle text-center"> Status Verifikasi</th>
+                    <th class="align-middle text-center"> Kendali</th>
+                </tr>
+                </thead>
 
+                <tbody>
+                @foreach($tempatPenyewaans AS $tempatPenyewaan)
+                    <tr>
+                        <td> {{ $tempatPenyewaans->firstItem() + $loop->index }} </td>
+                        <td> {{ $tempatPenyewaan->nama }} </td>
+                        <td> {{ $tempatPenyewaan->admin->name }} </td>
+                        <td> {{ $tempatPenyewaan->alamat }} </td>
+                        <td class="text-center">
+                            <x-verification-status
+                                :status="$tempatPenyewaan->terverifikasi">
+                            </x-verification-status>
+                        </td>
+                        <td class="text-center">
+                            <div>
+                                <x-delete-button
+                                    :itemId="$tempatPenyewaan->id"
+                                ></x-delete-button>
+                            </div>
 
-    <table class="table table-striped">
-        <thead class="thead-dark">
-        <tr>
-            <th class="align-middle"> #</th>
-            <th class="align-middle"> Nama</th>
-            <th class="align-middle"> Admin</th>
-            <th class="align-middle"> Alamat</th>
-            <th class="align-middle text-center"> Status Verifikasi</th>
-            <th class="align-middle text-center"> Kendali</th>
-        </tr>
-        </thead>
+                            <div class="text-center">
+                                <x-verification-toggle
+                                    :id="$tempatPenyewaan->id"
+                                    :status="$tempatPenyewaan->terverifikasi"
+                                ></x-verification-toggle>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
 
-        <tbody>
-        @foreach($tempatPenyewaans AS $tempatPenyewaan)
-            <tr>
-                <td> {{ $tempatPenyewaans->firstItem() + $loop->index }} </td>
-                <td> {{ $tempatPenyewaan->admin->name }} </td>
-                <td> {{ $tempatPenyewaan->nama }} </td>
-                <td> {{ $tempatPenyewaan->alamat }} </td>
-                <td class="text-center">
-                    <x-verification-status
-                        :status="$tempatPenyewaan->terverifikasi">
-                    </x-verification-status>
-                </td>
-                <td class="text-center">
-                    <x-delete-button
-                        :itemId="$tempatPenyewaan->id"
-                    ></x-delete-button>
-                </td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
-
-    <div class="d-flex justify-content-center">
-        {{ $tempatPenyewaans->links() }}
-    </div>
+        <div class="d-flex justify-content-center">
+            {{ $tempatPenyewaans->links() }}
+        </div>
+    @else
+        @include('alert-no-data')
+    @endif
 </div>

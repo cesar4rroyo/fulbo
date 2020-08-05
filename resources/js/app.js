@@ -8,7 +8,7 @@ import "alpinejs"
 import Swal from "sweetalert2"
 
 require('./bootstrap');
-
+require('livewire-vue')
 
 window.Swal = Swal
 window.Vue = require('vue');
