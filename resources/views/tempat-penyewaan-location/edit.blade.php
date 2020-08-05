@@ -12,9 +12,12 @@
 
         @include("shared.messages")
 
-        <div class="card">
-            <div class="card-body">
-            </div>
-        </div>
+        <tempat-penyewaan-location-edit
+            submit_url="{{ route("tempat-penyewaan.location.update", $tempat_penyewaan) }}"
+            redirect_url="{{ route("tempat-penyewaan.location.edit", $tempat_penyewaan) }}"
+            :map_config='{{ json_encode(config("map")) }}'
+            :tempat_penyewaan='{{ json_encode($tempat_penyewaan) }}'
+            :tempat_penyewaans='{{ json_encode($tempat_penyewaans) }}'
+        ></tempat-penyewaan-location-edit>
     </div>
 @endsection

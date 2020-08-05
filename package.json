@@ -25,7 +25,8 @@
         "sass-loader": "^8.0.0",
         "sweetalert2": "^9.17.1",
         "vue": "^2.5.17",
-        "vue-template-compiler": "^2.6.10"
+        "vue-template-compiler": "^2.6.10",
+        "vue2-google-maps": "^0.10.7"
     },
     "dependencies": {
         "startbootstrap-landing-page": "^5.0.8"

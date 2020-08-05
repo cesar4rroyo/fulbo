@@ -21,10 +21,8 @@ window.Vue = require('vue');
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+const files = require.context('./', true, /\.vue$/i)
+files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -32,10 +30,31 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+Vue.mixin({
+    data() {
+        return {
+            error_data: null,
+        }
+    },
+
+    methods: {
+        get: lodash.get,
+    }
+});
+
+// Import vue2-google-maps
+import * as VueGoogleMaps from 'vue2-google-maps'
+import lodash from "lodash";
+Vue.use(VueGoogleMaps, {
+    load: {
+        libraries: ["geometry"],
+        key: 'AIzaSyCt1SXMaJ-9Yb7xley_wWlvi54f5ckafOQ'
+    },
+})
+
 const app = new Vue({
     el: '#app',
 });
-
 
 window.confirmDialog = (attributes) => {
     return Swal.fire({
