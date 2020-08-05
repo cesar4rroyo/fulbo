@@ -65,6 +65,13 @@
                                 ></x-delete-button>
                             </div>
 
+                            <a
+                                class="btn btn-info btn-sm my-2 d-inline-block mx-auto"
+                                href="{{ route("tempat-penyewaan.location.edit", $tempatPenyewaan) }}">
+                                Lokasi
+                                <i class="fas fa-pencil-alt  "></i>
+                            </a>
+
                             <div class="text-center">
                                 <x-verification-toggle
                                     :id="$tempatPenyewaan->id"

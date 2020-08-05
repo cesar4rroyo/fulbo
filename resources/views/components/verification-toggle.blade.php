@@ -10,7 +10,7 @@
                 })
     "
     type="button"
-    class="my-2 btn btn-sm {{ $status ? "btn-dark" : "btn-success" }} ">
+    class="btn btn-sm {{ $status ? "btn-dark" : "btn-success" }} ">
     {{ $status ? "Batalkan Verifikasi" : "Verifikasi" }}
     <i class="fas {{ $status ? "fa-times" : "fa-check" }}"></i>
 </button>
