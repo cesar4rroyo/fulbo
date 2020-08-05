@@ -15,7 +15,6 @@ class TempatPenyewaanRegistrationFormController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $this->authorize(AuthServiceProvider::ACTION_MANAGE_PENYEWA_PROFILE);
         return response()->view("tempat-penyewaan-registration");
     }
 }
