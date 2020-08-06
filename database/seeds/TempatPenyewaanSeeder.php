@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\UserLevel;
+use App\Lapangan;
 use App\TempatPenyewaan;
 use App\User;
 use Illuminate\Database\Seeder;
@@ -20,19 +21,27 @@ class TempatPenyewaanSeeder extends Seeder
 
         factory(TempatPenyewaan::class, rand(30, 50))
             ->make()
-            ->each(function (TempatPenyewaan $tempatPenyewaan, $index) {
+            ->map(function (TempatPenyewaan $tempatPenyewaan, $index) {
                 $usernameOrPassword = "admin_penyewaan_{$index}";
+                $email = "{$usernameOrPassword}@test.com";
 
-                $adminPenyewaan = factory(User::class)
-                    ->create([
+                $tempatPenyewaan->admin()->associate(
+                    factory(User::class)->create(
+                        [
+                        "email" => $email,
                         "username" => $usernameOrPassword,
-                        "password" => Hash::make($usernameOrPassword),
                         "level" => UserLevel::ADMIN_PENYEWA,
-                    ]);
+                        "password" => Hash::make($usernameOrPassword),
+                    ])
+                )->save();
 
-                $tempatPenyewaan->fill([
-                    "admin_id" => $adminPenyewaan->id,
-                ])->save();
+                return $tempatPenyewaan;
+            })
+            ->each(function (TempatPenyewaan $tempatPenyewaan) {
+                $tempatPenyewaan->lapangans()->saveMany(
+                    factory(Lapangan::class, rand(1, 5))
+                        ->make()
+                );
             });
 
         DB::commit();
