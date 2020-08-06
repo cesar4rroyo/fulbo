@@ -90,6 +90,7 @@ class LapanganController extends Controller
      * @param TempatPenyewaan $tempatPenyewaan
      * @param Lapangan $lapangan
      * @return Response
+     * @throws AuthorizationException
      */
     public function edit(Lapangan $lapangan)
     {

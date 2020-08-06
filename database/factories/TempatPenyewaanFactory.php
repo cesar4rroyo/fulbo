@@ -17,5 +17,9 @@ $factory->define(TempatPenyewaan::class, function (Faker $faker) {
         'nama' => $faker->company,
         'alamat' => $faker->address,
         'terverifikasi' => rand(0, 1),
+        'aktif' => 1,
+        'waktu_buka' => '10:00:00',
+        'waktu_tutup' => '17:00:00',
+        'panjang_sesi' => '00:40:00',
     ], $locationData);
 });
