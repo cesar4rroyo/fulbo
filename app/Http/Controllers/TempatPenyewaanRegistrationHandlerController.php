@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\MessageState;
 use App\Enums\UserLevel;
+use App\Providers\AuthServiceProvider;
+use App\Support\SessionHelper;
 use App\TempatPenyewaan;
 use App\User;
 use Illuminate\Http\Request;
@@ -54,6 +57,8 @@ class TempatPenyewaanRegistrationHandlerController extends Controller
         DB::commit();
 
         Auth::guard()->login($user);
+
+        SessionHelper::flashMessage(__("messages.tempat-penyewaan-registration-success"), MessageState::STATE_SUCCESS);
 
         return redirect()->route("tempat-penyewaan-profile-management");
     }

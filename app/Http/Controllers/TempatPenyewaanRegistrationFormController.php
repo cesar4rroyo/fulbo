@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Providers\AuthServiceProvider;
 use Illuminate\Http\Request;
 
 class TempatPenyewaanRegistrationFormController extends Controller

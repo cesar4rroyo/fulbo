@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\MessageState;
 use App\Enums\UserLevel;
 use App\Providers\RouteServiceProvider;
+use App\Support\SessionHelper;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -36,6 +38,7 @@ class PenyewaRegistrationHandlerController extends Controller
 
         Auth::guard()->login($user);
 
+        SessionHelper::flashMessage(__("messages.penyewa-registration-success"), MessageState::STATE_SUCCESS);
         return redirect(RouteServiceProvider::defaultRoute($user));
     }
 }

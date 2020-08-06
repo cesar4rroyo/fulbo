@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Providers\AuthServiceProvider;
 use App\TempatPenyewaan;
 use Illuminate\Http\Request;
 
 class TempatPenyewaanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware([
+            "auth",
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +22,7 @@ class TempatPenyewaanController extends Controller
      */
     public function index()
     {
-        $this->authorize("viewAny", TempatPenyewaan::class);
+        $this->authorize(AuthServiceProvider::ACTION_VIEW_ANY, TempatPenyewaan::class);
         return response()->view("tempat-penyewaan.index");
     }
 

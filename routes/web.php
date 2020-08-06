@@ -1,14 +1,17 @@
 <?php
 
+use App\Http\Controllers\LapanganController;
 use App\Http\Controllers\PenyewaProfileManagementFormController;
 use App\Http\Controllers\PenyewaProfileManagementHandlerController;
 use App\Http\Controllers\PenyewaRegistrationFormController;
 use App\Http\Controllers\PenyewaRegistrationHandlerController;
 use App\Http\Controllers\TempatPenyewaanController;
+use App\Http\Controllers\TempatPenyewaanLocationController;
 use App\Http\Controllers\TempatPenyewaanProfileManagementFormController;
 use App\Http\Controllers\TempatPenyewaanProfileManagementHandlerController;
 use App\Http\Controllers\TempatPenyewaanRegistrationFormController;
 use App\Http\Controllers\TempatPenyewaanRegistrationHandlerController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -30,9 +33,19 @@ Auth::routes([
     "verify" => false,
 ]);
 
-Route::view("/", "welcome")->name("welcome");
+Route::get("/", class_basename(WelcomeController::class))
+    ->name("welcome");
 
-Route::resource('/tempat-penyewaan', class_basename(TempatPenyewaanController::class));
+Route::resource('tempat-penyewaan', class_basename(TempatPenyewaanController::class))
+    ->only(['index']);
+
+Route::resource('tempat-penyewaan.lapangan', class_basename(LapanganController::class))
+    ->except(['show', 'destroy'])
+    ->shallow();
+Route::resource('tempat-penyewaan.location', class_basename(TempatPenyewaanLocationController::class))
+    ->only(['edit', 'update'])
+    ->parameter('location', 'tempat_penyewaan');
+
 Route::get('/penyewa-registration', class_basename(PenyewaRegistrationFormController::class))
     ->name("penyewa-registration");
 Route::post('/penyewa-registration', class_basename(PenyewaRegistrationHandlerController::class))

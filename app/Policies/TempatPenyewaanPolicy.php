@@ -11,6 +11,13 @@ class TempatPenyewaanPolicy
 {
     use HandlesAuthorization;
 
+    public function before(User $user, $ability)
+    {
+        if ($user->level === UserLevel::ADMIN_UTAMA) {
+            return true;
+        }
+    }
+
     /**
      * Determine whether the user can view any models.
      *
@@ -19,7 +26,7 @@ class TempatPenyewaanPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->level == UserLevel::ADMIN_UTAMA;
+        return $user->level === UserLevel::ADMIN_UTAMA;
     }
 
     /**

@@ -14,11 +14,15 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-        factory(User::class)->create([
-            "name" => "Admin Utama",
+        $user = factory(User::class)->make([
             "email" => "admin@admin.com",
             "password" => Hash::make("admin"),
             "level" => UserLevel::ADMIN_UTAMA,
         ]);
+
+        User::query()->firstOrCreate(
+            $user->only(["email", "password", "level"]),
+            $user->toArray(),
+        );
     }
 }
