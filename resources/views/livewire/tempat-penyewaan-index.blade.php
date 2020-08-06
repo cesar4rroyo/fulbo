@@ -54,9 +54,9 @@
                         <td> {{ $tempatPenyewaan->admin->name }} </td>
                         <td> {{ $tempatPenyewaan->alamat }} </td>
                         <td class="text-center">
-                            <x-verification-status
+                            <x-boolean-status
                                 :status="$tempatPenyewaan->terverifikasi">
-                            </x-verification-status>
+                            </x-boolean-status>
                         </td>
                         <td class="text-center">
                             <div>
