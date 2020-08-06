@@ -2,23 +2,41 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\MessageState;
 use App\Lapangan;
+use App\Providers\AuthServiceProvider;
+use App\Support\SessionHelper;
 use App\TempatPenyewaan;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class LapanganController extends Controller
 {
+    private Gate $gate;
+    private ResponseFactory $responseFactory;
+
+    public function __construct(Gate $gate, ResponseFactory $responseFactory)
+    {
+        $this->gate = $gate;
+        $this->responseFactory = $responseFactory;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @param TempatPenyewaan $tempatPenyewaan
      * @return Response
+     * @throws AuthorizationException
      */
-    public function index(TempatPenyewaan $tempatPenyewaan, ResponseFactory $responseFactory)
+    public function index(TempatPenyewaan $tempatPenyewaan)
     {
-        return $responseFactory->view("tempat-penyewaan.lapangan.index", compact(
+        $this->gate->authorize(AuthServiceProvider::ACTION_MANAGE_LAPANGAN);
+
+        return $this->responseFactory->view("tempat-penyewaan.lapangan.index", compact(
             "tempatPenyewaan"
         ));
     }
@@ -31,7 +49,11 @@ class LapanganController extends Controller
      */
     public function create(TempatPenyewaan $tempatPenyewaan)
     {
-        //
+        $this->gate->authorize(AuthServiceProvider::ACTION_MANAGE_LAPANGAN);
+
+        return $this->responseFactory->view("tempat-penyewaan.lapangan.create", compact(
+            "tempatPenyewaan"
+        ));
     }
 
     /**
@@ -39,23 +61,27 @@ class LapanganController extends Controller
      *
      * @param Request $request
      * @param TempatPenyewaan $tempatPenyewaan
-     * @return Response
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
     public function store(Request $request, TempatPenyewaan $tempatPenyewaan)
     {
-        //
-    }
+        $this->gate->authorize(AuthServiceProvider::ACTION_MANAGE_LAPANGAN);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param TempatPenyewaan $tempatPenyewaan
-     * @param Lapangan $lapangan
-     * @return Response
-     */
-    public function show(TempatPenyewaan $tempatPenyewaan, Lapangan $lapangan)
-    {
-        //
+        $data = $request->validate([
+            "nama" => ["required", "string"],
+            "aktif" => ["required", "boolean"],
+        ]);
+
+        $tempatPenyewaan->lapangans()->create($data);
+
+        SessionHelper::flashMessage(
+            __("messages.create.success"),
+            MessageState::STATE_SUCCESS,
+        );
+
+        return $this->responseFactory
+            ->redirectToRoute("tempat-penyewaan.lapangan.index", $tempatPenyewaan);
     }
 
     /**
@@ -65,9 +91,13 @@ class LapanganController extends Controller
      * @param Lapangan $lapangan
      * @return Response
      */
-    public function edit(TempatPenyewaan $tempatPenyewaan, Lapangan $lapangan)
+    public function edit(Lapangan $lapangan)
     {
-        //
+        $this->gate->authorize(AuthServiceProvider::ACTION_MANAGE_LAPANGAN);
+
+        return $this->responseFactory->view("tempat-penyewaan.lapangan.edit", compact(
+            "lapangan",
+        ));
     }
 
     /**
@@ -76,22 +106,28 @@ class LapanganController extends Controller
      * @param Request $request
      * @param TempatPenyewaan $tempatPenyewaan
      * @param Lapangan $lapangan
-     * @return Response
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
-    public function update(Request $request, TempatPenyewaan $tempatPenyewaan, Lapangan $lapangan)
+    public function update(Request $request, Lapangan $lapangan)
     {
-        //
-    }
+        $this->gate->authorize(AuthServiceProvider::ACTION_MANAGE_LAPANGAN);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param TempatPenyewaan $tempatPenyewaan
-     * @param Lapangan $lapangan
-     * @return Response
-     */
-    public function destroy(TempatPenyewaan $tempatPenyewaan, Lapangan $lapangan)
-    {
-        //
+        $data = $request->validate([
+            "nama" => ["required", "string"],
+            "aktif" => ["required", "boolean"],
+        ]);
+
+        $lapangan->update($data);
+
+        SessionHelper::flashMessage(
+            __("messages.update.success"),
+            MessageState::STATE_SUCCESS,
+        );
+
+        return $this->responseFactory->redirectToRoute(
+            "lapangan.edit",
+            $lapangan,
+        );
     }
 }

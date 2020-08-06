@@ -51,7 +51,10 @@
                     <tr>
                         <td> {{ $tempatPenyewaans->firstItem() + $loop->index }} </td>
                         <td> {{ $tempatPenyewaan->nama }} </td>
-                        <td> {{ $tempatPenyewaan->admin->name }} </td>
+                        <td>
+                            <div> {{ $tempatPenyewaan->admin->name }} </div>
+                            <div> ({{ $tempatPenyewaan->admin->email }}) </div>
+                        </td>
                         <td> {{ $tempatPenyewaan->alamat }} </td>
                         <td class="text-center">
                             <x-boolean-status

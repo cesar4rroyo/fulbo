@@ -39,7 +39,9 @@ Route::get("/", class_basename(WelcomeController::class))
 Route::resource('tempat-penyewaan', class_basename(TempatPenyewaanController::class))
     ->only(['index']);
 
-Route::resource('tempat-penyewaan.lapangan', class_basename(LapanganController::class));
+Route::resource('tempat-penyewaan.lapangan', class_basename(LapanganController::class))
+    ->except(['show', 'destroy'])
+    ->shallow();
 Route::resource('tempat-penyewaan.location', class_basename(TempatPenyewaanLocationController::class))
     ->only(['edit', 'update'])
     ->parameter('location', 'tempat_penyewaan');

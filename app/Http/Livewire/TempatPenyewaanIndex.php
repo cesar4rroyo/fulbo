@@ -99,7 +99,6 @@ class TempatPenyewaanIndex extends Component
     {
         try {
             $tempatPenyewaan = TempatPenyewaan::query()
-                ->where('terverifikasi', 1)
                 ->firstOrFail($id);
 
             $tempatPenyewaan->delete();

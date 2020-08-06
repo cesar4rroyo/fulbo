@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'errors' => [
+        '404' => 'Maaf, halaman yang Anda cari tidak tersedia.',
+        '403' => 'Maaf, Anda tidak memiliki hak akses untuk halaman tersebut.'
+    ],
 
     'create' => [
         'success' => 'Data berhasil ditambahkan.',

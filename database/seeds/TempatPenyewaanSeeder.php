@@ -39,7 +39,7 @@ class TempatPenyewaanSeeder extends Seeder
             })
             ->each(function (TempatPenyewaan $tempatPenyewaan) {
                 $tempatPenyewaan->lapangans()->saveMany(
-                    factory(Lapangan::class, rand(1, 5))
+                    factory(Lapangan::class, rand(20, 50))
                         ->make()
                 );
             });

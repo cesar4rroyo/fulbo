@@ -2,6 +2,6 @@
 
 @section("content")
     <livewire:lapangan-index
-        :tempat-penyewaan="$tempatPenyewaan->id"
+        :tempat-penyewaan-id="$tempatPenyewaan->id"
     />
 @endsection
