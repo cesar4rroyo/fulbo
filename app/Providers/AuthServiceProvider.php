@@ -17,6 +17,7 @@ class AuthServiceProvider extends ServiceProvider
     const ACTION_MANAGE_PENYEWA_PROFILE = "penyewa-profile";
     const ACTION_MANAGE_LAPANGAN = "manage-lapangan";
     const ACTION_MANAGE_FOTO = "manage-foto";
+    const ACTION_VIEW_TEMPAT_PENYEWAAN_PAGE = 'view-tempat-penyewaan';
 
     /**
      * The policy mappings for the application.
@@ -52,6 +53,10 @@ class AuthServiceProvider extends ServiceProvider
             return
                 $user->level === UserLevel::ADMIN_PENYEWA &&
                 $user->tempat_penyewaan->terverifikasi;
+        });
+
+        Gate::define(self::ACTION_VIEW_TEMPAT_PENYEWAAN_PAGE, function (?User $user) {
+            return $user !== null;
         });
 
         $this->registerPolicies();

@@ -12,31 +12,38 @@
             type="text">
     </label>
 
-    <ul class="list-group position-absolute d-block"
+    <div class="list-group position-absolute d-block"
         style="width: 100%; z-index: 1">
         @forelse($items as $item)
-            <li
-                x-data="{ hovered: false }"
+            <div
+                x-data="{ hovered: false, url: '{{ route("tempat-penyewaan.page", $item)  }}' }"
                 class="list-group-item list-group-item-action"
                 :class="{ active: hovered }"
                 x-on:mouseenter="hovered = true"
                 x-on:mouseleave="hovered = false"
+                x-on:click="window.location.replace(url)"
             >
-                {{ $item->nama }}
-            </li>
+                <div>
+                    {{ $item->nama }}
+                </div>
+
+                <div>
+                    {{ $item->alamat  }}
+                </div>
+            </div>
         @empty
-            <li
+            <div
                 wire:loading
                 class="list-group-item list-group-item-action">
                 Melakukan pencarian...
-            </li>
+            </div>
 
             @if($query !== "")
-                <li
+                <div
                     class="list-group-item list-group-item-action">
                     Tempat Tidak Ditemukan
-                </li>
+                </div>
             @endif
         @endforelse
-    </ul>
+    </div>
 </div>

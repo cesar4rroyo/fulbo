@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FotoTempatPenyewaanCarouselController;
 use App\Http\Controllers\FotoTempatPenyewaanController;
 use App\Http\Controllers\FotoTempatPenyewaanImageController;
 use App\Http\Controllers\FotoTempatPenyewaanThumbController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\PenyewaRegistrationFormController;
 use App\Http\Controllers\PenyewaRegistrationHandlerController;
 use App\Http\Controllers\TempatPenyewaanController;
 use App\Http\Controllers\TempatPenyewaanLocationController;
+use App\Http\Controllers\TempatPenyewaanPageController;
 use App\Http\Controllers\TempatPenyewaanProfileManagementFormController;
 use App\Http\Controllers\TempatPenyewaanProfileManagementHandlerController;
 use App\Http\Controllers\TempatPenyewaanRegistrationFormController;
@@ -47,13 +49,20 @@ Route::resource('tempat-penyewaan.lapangan', class_basename(LapanganController::
     ->shallow();
 
 Route::resource('tempat-penyewaan.foto', class_basename(FotoTempatPenyewaanController::class))
+    ->except(["show"])
     ->shallow();
+
+Route::get('tempat-penyewaan/{tempat_penyewaan}/page', class_basename(TempatPenyewaanPageController::class))
+    ->name('tempat-penyewaan.page');
 
 Route::get('/foto/{foto}/image', class_basename(FotoTempatPenyewaanImageController::class))
     ->name('foto.image.show');
 
 Route::get('/foto/{foto}/thumb', class_basename(FotoTempatPenyewaanThumbController::class))
     ->name('foto.thumb.show');
+
+Route::get('/foto/{foto}/carousel', class_basename(FotoTempatPenyewaanCarouselController::class))
+    ->name('foto.carousel.show');
 
 Route::resource('tempat-penyewaan.location', class_basename(TempatPenyewaanLocationController::class))
     ->only(['edit', 'update'])

@@ -14,6 +14,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class FotoTempatPenyewaanController extends Controller
 {
@@ -36,6 +38,7 @@ class FotoTempatPenyewaanController extends Controller
      *
      * @param TempatPenyewaan $tempat_penyewaan
      * @return Response
+     * @throws AuthorizationException
      */
     public function index(TempatPenyewaan $tempat_penyewaan)
     {
@@ -109,18 +112,6 @@ class FotoTempatPenyewaanController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param TempatPenyewaan $tempat_penyewaan
-     * @param Foto $foto
-     * @return Response
-     */
-    public function show(TempatPenyewaan $tempat_penyewaan, Foto $foto)
-    {
-        $this->gate->authorize(AuthServiceProvider::ACTION_MANAGE_FOTO);
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param Foto $foto
@@ -140,6 +131,8 @@ class FotoTempatPenyewaanController extends Controller
      * @param Foto $foto
      * @return RedirectResponse
      * @throws AuthorizationException
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
      */
     public function update(Request $request, Foto $foto)
     {

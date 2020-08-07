@@ -18,7 +18,9 @@ class FotoTempatPenyewaan extends Model implements HasMedia
 
     public $registerMediaConversionsUsingModelInstance = true;
     const CONVERSION_THUMB = 'thumb';
+    const CONVERSION_CAROUSEL_SLIDE = 'carousel-slide';
     const THUMB_MAX_WIDTH_PIXELS = 400;
+    const CAROUSEL_MAX_WIDTH_PIXELS = 1110;
 
     public function registerMediaConversions(Media $media = null): void
     {
@@ -27,13 +29,23 @@ class FotoTempatPenyewaan extends Model implements HasMedia
         $this
             ->addMediaConversion(self::CONVERSION_THUMB)
             ->width(self::THUMB_MAX_WIDTH_PIXELS)
-            ->height(self::THUMB_MAX_WIDTH_PIXELS / $originalImage->getWidth() * $originalImage->getHeight())
-            ->optimize()
-        ;
+            ->height(self::THUMB_MAX_WIDTH_PIXELS / $originalImage->getWidth() * $originalImage->getHeight());
+
+        $this
+            ->addMediaConversion(self::CONVERSION_CAROUSEL_SLIDE)
+            ->width(self::CAROUSEL_MAX_WIDTH_PIXELS)
+            ->height(self::CAROUSEL_MAX_WIDTH_PIXELS / $originalImage->getWidth() * $originalImage->getHeight());
+    }
+
+    public function getCarouselPath()
+    {
+        return $this->getFirstMedia()
+            ->getPath(self::CONVERSION_CAROUSEL_SLIDE);
     }
 
     public function getThumbPath()
     {
-        return $this->getFirstMedia()->getPath(self::CONVERSION_THUMB);
+        return $this->getFirstMedia()
+            ->getPath(self::CONVERSION_THUMB);
     }
 }
