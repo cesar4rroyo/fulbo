@@ -17,6 +17,8 @@ class CreateFotoTempatPenyewaanTable extends Migration
             $table->id();
 
             $table->unsignedInteger('tempat_penyewaan_id')->index();
+            $table->string('nama');
+            $table->text('deskripsi');
             $table->unsignedInteger('urutan')->index();
             $table->timestamps();
 

@@ -21,7 +21,7 @@ class TempatPenyewaanSeeder extends Seeder
     {
         DB::beginTransaction();
 
-        factory(TempatPenyewaan::class, 1)
+        factory(TempatPenyewaan::class, 10)
             ->make()
             ->map(function (TempatPenyewaan $tempatPenyewaan, $index) {
                 $usernameOrPassword = "admin_penyewaan_{$index}";
