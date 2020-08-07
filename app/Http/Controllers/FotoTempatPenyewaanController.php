@@ -56,10 +56,15 @@ class FotoTempatPenyewaanController extends Controller
      *
      * @param TempatPenyewaan $tempat_penyewaan
      * @return Response
+     * @throws AuthorizationException
      */
     public function create(TempatPenyewaan $tempat_penyewaan)
     {
         $this->gate->authorize(AuthServiceProvider::ACTION_MANAGE_FOTO);
+
+        return $this->responseFactory->view("tempat-penyewaan.foto.create", compact(
+            "tempat_penyewaan"
+        ));
     }
 
     /**
@@ -67,11 +72,40 @@ class FotoTempatPenyewaanController extends Controller
      *
      * @param Request $request
      * @param TempatPenyewaan $tempat_penyewaan
-     * @return Response
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
     public function store(Request $request, TempatPenyewaan $tempat_penyewaan)
     {
         $this->gate->authorize(AuthServiceProvider::ACTION_MANAGE_FOTO);
+
+        $data = $request->validate([
+            "nama" => ["required", "string"],
+            "deskripsi" => ["required", "string"],
+            "urutan" => ["required", "numeric"],
+            "image" => ["required", "file", "mimes:jpg,png,jpeg"],
+        ]);
+
+        unset($data["image"]);
+
+        DB::beginTransaction();
+
+        /** @var Foto $foto */
+        $foto = $tempat_penyewaan->fotos()->create($data);
+        $foto->addMediaFromRequest("image")
+            ->toMediaCollection();
+
+        DB::commit();
+
+        SessionHelper::flashMessage(
+            __("messages.create.success"),
+            MessageState::STATE_SUCCESS
+        );
+
+        return $this->responseFactory->redirectToRoute("tempat-penyewaan.foto.index",
+            $tempat_penyewaan
+        );
+
     }
 
     /**
@@ -89,26 +123,57 @@ class FotoTempatPenyewaanController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param TempatPenyewaan $tempat_penyewaan
      * @param Foto $foto
      * @return Response
+     * @throws AuthorizationException
      */
-    public function edit(TempatPenyewaan $tempat_penyewaan, Foto $foto)
+    public function edit(Foto $foto)
     {
         $this->gate->authorize(AuthServiceProvider::ACTION_MANAGE_FOTO);
+        return $this->responseFactory->view("tempat-penyewaan.foto.edit", compact("foto"));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param TempatPenyewaan $tempat_penyewaan
      * @param Foto $foto
-     * @return Response
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
-    public function update(Request $request, TempatPenyewaan $tempat_penyewaan, Foto $foto)
+    public function update(Request $request, Foto $foto)
     {
         $this->gate->authorize(AuthServiceProvider::ACTION_MANAGE_FOTO);
+
+        $data = $request->validate([
+            "nama" => ["required", "string"],
+            "deskripsi" => ["required", "string"],
+            "image" => ["nullable", "file", "mimes:jpg,png,jpeg"]
+        ]);
+
+        DB::beginTransaction();
+
+        if ($request->hasFile("image")) {
+            $foto
+                ->clearMediaCollection()
+                ->addMediaFromRequest("image")
+                ->toMediaCollection();
+        }
+        unset($data["image"]);
+
+        $foto->update($data);
+
+        DB::commit();
+
+        SessionHelper::flashMessage(
+            __("messages.update.success"),
+            MessageState::STATE_SUCCESS,
+        );
+
+        return $this->responseFactory->redirectToRoute(
+            "foto.edit",
+            $foto
+        );
     }
 
     /**

@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\FotoTempatPenyewaanController;
+use App\Http\Controllers\FotoTempatPenyewaanImageController;
+use App\Http\Controllers\FotoTempatPenyewaanThumbController;
 use App\Http\Controllers\LapanganController;
 use App\Http\Controllers\PenyewaProfileManagementFormController;
 use App\Http\Controllers\PenyewaProfileManagementHandlerController;
@@ -47,7 +49,10 @@ Route::resource('tempat-penyewaan.lapangan', class_basename(LapanganController::
 Route::resource('tempat-penyewaan.foto', class_basename(FotoTempatPenyewaanController::class))
     ->shallow();
 
-Route::get('/foto/{foto}/thumb', class_basename(\App\Http\Controllers\FotoTempatPenyewaanThumbController::class))
+Route::get('/foto/{foto}/image', class_basename(FotoTempatPenyewaanImageController::class))
+    ->name('foto.image.show');
+
+Route::get('/foto/{foto}/thumb', class_basename(FotoTempatPenyewaanThumbController::class))
     ->name('foto.thumb.show');
 
 Route::resource('tempat-penyewaan.location', class_basename(TempatPenyewaanLocationController::class))

@@ -5,6 +5,15 @@
         Foto
     </h1>
 
+    <div class="d-flex justify-content-end my-3">
+        <a
+                class="btn btn-primary"
+                href="{{ route("tempat-penyewaan.foto.create", $tempat_penyewaan)  }}">
+            Tambah
+            <i class="fas fa-plus"></i>
+        </a>
+    </div>
+
     @include("shared.messages")
 
     <div class="table-responsive">
