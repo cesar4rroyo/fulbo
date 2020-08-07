@@ -33,6 +33,14 @@
         </a>
     @endcan
 
+    @can(\App\Providers\AuthServiceProvider::ACTION_MANAGE_FOTO)
+        <a class="text-decoration-none d-block {{ Route::is("tempat-penyewaan.foto.*") ? "text-primary" : "text-dark"  }}"
+           href="{{ route("tempat-penyewaan.foto.index", auth()->user()->tempat_penyewaan) }}"
+        >
+            Foto
+        </a>
+    @endcan
+
     @can(\App\Providers\AuthServiceProvider::ACTION_MANAGE_PENYEWA_PROFILE)
         <a class="text-decoration-none d-block {{ Route::is("penyewa-profile-management") ? "text-primary" : "text-dark"  }}"
            href="{{ route("penyewa-profile-management") }}"

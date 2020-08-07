@@ -6,10 +6,10 @@ use App\QueryBuilder\TempatPenyewaanBuilder;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use Carbon\CarbonPeriod;
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Collection;
 use Illuminate\Support\LazyCollection;
 
 /**
@@ -40,6 +40,20 @@ class TempatPenyewaan extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function sesi_pemesanans(): HasMany
+    {
+        return $this->hasMany(SesiPemesanan::class);
+    }
+
+    public function fotos(): HasMany
+    {
+        return $this->hasMany(FotoTempatPenyewaan::class);
+    }
+
+    /**
+     * @return array|LazyCollection
+     * @throws Exception
+     */
     public function getPossibleSessions()
     {
         if (empty($this->waktu_buka) || empty($this->waktu_tutup) || empty($this->panjang_sesi)) {
@@ -53,15 +67,15 @@ class TempatPenyewaan extends Model
             CarbonInterval::createFromFormat("H:i:s", $this->panjang_sesi)
         );
 
-        return LazyCollection::make(function () use($serviceOpenPeriod) {
-                $previous = $serviceOpenPeriod->current();
-                $serviceOpenPeriod->next();
+        return LazyCollection::make(function () use ($serviceOpenPeriod) {
+            $previous = $serviceOpenPeriod->current();
+            $serviceOpenPeriod->next();
 
-                while ($current = $serviceOpenPeriod->current()) {
-                    yield CarbonPeriod::between($previous, $current);
-                    $previous = $current;
-                    $serviceOpenPeriod->next();
-                }
-            })->all();
+            while ($current = $serviceOpenPeriod->current()) {
+                yield CarbonPeriod::between($previous, $current);
+                $previous = $current;
+                $serviceOpenPeriod->next();
+            }
+        });
     }
 }

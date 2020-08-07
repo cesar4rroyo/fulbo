@@ -1,9 +1,11 @@
 <?php
 
 use App\Enums\UserLevel;
+use App\FotoTempatPenyewaan;
 use App\Lapangan;
 use App\TempatPenyewaan;
 use App\User;
+use Carbon\CarbonPeriod;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -19,7 +21,7 @@ class TempatPenyewaanSeeder extends Seeder
     {
         DB::beginTransaction();
 
-        factory(TempatPenyewaan::class, rand(30, 50))
+        factory(TempatPenyewaan::class, 1)
             ->make()
             ->map(function (TempatPenyewaan $tempatPenyewaan, $index) {
                 $usernameOrPassword = "admin_penyewaan_{$index}";
@@ -39,11 +41,32 @@ class TempatPenyewaanSeeder extends Seeder
             })
             ->each(function (TempatPenyewaan $tempatPenyewaan) {
                 $tempatPenyewaan->lapangans()->saveMany(
+                    factory(FotoTempatPenyewaan::class, rand(5, 10))
+                        ->make()
+                        ->each(fn (FotoTempatPenyewaan $fotoTempatPenyewaan, $index) => $fotoTempatPenyewaan->fill(["urutan" => $index]))
+                )->each(function (FotoTempatPenyewaan $fotoTempatPenyewaan) {
+                    $fotoTempatPenyewaan
+                        ->addMedia(
+                            __DIR__ . "/../images/pexels-pixabay-50713.jpg"
+                        )
+                        ->preservingOriginal()
+                        ->toMediaCollection();
+                });
+            })
+            ->each(function (TempatPenyewaan $tempatPenyewaan) {
+                $tempatPenyewaan->getPossibleSessions()->each(function (CarbonPeriod $possibleSession) use ($tempatPenyewaan) {
+                    $tempatPenyewaan->sesi_pemesanans()->create([
+                        "waktu_mulai" => $possibleSession->getStartDate()->format("H:i:s"),
+                        "waktu_selesai" => $possibleSession->getEndDate()->format("H:i:s"),
+                    ]);
+                });
+            })
+            ->each(function (TempatPenyewaan $tempatPenyewaan) {
+                $tempatPenyewaan->lapangans()->saveMany(
                     factory(Lapangan::class, rand(20, 50))
                         ->make()
                 );
             });
-
         DB::commit();
     }
 }
