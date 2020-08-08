@@ -98,7 +98,7 @@ class TempatPenyewaanIndex extends Component
     public function delete(int $id)
     {
         try {
-            $tempatPenyewaan = TempatPenyewaan::query()
+            $tempatPenyewaan = TempatPenyewaan::all()
                 ->findOrFail($id);
 
             $tempatPenyewaan->delete();

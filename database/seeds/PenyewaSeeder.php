@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\UserLevel;
+use App\Penyewa;
 use App\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -17,16 +18,18 @@ class PenyewaSeeder extends Seeder
     {
         DB::beginTransaction();
 
-        factory(User::class, 100)
+        factory(Penyewa::class, 100)
             ->make()
-            ->each(function (User $user, $index) {
+            ->each(function (Penyewa $penyewa, $index) {
                 $emailOrPassword = "penyewa_{$index}@test.com";
 
-                $user->fill([
-                    "email" => $emailOrPassword,
-                    "password" => Hash::make($emailOrPassword),
-                    "level" => UserLevel::PENYEWA,
-                ])->save();
+                $penyewa->user()->associate(
+                    factory(User::class)->create([
+                        "email" => $emailOrPassword,
+                        "password" => Hash::make($emailOrPassword),
+                        "level" => UserLevel::PENYEWA,
+                    ])
+                )->save();
             });
 
         DB::commit();

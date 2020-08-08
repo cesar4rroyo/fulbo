@@ -37,9 +37,10 @@
             <table class="table table-sm table-striped">
                 <thead class="thead-dark">
                 <tr>
-                    <th class="align-middle"> #</th>
+                    <th class="align-middle"> # </th>
                     <th class="align-middle"> Nama Tempat</th>
-                    <th class="align-middle"> Admin</th>
+                    <th class="align-middle"> Admin </th>
+                    <th class="align-middle"> No. Telepon </th>
                     <th class="align-middle" style="width: 100px"> Alamat</th>
                     <th class="align-middle text-center"> Status Verifikasi</th>
                     <th class="align-middle text-center"> Kendali</th>
@@ -54,6 +55,9 @@
                         <td>
                             <div> {{ $tempatPenyewaan->admin->name }} </div>
                             <div> ({{ $tempatPenyewaan->admin->email }}) </div>
+                        </td>
+                        <td>
+                            {{ $tempatPenyewaan->no_telepon }}
                         </td>
                         <td> {{ $tempatPenyewaan->alamat }} </td>
                         <td class="text-center">
