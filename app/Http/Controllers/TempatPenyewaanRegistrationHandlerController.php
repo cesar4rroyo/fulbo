@@ -41,6 +41,7 @@ class TempatPenyewaanRegistrationHandlerController extends Controller
             "nama" => ["required", "string", Rule::unique(TempatPenyewaan::class)],
             "alamat" => ["required", "string"],
             "name" => ["required", "string"],
+            "no_telepon" => ["required", "string", Rule::unique(TempatPenyewaan::class)],
             "email" => ["required", "string", Rule::unique(User::class)],
             "tanggal_lahir" => ["required", "dateformat:Y-m-d"],
             "password" => ["required", "string", "confirmed"],
@@ -61,7 +62,8 @@ class TempatPenyewaanRegistrationHandlerController extends Controller
 
         TempatPenyewaan::query()->create(array_merge(Arr::only($data, [
             "nama",
-            "alamat"
+            "alamat",
+            "no_telepon",
         ]), [
             "admin_id" => $user->id,
         ]));

@@ -80,4 +80,15 @@ class TempatPenyewaan extends Model
             }
         });
     }
+
+    public function getPossibleSessionsArray(): array
+    {
+        return $this->getPossibleSessions()
+            ->map(function (CarbonPeriod $period) {
+                return [
+                    "start" => $period->getStartDate()->format("H:i:s"),
+                    "finish" => $period->getEndDate()->format("H:i:s"),
+                ];
+            })->toArray();
+    }
 }

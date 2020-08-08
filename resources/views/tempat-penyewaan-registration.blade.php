@@ -34,6 +34,23 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="no_telepon"> No. Telepon: </label>
+                        <input
+                                id="no_telepon"
+                                type="tel"
+                                placeholder="No. Telepon"
+                                class="form-control @error("no_telepon") is-invalid @enderror"
+                                name="no_telepon"
+                                value="{{ old("no_telepon") }}"
+                        />
+                        @error("no_telepon")
+                        <span class="invalid-feedback">
+                            {{ $message }}
+                        </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
                         <label for="alamat">
                             Alamat:
                         </label>

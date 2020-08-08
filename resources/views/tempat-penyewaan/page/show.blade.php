@@ -2,13 +2,26 @@
 
 @section("content")
     <div class="container mt-5 vh-100">
-        <h1 class="text-primary">
-            {{ $tempat_penyewaan->nama }}
-        </h1>
+        <div class="mb-3">
+            <h1 class="text-primary">
+                {{ $tempat_penyewaan->nama }}
+            </h1>
 
-        <p>
-            {{ $tempat_penyewaan->alamat }}
-        </p>
+            <div class="text-muted font-weight-bold">
+                <i class="fas fa-phone"></i> {{ $tempat_penyewaan->no_telepon }}
+            </div>
+
+            <p>
+                {{ $tempat_penyewaan->alamat }}
+            </p>
+
+            <a href="{{ route("tempat-penyewaan.pemesanan-penyewa.create", $tempat_penyewaan) }}"
+               class="btn btn-primary btn-block"
+            >
+                <i class="fas fa-book"></i>
+                Buat Pemesanan
+            </a>
+        </div>
 
         <div id="foto-carousel"
              class="carousel slide"
@@ -65,13 +78,6 @@
                 ></span>
                 <span class="sr-only"> Selanjutnya </span>
             </a>
-        </div>
-
-
-        <div class="card">
-            <div class="card-body">
-
-            </div>
         </div>
     </div>
 @endsection
