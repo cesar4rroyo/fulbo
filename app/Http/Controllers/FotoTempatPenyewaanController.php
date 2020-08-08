@@ -172,7 +172,6 @@ class FotoTempatPenyewaanController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param TempatPenyewaan $tempat_penyewaan
      * @param Foto $foto
      * @return RedirectResponse
      * @throws AuthorizationException

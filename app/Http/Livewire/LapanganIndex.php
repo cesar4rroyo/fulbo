@@ -30,7 +30,7 @@ class LapanganIndex extends Component
         try {
             $lapangan = $this->tempatPenyewaan
                 ->lapangans()
-                ->firstOrFail($id);
+                ->findOrFail($id);
 
             $lapangan->delete();
 

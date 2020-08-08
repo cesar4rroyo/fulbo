@@ -87,7 +87,6 @@ class LapanganController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param TempatPenyewaan $tempatPenyewaan
      * @param Lapangan $lapangan
      * @return Response
      * @throws AuthorizationException
@@ -105,7 +104,6 @@ class LapanganController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param TempatPenyewaan $tempatPenyewaan
      * @param Lapangan $lapangan
      * @return RedirectResponse
      * @throws AuthorizationException

@@ -13,18 +13,20 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\LazyCollection;
 
 /**
- * @property boolean terverifikasi
+ * @property boolean $terverifikasi
  */
 class TempatPenyewaan extends Model
 {
     protected $table = "tempat_penyewaan";
     protected $guarded = [];
 
-    public static function query(): TempatPenyewaanBuilder
+    /** return QueryBuilder|TempatPenyewaanBuilder */
+    public static function query()
     {
         return parent::query();
     }
 
+    /** return TempatPenyewaanBuilder */
     public function newEloquentBuilder($query)
     {
         return new TempatPenyewaanBuilder($query);

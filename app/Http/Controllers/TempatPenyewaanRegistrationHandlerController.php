@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Enums\MessageState;
 use App\Enums\UserLevel;
-use App\Providers\AuthServiceProvider;
 use App\Support\SessionHelper;
 use App\TempatPenyewaan;
 use App\User;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -17,11 +18,22 @@ use Illuminate\Validation\Rule;
 
 class TempatPenyewaanRegistrationHandlerController extends Controller
 {
+    private ResponseFactory $responseFactory;
+
+    /**
+     * TempatPenyewaanRegistrationHandlerController constructor.
+     * @param ResponseFactory $responseFactory
+     */
+    public function __construct(ResponseFactory $responseFactory)
+    {
+        $this->responseFactory = $responseFactory;
+    }
+
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function __invoke(Request $request)
     {
@@ -58,8 +70,12 @@ class TempatPenyewaanRegistrationHandlerController extends Controller
 
         Auth::guard()->login($user);
 
-        SessionHelper::flashMessage(__("messages.tempat-penyewaan-registration-success"), MessageState::STATE_SUCCESS);
+        SessionHelper::flashMessage(
+            __("messages.tempat-penyewaan-registration-success"),
+            MessageState::STATE_SUCCESS
+        );
 
-        return redirect()->route("tempat-penyewaan-profile-management");
+        return $this->responseFactory
+            ->redirectToRoute("tempat-penyewaan-profile-management");
     }
 }

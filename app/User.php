@@ -8,8 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 /**
- * @property TempatPenyewaan tempat_penyewaan
- * @property string level
+ * @property TempatPenyewaan $tempat_penyewaan
+ * @property string $level
  */
 class User extends Authenticatable
 {
