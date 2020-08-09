@@ -17,6 +17,9 @@ use Illuminate\Support\LazyCollection;
  */
 class TempatPenyewaan extends Model
 {
+    const WEEKDAY_DEFAULT_PRICE = 50_000;
+    const WEEKEND_DEFAULT_PRICE = 75_000;
+
     protected $table = "tempat_penyewaan";
     protected $guarded = [];
 
@@ -45,6 +48,11 @@ class TempatPenyewaan extends Model
     public function sesi_pemesanans(): HasMany
     {
         return $this->hasMany(SesiPemesanan::class);
+    }
+
+    public function harga_pemesanans(): HasMany
+    {
+        return $this->hasMany(HargaPemesanan::class);
     }
 
     public function fotos(): HasMany

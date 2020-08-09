@@ -33,6 +33,14 @@
         </a>
     @endcan
 
+    @can(\App\Providers\AuthServiceProvider::ACTION_MANAGE_HARGA_PEMESANAN)
+        <a class="text-decoration-none d-block {{ Route::is("tempat-penyewaan.harga-pemesanan.*") ? "text-primary" : "text-dark"  }}"
+           href="{{ route("tempat-penyewaan.harga-pemesanan.index", auth()->user()->tempat_penyewaan) }}"
+        >
+            Harga Pemesanan
+        </a>
+    @endcan
+
     @can(\App\Providers\AuthServiceProvider::ACTION_MANAGE_FOTO)
         <a class="text-decoration-none d-block {{ Route::is("tempat-penyewaan.foto.*") ? "text-primary" : "text-dark"  }}"
            href="{{ route("tempat-penyewaan.foto.index", auth()->user()->tempat_penyewaan) }}"

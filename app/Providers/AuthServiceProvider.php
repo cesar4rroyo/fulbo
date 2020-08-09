@@ -17,6 +17,7 @@ class AuthServiceProvider extends ServiceProvider
     const ACTION_MANAGE_PENYEWA_PROFILE = "penyewa-profile";
     const ACTION_MANAGE_LAPANGAN = "manage-lapangan";
     const ACTION_MANAGE_FOTO = "manage-foto";
+    const ACTION_MANAGE_HARGA_PEMESANAN = "manage-harga-pemesanan";
     const ACTION_VIEW_TEMPAT_PENYEWAAN_PAGE = 'view-tempat-penyewaan';
 
     /**
@@ -50,6 +51,12 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define(self::ACTION_MANAGE_FOTO, function (User $user) {
+            return
+                $user->level === UserLevel::ADMIN_PENYEWA &&
+                $user->tempat_penyewaan->terverifikasi;
+        });
+
+        Gate::define(self::ACTION_MANAGE_HARGA_PEMESANAN, function (User $user) {
             return
                 $user->level === UserLevel::ADMIN_PENYEWA &&
                 $user->tempat_penyewaan->terverifikasi;

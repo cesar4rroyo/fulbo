@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Observers\TempatPenyewaanObserver;
+use App\TempatPenyewaan;
 use Faker\Generator;
 use Illuminate\Container\Container;
 use Illuminate\Support\ServiceProvider;
@@ -25,6 +27,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        TempatPenyewaan::observe(TempatPenyewaanObserver::class);
+
         $this->app->bind("indexProvider", function () {
             return new class() {
                 private $index = 1;

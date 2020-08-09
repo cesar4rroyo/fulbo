@@ -11,6 +11,7 @@ use App\Http\Controllers\PenyewaProfileManagementHandlerController;
 use App\Http\Controllers\PenyewaRegistrationFormController;
 use App\Http\Controllers\PenyewaRegistrationHandlerController;
 use App\Http\Controllers\TempatPenyewaanController;
+use App\Http\Controllers\TempatPenyewaanHargaPemesananController;
 use App\Http\Controllers\TempatPenyewaanLocationController;
 use App\Http\Controllers\TempatPenyewaanPageController;
 use App\Http\Controllers\TempatPenyewaanProfileManagementFormController;
@@ -55,6 +56,10 @@ Route::resource('tempat-penyewaan.foto', class_basename(FotoTempatPenyewaanContr
 
 Route::resource('tempat-penyewaan.pemesanan-penyewa', class_basename(PemesananPenyewaController::class))
     ->only(['index', 'create', 'store', 'destroy'])
+    ->shallow();
+
+Route::resource('tempat-penyewaan.harga-pemesanan', class_basename(TempatPenyewaanHargaPemesananController::class))
+    ->only(['index', 'edit', 'update'])
     ->shallow();
 
 Route::get('tempat-penyewaan/{tempat_penyewaan}/page', class_basename(TempatPenyewaanPageController::class))
