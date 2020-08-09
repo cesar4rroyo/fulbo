@@ -25,7 +25,6 @@
 
                 <hr>
 
-
                 <div class="form-group">
                     <label for="harga"> Harga: </label>
                     <input
