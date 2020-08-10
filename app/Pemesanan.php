@@ -16,8 +16,13 @@ class Pemesanan extends Model
         return $this->hasMany(ItemPemesanan::class);
     }
 
-    public function user(): BelongsTo
+    public function tempat_penyewaan(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(TempatPenyewaan::class);
+    }
+
+    public function penyewa(): BelongsTo
+    {
+        return $this->belongsTo(Penyewa::class);
     }
 }

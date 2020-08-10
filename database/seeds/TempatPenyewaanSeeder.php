@@ -23,18 +23,17 @@ class TempatPenyewaanSeeder extends Seeder
         DB::beginTransaction();
 
         factory(TempatPenyewaan::class, 10)
-            ->make()
+            ->make([
+                "terverifikasi" => 1,
+            ])
             ->map(function (TempatPenyewaan $tempatPenyewaan, $index) {
-                $usernameOrPassword = "admin_penyewaan_{$index}";
-                $email = "{$usernameOrPassword}@test.com";
+                $emailOrPassword = "admin_penyewaan_{$index}@test.com";
 
                 $tempatPenyewaan->admin()->associate(
-                    factory(User::class)->create(
-                        [
-                        "email" => $email,
-                        "username" => $usernameOrPassword,
-                        "level" => UserLevel::ADMIN_PENYEWA,
-                        "password" => Hash::make($usernameOrPassword),
+                    factory(User::class)->create([
+                        "email" => $emailOrPassword,
+                        "level" => UserLevel::ADMIN_PENYEWAAN,
+                        "password" => Hash::make($emailOrPassword),
                     ])
                 )->save();
 

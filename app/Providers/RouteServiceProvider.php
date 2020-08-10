@@ -30,7 +30,7 @@ class RouteServiceProvider extends ServiceProvider
         switch ($user->level ?? null) {
             case UserLevel::ADMIN_UTAMA:
                 return route("tempat-penyewaan.index");
-            case UserLevel::ADMIN_PENYEWA:
+            case UserLevel::ADMIN_PENYEWAAN:
                 return route("tempat-penyewaan-profile-management");
             case UserLevel::PENYEWA:
                 return route("penyewa-profile-management");

@@ -19,6 +19,7 @@ class CreateItemPemesananTable extends Migration
             $table->unsignedInteger('pemesanan_id')->index();
             $table->time('waktu_mulai');
             $table->time('waktu_selesai');
+            $table->unsignedDouble('harga');
 
             $table->foreign('pemesanan_id')->references('id')
                 ->on('pemesanan');

@@ -8,11 +8,11 @@ class PemesananStatus
 {
     const DRAFT = "DRAFT";
     const DITERIMA = "DITERIMA";
-    const DITOLAK = "DITOLAK";
+    const BATAL = "BATAL";
 
     const LEVELS = [
         self::DRAFT,
         self::DITERIMA,
-        self::DITOLAK,
+        self::BATAL,
     ];
 }

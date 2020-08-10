@@ -20,7 +20,7 @@
 
                 <dl>
                     <dt> Hari: </dt>
-                    <dd> {{ \Carbon\Carbon::getDays()[$harga_pemesanan->hari_dalam_minggu] ?? '' }} </dd>
+                    <dd> {{ \Facades\App\Support\DateUtil::getDayNameByIndex($harga_pemesanan->hari_dalam_minggu) }} </dd>
                 </dl>
 
                 <hr>

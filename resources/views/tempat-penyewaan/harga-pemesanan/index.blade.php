@@ -22,7 +22,7 @@
             @foreach($harga_pemesanans AS $harga_pemesanan)
                 <tr>
                     <td> {{ $loop->iteration }} </td>
-                    <td> {{ \Carbon\Carbon::getDays()[$harga_pemesanan->hari_dalam_minggu] ?? '' }} </td>
+                    <td> {{ \Facades\App\Support\DateUtil::getDayNameByIndex($harga_pemesanan->hari_dalam_minggu) }} </td>
                     <td class="text-right"> {{ number_format($harga_pemesanan->harga) }} </td>
                     <td class="text-center">
                         <a href="{{ route("harga-pemesanan.edit", $harga_pemesanan) }}" class="btn btn-info btn-sm">

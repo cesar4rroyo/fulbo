@@ -12,15 +12,15 @@ class FotoTempatPenyewaan extends Model implements HasMedia
 {
     use InteractsWithMedia;
 
-    protected $table = "foto_tempat_penyewaan";
-    protected $guarded = [];
-    protected $perPage = 5;
-
-    public $registerMediaConversionsUsingModelInstance = true;
+    const COLLECTION_DEFAULT = 'default';
     const CONVERSION_THUMB = 'thumb';
     const CONVERSION_CAROUSEL_SLIDE = 'carousel-slide';
     const THUMB_MAX_WIDTH_PIXELS = 400;
     const CAROUSEL_MAX_WIDTH_PIXELS = 1110;
+    public $registerMediaConversionsUsingModelInstance = true;
+    protected $table = "foto_tempat_penyewaan";
+    protected $guarded = [];
+    protected $perPage = 5;
 
     public function registerMediaConversions(Media $media = null): void
     {
@@ -39,13 +39,17 @@ class FotoTempatPenyewaan extends Model implements HasMedia
 
     public function getCarouselPath()
     {
-        return $this->getFirstMedia()
-            ->getPath(self::CONVERSION_CAROUSEL_SLIDE);
+        return $this->getFirstMediaPath(
+            self::COLLECTION_DEFAULT,
+            self::CONVERSION_CAROUSEL_SLIDE
+        );
     }
 
     public function getThumbPath()
     {
-        return $this->getFirstMedia()
-            ->getPath(self::CONVERSION_THUMB);
+        return $this->getFirstMediaPath(
+            self::COLLECTION_DEFAULT,
+            self::CONVERSION_THUMB
+        );
     }
 }

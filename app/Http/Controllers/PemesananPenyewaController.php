@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Pemesanan;
-use App\TempatPenyewaan;
+use App\Providers\AuthServiceProvider;
 use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\Response;
 
 class PemesananPenyewaController extends Controller
@@ -14,15 +15,14 @@ class PemesananPenyewaController extends Controller
     private Gate $gate;
     private ResponseFactory $responseFactory;
 
-    /**
-     * PemesananController constructor.
-     * @param Gate $gate
-     * @param ResponseFactory $responseFactory
-     */
     public function __construct(Gate $gate, ResponseFactory $responseFactory)
     {
         $this->gate = $gate;
         $this->responseFactory = $responseFactory;
+
+        $this->middleware([
+            "auth"
+        ]);
     }
 
     /**
@@ -32,75 +32,25 @@ class PemesananPenyewaController extends Controller
      */
     public function index()
     {
+        $this->gate->authorize(AuthServiceProvider::ACTION_VIEW_ANY_PEMESANAN_PENYEWA);
+
+        return $this->responseFactory->view(
+            "pemesanan-penyewa.index"
+        );
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @param TempatPenyewaan $tempatPenyewaan
-     * @return Response
-     */
-    public function create(TempatPenyewaan $tempatPenyewaan)
-    {
-        return $this->responseFactory->view("pemesanan-penyewa.create", [
-            "tempat_penyewaan" => $tempatPenyewaan,
-            "possible_sessions" => $tempatPenyewaan->getPossibleSessionsArray(),
-        ]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param Pemesanan $pemesanan
-     * @return Response
-     */
     public function show(Pemesanan $pemesanan)
     {
-        //
-    }
+        $pemesanan->load([
+            "tempat_penyewaan",
+            "penyewa",
+            "items" => function (HasMany $builder) {
+                $builder->orderBy("waktu_mulai");
+            }
+        ]);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param Pemesanan $pemesanan
-     * @return Response
-     */
-    public function edit(Pemesanan $pemesanan)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param Pemesanan $pemesanan
-     * @return Response
-     */
-    public function update(Request $request, Pemesanan $pemesanan)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param Pemesanan $pemesanan
-     * @return Response
-     */
-    public function destroy(Pemesanan $pemesanan)
-    {
-        //
+        return $this->responseFactory->view("pemesanan-penyewa.show", [
+            "pemesanan" => $pemesanan,
+        ]);
     }
 }

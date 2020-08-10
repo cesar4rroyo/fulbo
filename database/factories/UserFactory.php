@@ -21,15 +21,14 @@ use Illuminate\Support\Str;
 */
 
 $factory->define(User::class, function (Faker $faker) {
-    $usernameOrPassword = $faker->unique()->userName;
+    $emailOrPassword = $faker->unique()->userName;
 
     return [
         'name' => $faker->name,
-        'username' => $usernameOrPassword,
         'level' => $faker->randomElement(UserLevel::LEVELS),
-        'email' => "{$usernameOrPassword}@gmail.com",
+        'email' => "{$emailOrPassword}@gmail.com",
         'email_verified_at' => now(),
-        'password' => Hash::make($usernameOrPassword), // password
+        'password' => Hash::make($emailOrPassword), // password
         'remember_token' => Str::random(10),
     ];
 });

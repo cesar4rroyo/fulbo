@@ -15,12 +15,20 @@
                 {{ $tempat_penyewaan->alamat }}
             </p>
 
-            <a href="{{ route("tempat-penyewaan.pemesanan-penyewa.create", $tempat_penyewaan) }}"
-               class="btn btn-primary btn-block"
-            >
-                <i class="fas fa-book"></i>
-                Buat Pemesanan
-            </a>
+            @can(\App\Providers\AuthServiceProvider::ACTION_CREATE_PEMESANAN_PENYEWA)
+                <a href="{{ route("tempat-penyewaan.pemesanan-penyewa.create", $tempat_penyewaan) }}"
+                   class="btn btn-primary btn-block"
+                >
+                    <i class="fas fa-book"></i>
+                    Buat Pemesanan
+                </a>
+            @else
+                <div class="alert alert-info">
+                    <i class="fas fa-exclamation-circle"></i>
+                    Anda hanya dapat melakukan pemesanan jika Anda telah masuk
+                    dengan menggunakan akun penyewa.
+                </div>
+            @endcan
         </div>
 
         <div id="foto-carousel"

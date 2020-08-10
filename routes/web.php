@@ -5,7 +5,9 @@ use App\Http\Controllers\FotoTempatPenyewaanController;
 use App\Http\Controllers\FotoTempatPenyewaanImageController;
 use App\Http\Controllers\FotoTempatPenyewaanThumbController;
 use App\Http\Controllers\LapanganController;
+use App\Http\Controllers\PemesananPenyewaUpdateStatusController;
 use App\Http\Controllers\PemesananPenyewaController;
+use App\Http\Controllers\TempatPenyewaanPemesananPenyewaController;
 use App\Http\Controllers\PenyewaProfileManagementFormController;
 use App\Http\Controllers\PenyewaProfileManagementHandlerController;
 use App\Http\Controllers\PenyewaRegistrationFormController;
@@ -54,9 +56,15 @@ Route::resource('tempat-penyewaan.foto', class_basename(FotoTempatPenyewaanContr
     ->except(["show"])
     ->shallow();
 
-Route::resource('tempat-penyewaan.pemesanan-penyewa', class_basename(PemesananPenyewaController::class))
+Route::resource('tempat-penyewaan.pemesanan-penyewa', class_basename(TempatPenyewaanPemesananPenyewaController::class))
     ->only(['index', 'create', 'store', 'destroy'])
     ->shallow();
+
+Route::resource('pemesanan-penyewa', class_basename(PemesananPenyewaController::class))
+    ->parameter('pemesanan-penyewa', 'pemesanan')
+    ->shallow();
+Route::put('pemesanan-penyewa/{pemesanan}/update-status', class_basename(PemesananPenyewaUpdateStatusController::class))
+    ->name('pemesanan-penyewa.update-status');
 
 Route::resource('tempat-penyewaan.harga-pemesanan', class_basename(TempatPenyewaanHargaPemesananController::class))
     ->only(['index', 'edit', 'update'])

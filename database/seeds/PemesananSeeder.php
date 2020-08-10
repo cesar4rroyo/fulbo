@@ -23,8 +23,8 @@ class PemesananSeeder extends Seeder
             ->get();
 
         $period = CarbonPeriod::between(
-            Carbon::today(),
-            Carbon::today()->addDays(rand(3 * 30, 4 * 30))
+            Carbon::today()->addDays(-rand(3 * 30, 4 * 30)),
+            Carbon::today()->addDays(+rand(3 * 30, 4 * 30))
         );
 
         DB::beginTransaction();
@@ -43,6 +43,9 @@ class PemesananSeeder extends Seeder
                         "status" => PemesananStatus::DRAFT,
                     ])->save();
 
+                    $hargaPemesanans = $tempat_penyewaan->harga_pemesanans()
+                        ->pluck("harga", "hari_dalam_minggu");
+
                     $max = 2;
                     $count = $tempat_penyewaan->getPossibleSessions()->count();
                     $skip = rand(0, min(0, $count - 1));
@@ -51,13 +54,13 @@ class PemesananSeeder extends Seeder
                     $tempat_penyewaan->getPossibleSessions()
                         ->skip($skip)
                         ->take($take)
-                        ->each(function (CarbonPeriod $carbonPeriod) use ($pemesanan) {
+                        ->each(function (CarbonPeriod $carbonPeriod) use ($hargaPemesanans, $day, $pemesanan) {
                             $pemesanan->items()->create([
                                 "waktu_mulai" => $carbonPeriod->getStartDate()->format("H:i:s"),
                                 "waktu_selesai" => $carbonPeriod->getEndDate()->format("H:i:s"),
+                                "harga" => $hargaPemesanans->get($day->weekday(), 0)
                             ]);
                         });
-
                 });
         };
 

@@ -50,7 +50,7 @@ class TempatPenyewaanRegistrationHandlerController extends Controller
         DB::beginTransaction();
 
         $data["password"] = Hash::make("password");
-        $data["level"] = UserLevel::ADMIN_PENYEWA;
+        $data["level"] = UserLevel::ADMIN_PENYEWAAN;
 
         $user = User::query()->create(Arr::only($data, [
             "name",

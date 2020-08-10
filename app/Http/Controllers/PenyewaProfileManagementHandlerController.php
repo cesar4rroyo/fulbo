@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Enums\MessageState;
 use App\Penyewa;
+use App\Providers\AuthServiceProvider;
 use App\Support\SessionHelper;
 use App\User;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Auth\Access\Gate;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
@@ -34,11 +38,14 @@ class PenyewaProfileManagementHandlerController extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
+     * @param Request $request
+     * @return RedirectResponse|Response
+     * @throws AuthorizationException
      */
     public function __invoke(Request $request)
     {
+        $this->gate->authorize(AuthServiceProvider::ACTION_MANAGE_PENYEWA_PROFILE);
+
         /** @var User $user */
         $user = Auth::user();
 
@@ -52,12 +59,11 @@ class PenyewaProfileManagementHandlerController extends Controller
 
         if (isset($data["password"])) {
             $data["password"] = Hash::make($data["password"]);
-        }
-        else {
+        } else {
             unset($data["password"]);
         }
 
-        DB::transaction(function () use($user, $data) {
+        DB::transaction(function () use ($user, $data) {
             $user->penyewa()->update(Arr::only($data, [
                 "no_telepon"
             ]));

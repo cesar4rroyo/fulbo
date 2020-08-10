@@ -56,4 +56,12 @@
             Profil
         </a>
     @endcan
+
+    @can(\App\Providers\AuthServiceProvider::ACTION_VIEW_ANY_PEMESANAN_PENYEWA)
+        <a class="text-decoration-none d-block {{ Route::is("pemesanan-penyewa.*") ? "text-primary" : "text-dark"  }}"
+           href="{{ route("pemesanan-penyewa.index") }}"
+        >
+            Pemesanan
+        </a>
+    @endcan
 </div>

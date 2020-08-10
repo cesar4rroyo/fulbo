@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\FotoTempatPenyewaan;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Routing\ResponseFactory;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 
 class FotoTempatPenyewaanImageController extends Controller
 {
@@ -25,12 +27,17 @@ class FotoTempatPenyewaanImageController extends Controller
      *
      * @param Request $request
      * @param FotoTempatPenyewaan $foto
-     * @return BinaryFileResponse
+     * @return Response|BinaryFileResponse
      */
     public function __invoke(Request $request, FotoTempatPenyewaan $foto)
     {
-        return $this->responseFactory->file(
-            $foto->getFirstMediaPath()
-        );
+        try {
+            return $this->responseFactory->file(
+                $foto->getFirstMediaPath()
+            );
+        } catch (FileNotFoundException $exception) {
+            return $this->responseFactory
+                ->noContent(400);
+        }
     }
 }

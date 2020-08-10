@@ -11,7 +11,13 @@ class UserBuilder extends Builder
 {
     public function isPenyewa(): self
     {
-        $this->where('level', UserLevel::PENYEWA);
-        return $this;
+        return $this
+            ->where('level', UserLevel::PENYEWA);
+    }
+
+    public function isAdminPenyewaan(): self
+    {
+        return $this
+            ->where('level', UserLevel::ADMIN_PENYEWAAN);
     }
 }
