@@ -31,7 +31,7 @@
             <tbody>
             @foreach($fotos AS $foto)
                 <tr>
-                    <td> {{ $fotos->firstItem() + $loop->iteration }} </td>
+                    <td> {{ $foto->urutan }} </td>
                     <td> {{ $foto->nama }} </td>
                     <td> {{ $foto->deskripsi }} </td>
                     <td>

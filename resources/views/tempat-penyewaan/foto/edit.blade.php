@@ -57,6 +57,23 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="urutan"> Urutan Foto: </label>
+                    <input
+                            id="urutan"
+                            type="number"
+                            placeholder="Urutan Foto"
+                            class="form-control @error("urutan") is-invalid @enderror"
+                            name="urutan"
+                            value="{{ old("urutan", $foto->urutan) }}"
+                    />
+                    @error("urutan")
+                    <span class="invalid-feedback">
+                        {{ $message }}
+                    </span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
                     <label for="image"> Gambar Baru: </label>
                     <input
                             id="image"

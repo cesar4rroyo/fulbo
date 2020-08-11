@@ -141,6 +141,7 @@ class FotoTempatPenyewaanController extends Controller
         $data = $request->validate([
             "nama" => ["required", "string"],
             "deskripsi" => ["required", "string"],
+            "urutan" => ["required", "numeric"],
             "image" => ["nullable", "file", "mimes:jpg,png,jpeg"]
         ]);
 
