@@ -165,8 +165,8 @@ export default {
       }
 
       return {
-        lat: map_config.center.latitude,
-        lng: map_config.center.longitude
+        lat: this.map_config.center.latitude,
+        lng: this.map_config.center.longitude
       }
     },
 

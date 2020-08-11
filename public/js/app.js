@@ -4117,8 +4117,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
 
       return {
-        lat: map_config.center.latitude,
-        lng: map_config.center.longitude
+        lat: this.map_config.center.latitude,
+        lng: this.map_config.center.longitude
       };
     },
     onFormSubmit: function onFormSubmit() {
