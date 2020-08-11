@@ -60,10 +60,15 @@ class TempatPenyewaanRegistrationHandlerController extends Controller
             "level",
         ]));
 
+        $data["waktu_buka"] = "10:00:00";
+        $data["waktu_tutup"] = "22:00:00";
+
         TempatPenyewaan::query()->create(array_merge(Arr::only($data, [
             "nama",
             "alamat",
             "no_telepon",
+            "waktu_buka",
+            "waktu_tutup",
         ]), [
             "admin_id" => $user->id,
         ]));

@@ -52,25 +52,6 @@
                         >
                             Detail
                         </a>
-
-                        @if($pemesanan->status === \App\Enums\PemesananStatus::DRAFT)
-                            <button
-                                    x-data="{ id: {{ $pemesanan->id }} }"
-                                    x-on:click="
-                                            confirmDialog()
-                                                .then(response => {
-                                                    if (!response.value) {
-                                                        return
-                                                    }
-                                                    window.livewire.emit('cancel', id)
-                                                })
-                                        "
-                                    class="btn btn-sm btn-danger"
-                            >
-                                Batalkan
-                                <i class="fas fa-times"></i>
-                            </button>
-                        @endif
                     </td>
                 </tr>
             @endforeach

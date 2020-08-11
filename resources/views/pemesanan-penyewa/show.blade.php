@@ -10,6 +10,9 @@
     </h1>
 
     <dl>
+        <dt> Tempat Penyewaan </dt>
+        <dd> {{ $pemesanan->tempat_penyewaan->nama }} ({{ $pemesanan->tempat_penyewaan->no_telepon }}) </dd>
+
         <dt> Hari, Tanggal:</dt>
         <dd> {{ \App\Support\Formatter::date($pemesanan->tanggal) }} </dd>
 
@@ -20,7 +23,6 @@
             />
         </dt>
     </dl>
-
 
     <div class="table-responsive">
         <table class="table table-sm table-striped">
@@ -43,35 +45,39 @@
         </table>
     </div>
 
-    <div class="d-flex justify-content-end">
-        <form
-                method="POST"
-                action="{{ route("pemesanan-penyewa.update-status", $pemesanan) }}"
-        >
-            @csrf
-            @method("PUT")
+    @if($pemesanan->status !== \App\Enums\PemesananStatus::DITERIMA)
+        <div class="d-flex justify-content-end">
+            <form
+                    method="POST"
+                    action="{{ route("pemesanan-penyewa.update-status", $pemesanan) }}"
+            >
+                @csrf
+                @method("PUT")
 
 
-            <div class="form-group">
-                <label for="status"> Status Baru: </label>
-                <select class="form-control"
-                        name="status"
-                        id="status"
-                >
-                    <option value="{{ \App\Enums\PemesananStatus::BATAL }}" {{ old("status", $pemesanan->status) === \App\Enums\PemesananStatus::BATAL ? "selected" : ""  }}>
-                        Batal
-                    </option>
-                    <option value="{{ \App\Enums\PemesananStatus::DRAFT }}" {{ old("status", $pemesanan->status) === \App\Enums\PemesananStatus::DRAFT ? "selected" : ""  }}>
-                        Draft
-                    </option>
-                </select>
-            </div>
 
-            <div class="form-group d-flex justify-content-end">
-                <button class="btn btn-primary">
-                    Ubah
-                </button>
-            </div>
-        </form>
-    </div>
+
+                <div class="form-group">
+                    <label for="status"> Status Baru: </label>
+                    <select class="form-control"
+                            name="status"
+                            id="status"
+                    >
+                        <option value="{{ \App\Enums\PemesananStatus::BATAL }}" {{ old("status", $pemesanan->status) === \App\Enums\PemesananStatus::BATAL ? "selected" : ""  }}>
+                            Batal
+                        </option>
+                        <option value="{{ \App\Enums\PemesananStatus::DRAFT }}" {{ old("status", $pemesanan->status) === \App\Enums\PemesananStatus::DRAFT ? "selected" : ""  }}>
+                            Draft
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group d-flex justify-content-end">
+                    <button class="btn btn-primary">
+                        Ubah
+                    </button>
+                </div>
+            </form>
+        </div>
+    @endif
 @endsection

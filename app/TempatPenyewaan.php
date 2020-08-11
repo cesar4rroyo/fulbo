@@ -71,15 +71,15 @@ class TempatPenyewaan extends Model
      */
     public function getPossibleSessions()
     {
-        if (empty($this->waktu_buka) || empty($this->waktu_tutup) || empty($this->panjang_sesi)) {
-            return [];
+        if (empty($this->waktu_buka) || empty($this->waktu_tutup)) {
+            return LazyCollection::empty();
         }
 
         $serviceOpenPeriod = CarbonPeriod::between(
             Carbon::createFromFormat("H:i:s", $this->waktu_buka),
             Carbon::createFromFormat("H:i:s", $this->waktu_tutup),
         )->setDateInterval(
-            CarbonInterval::createFromFormat("H:i:s", $this->panjang_sesi)
+            CarbonInterval::createFromFormat("H:i:s", "01:00:00")
         );
 
         return LazyCollection::make(function () use ($serviceOpenPeriod) {
