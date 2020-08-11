@@ -77,6 +77,40 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="waktu_buka"> Waktu Buka: </label>
+                        <input
+                                id="waktu_buka"
+                                type="time"
+                                placeholder="Waktu Buka"
+                                class="form-control @error("waktu_buka") is-invalid @enderror"
+                                name="waktu_buka"
+                                value="{{ old("waktu_buka", $user->tempat_penyewaan->waktu_buka) }}"
+                        />
+                        @error("waktu_buka")
+                        <span class="invalid-feedback">
+                            {{ $message }}
+                        </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label for="waktu_tutup"> Waktu Tutup: </label>
+                        <input
+                                id="waktu_tutup"
+                                type="time"
+                                placeholder="Waktu Tutup"
+                                class="form-control @error("waktu_tutup") is-invalid @enderror"
+                                name="waktu_tutup"
+                                value="{{ old("waktu_tutup", $user->tempat_penyewaan->waktu_tutup) }}"
+                        />
+                        @error("waktu_tutup")
+                        <span class="invalid-feedback">
+                            {{ $message }}
+                        </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
                         <label for="alamat">
                             Alamat:
                         </label>

@@ -33,7 +33,9 @@ class TempatPenyewaanProfileManagementHandlerController extends Controller
             "name" => ["required", "string"],
             "email" => ["required", "string", Rule::unique(User::class)->ignoreModel($user)],
             "no_telepon" => ["required", "string", Rule::unique(TempatPenyewaan::class)->ignoreModel($user->tempat_penyewaan)],
-            "tanggal_lahir" => ["required", "dateformat:Y-m-d"],
+            "waktu_buka" => ["required", "date_format:H:i"],
+            "waktu_tutup" => ["required", "date_format:H:i"],
+            "tanggal_lahir" => ["required", "date_format:Y-m-d"],
             "password" => ["nullable", "string", "confirmed"],
         ]);
 
@@ -41,6 +43,8 @@ class TempatPenyewaanProfileManagementHandlerController extends Controller
             "nama",
             "alamat",
             "no_telepon",
+            "waktu_buka",
+            "waktu_tutup",
         ]);
 
         $userData = Arr::only($data, [
