@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\MessageState;
 use App\Enums\PemesananStatus;
 use App\Pemesanan;
 use App\Providers\AuthServiceProvider;
+use App\Support\SessionHelper;
 use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -47,10 +49,15 @@ class PemesananTempatPenyewaanUpdateStatusController extends Controller
 
         $pemesanan->update($data);
 
+        SessionHelper::flashMessage(
+            __("messages.update.success"),
+            MessageState::STATE_SUCCESS,
+        );
+
         return $this->responseFactory
             ->redirectToRoute(
-                "tempat-penyewaan.pemesanan-by-tempat.index",
-                $pemesanan->tempat_penyewaan_id
+                "pemesanan-by-tempat.show",
+                $pemesanan
             );
     }
 }

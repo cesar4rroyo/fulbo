@@ -9,6 +9,8 @@
         Detail
     </h1>
 
+    @include("shared.messages")
+
     <dl>
         <dt> Hari, Tanggal:</dt>
         <dd> {{ \App\Support\Formatter::date($pemesanan->tanggal) }} </dd>
@@ -20,7 +22,6 @@
             />
         </dt>
     </dl>
-
 
     <div class="table-responsive">
         <table class="table table-sm table-striped">
@@ -58,13 +59,13 @@
                         name="status"
                         id="status"
                 >
-                    <option value="{{ \App\Enums\PemesananStatus::BATAL }}" {{ old("status", $pemesanan->status) === \App\Enums\PemesananStatus::BATAL ? "selected" : ""  }}>
+                    <option value="{{ \App\Enums\PemesananStatus::BATAL }}" {{ old("status", $pemesanan->status) == \App\Enums\PemesananStatus::BATAL ? "selected" : ""  }}>
                         Batal
                     </option>
-                    <option value="{{ \App\Enums\PemesananStatus::DRAFT }}" {{ old("status", $pemesanan->status) === \App\Enums\PemesananStatus::DRAFT ? "selected" : ""  }}>
+                    <option value="{{ \App\Enums\PemesananStatus::DRAFT }}" {{ old("status", $pemesanan->status) == \App\Enums\PemesananStatus::DRAFT ? "selected" : ""  }}>
                         Draft
                     </option>
-                    <option value="{{ \App\Enums\PemesananStatus::DITERIMA }}" {{ old("status", $pemesanan->status) === \App\Enums\PemesananStatus::DRAFT ? "selected" : ""  }}>
+                    <option value="{{ \App\Enums\PemesananStatus::DITERIMA }}" {{ old("status", $pemesanan->status) == \App\Enums\PemesananStatus::DITERIMA ? "selected" : ""  }}>
                         Diterima
                     </option>
                 </select>
