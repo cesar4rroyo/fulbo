@@ -64,7 +64,6 @@ Route::resource('tempat-penyewaan.pemesanan-penyewa', class_basename(TempatPenye
 Route::resource('tempat-penyewaan.pemesanan', class_basename(TempatPenyewaanPemesananController::class))
     ->only(['index', 'show']);
 
-
 Route::resource('pemesanan-penyewa', class_basename(PemesananPenyewaController::class))
     ->parameter('pemesanan-penyewa', 'pemesanan')
     ->shallow();

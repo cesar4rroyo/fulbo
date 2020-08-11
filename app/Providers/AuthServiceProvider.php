@@ -23,6 +23,8 @@ class AuthServiceProvider extends ServiceProvider
     const ACTION_UPDATE_PEMESANAN_PENYEWA = 'update-pemesanan-penyewa';
     const ACTION_VIEW_ANY_PEMESANAN_PENYEWA = 'view-any-pemesanan-penyewa';
 
+    const ACTION_MANAGE_PEMESANAN_PENYEWAAN = 'manage-pemesanan-penyewaan';
+
     /**
      * The policy mappings for the application.
      *

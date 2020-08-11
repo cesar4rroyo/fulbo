@@ -25,7 +25,7 @@
         </a>
     @endcan
 
-    @can(\App\Providers\AuthServiceProvider::ACTION_MANAGE_TEMPAT_PENYEWAAN_PROFILE)
+    @can(\App\Providers\AuthServiceProvider::ACTION_MANAGE_PEMESANAN_PENYEWAAN)
         <a class="text-decoration-none d-block {{ Route::is("tempat-penyewaan.pemesanan.*") ? "text-primary" : "text-dark"  }}"
            href="{{ route("tempat-penyewaan.pemesanan.index", auth()->user()->tempat_penyewaan) }}"
         >

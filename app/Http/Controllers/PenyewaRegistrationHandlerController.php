@@ -45,7 +45,6 @@ class PenyewaRegistrationHandlerController extends Controller
             "password" => ["required", "string", "confirmed"],
         ]);
 
-
         $data["password"] = Hash::make($data["password"]);
 
         $user = User::query()->create(array_merge(Arr::only($data, [

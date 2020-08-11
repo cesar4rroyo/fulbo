@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -20,6 +23,24 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
+
+//    public function login(Request $request)
+//    {
+////        dd($request->all());
+//
+//        $pass =  User::query()
+//            ->where([
+//                "email" => $request->get("email"),
+//            ])
+//            ->first()
+//            ->makeVisible("password")
+//            ->password;
+//
+//        $pass2 = Hash::check($request->get("password"), $pass);
+//
+//        return compact("pass", "pass2");
+//    }
+
 
     public function redirectTo()
     {
