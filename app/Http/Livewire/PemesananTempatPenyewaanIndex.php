@@ -3,6 +3,8 @@
 namespace App\Http\Livewire;
 
 use App\TempatPenyewaan;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Date;
 use Livewire\Component;
 
 class PemesananTempatPenyewaanIndex extends Component
@@ -39,6 +41,9 @@ class PemesananTempatPenyewaanIndex extends Component
     {
         return $this->getTempatPenyewaanProperty()
             ->pemesanans()
+            ->when($this->showAll !== "true", function (Builder $builder) {
+                $builder->whereDate('tanggal', '>=', Date::now());
+            })
             ->orderByDesc('tanggal')
             ->paginate();
     }

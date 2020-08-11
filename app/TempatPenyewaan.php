@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Casts\TimeCast;
 use App\QueryBuilder\TempatPenyewaanBuilder;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;

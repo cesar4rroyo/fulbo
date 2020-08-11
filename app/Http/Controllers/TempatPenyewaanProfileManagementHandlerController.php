@@ -26,7 +26,7 @@ class TempatPenyewaanProfileManagementHandlerController extends Controller
 
         /** @var User $user */
         $user = auth()->user();
-
+        
         $data = $request->validate([
             "nama" => ["required", "string", Rule::unique(TempatPenyewaan::class)->ignoreModel($user->tempat_penyewaan)],
             "alamat" => ["required", "string"],

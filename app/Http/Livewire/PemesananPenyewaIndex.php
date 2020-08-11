@@ -47,7 +47,7 @@ class PemesananPenyewaIndex extends Component
         $pemesanans = Pemesanan::query()
             ->with("tempat_penyewaan")
             ->when($this->showAll !== "true", function (Builder $builder) {
-                $builder->whereDate('tanggal', '>', Date::now());
+                $builder->whereDate('tanggal', '>=', Date::now());
             })
             ->whereHas("penyewa", function (Builder $builder) {
                 $builder->where("user_id", auth()->id());

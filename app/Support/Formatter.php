@@ -13,6 +13,13 @@ class Formatter
         return number_format($value);
     }
 
+    public static function timeWithoutSeconds($value)
+    {
+        return app(DateFactory::class)
+            ->createFromFormat("H:i:s", $value)
+            ->format("H:i");
+    }
+
     public static function date($value)
     {
         return app(DateFactory::class)
