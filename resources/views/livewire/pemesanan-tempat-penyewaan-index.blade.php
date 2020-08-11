@@ -49,8 +49,10 @@
                             "status" => $pemesanan->status
                         ])
                     </td>
-                    <td>
-                        <a href="{{ route("tempat-penyewaan.pemesanan.show") }}">
+                    <td class="text-center">
+                        <a
+                                class="btn btn-info btn-sm"
+                                href="{{ route("pemesanan-by-tempat.show", $pemesanan) }}">
                             Detail
                         </a>
                     </td>

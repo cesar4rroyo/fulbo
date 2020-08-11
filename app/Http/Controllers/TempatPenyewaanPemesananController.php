@@ -6,7 +6,7 @@ use App\Pemesanan;
 use App\TempatPenyewaan;
 use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class TempatPenyewaanPemesananController extends Controller
 {
@@ -46,74 +46,24 @@ class TempatPenyewaanPemesananController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @param  \App\TempatPenyewaan  $tempatPenyewaan
-     * @return \Illuminate\Http\Response
-     */
-    public function create(TempatPenyewaan $tempatPenyewaan)
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\TempatPenyewaan  $tempatPenyewaan
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request, TempatPenyewaan $tempatPenyewaan)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  \App\TempatPenyewaan  $tempatPenyewaan
      * @param  \App\Pemesanan  $pemesanan
      * @return \Illuminate\Http\Response
      */
-    public function show(TempatPenyewaan $tempatPenyewaan, Pemesanan $pemesanan)
+    public function show(Pemesanan $pemesanan)
     {
-        //
-    }
+        $pemesanan->load([
+            "tempat_penyewaan",
+            "penyewa",
+            "items" => function (HasMany $builder) {
+                $builder->orderBy("waktu_mulai");
+            }
+        ]);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\TempatPenyewaan  $tempatPenyewaan
-     * @param  \App\Pemesanan  $pemesanan
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(TempatPenyewaan $tempatPenyewaan, Pemesanan $pemesanan)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\TempatPenyewaan  $tempatPenyewaan
-     * @param  \App\Pemesanan  $pemesanan
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, TempatPenyewaan $tempatPenyewaan, Pemesanan $pemesanan)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\TempatPenyewaan  $tempatPenyewaan
-     * @param  \App\Pemesanan  $pemesanan
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(TempatPenyewaan $tempatPenyewaan, Pemesanan $pemesanan)
-    {
-        //
+        return $this->responseFactory->view("tempat-penyewaan.pemesanan.show", [
+            "pemesanan" => $pemesanan
+        ]);
     }
 }
