@@ -8,6 +8,7 @@ use Faker\Generator;
 use Illuminate\Container\Container;
 use Illuminate\Support\DateFactory;
 use Illuminate\Support\ServiceProvider;
+use Jenssegers\Date\Date;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,8 +30,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         TempatPenyewaan::observe(TempatPenyewaanObserver::class);
-        DateFactory::useClass(\Jenssegers\Date\Date::class);
-
+        DateFactory::useClass(Date::class);
 
         $this->app->bind("indexProvider", function () {
             return new class() {

@@ -20,7 +20,6 @@
         </select>
     </div>
 
-
     <div class="table-responsive">
         <table class="table table-sm table-striped">
             <thead class="thead-dark">
@@ -28,7 +27,7 @@
                 <th> #</th>
                 <th> Tempat</th>
                 <th> Hari, Tanggal</th>
-                <th> Status</th>
+                <th class="text-center"> Status</th>
                 <th class="text-center">
                     Kendali
                 </th>
@@ -41,13 +40,12 @@
                     <td> {{ $pemesanans->firstItem() + $loop->index }} </td>
                     <td> {{ $pemesanan->tempat_penyewaan->nama }}  </td>
                     <td> {{ \App\Support\Formatter::date($pemesanan->tanggal) }}  </td>
-                    <td>
-                        @include('components.pemesanan-status', [
-                            "status" => $pemesanan->status,
-                        ])
+                    <td class="text-center">
+                        <x-pemesanan-status
+                            :status="$pemesanan->status"
+                        />
                     </td>
                     <td class="text-center">
-
                         <a
                                 class="btn btn-info btn-sm"
                                 href="{{ route("pemesanan-penyewa.show", $pemesanan) }}"

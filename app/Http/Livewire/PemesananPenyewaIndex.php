@@ -33,11 +33,6 @@ class PemesananPenyewaIndex extends Component
         ]);
     }
 
-    public function updating($attribute, $value)
-    {
-        dump(compact("attribute", "value"));
-    }
-
     public function cancel($id)
     {
         Pemesanan::query()

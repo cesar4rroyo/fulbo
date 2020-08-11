@@ -25,6 +25,14 @@
         </a>
     @endcan
 
+    @can(\App\Providers\AuthServiceProvider::ACTION_MANAGE_TEMPAT_PENYEWAAN_PROFILE)
+        <a class="text-decoration-none d-block {{ Route::is("tempat-penyewaan.pemesanan.*") ? "text-primary" : "text-dark"  }}"
+           href="{{ route("tempat-penyewaan.pemesanan.index", auth()->user()->tempat_penyewaan) }}"
+        >
+            Pemesanan
+        </a>
+    @endcan
+
     @can(\App\Providers\AuthServiceProvider::ACTION_MANAGE_LAPANGAN)
         <a class="text-decoration-none d-block {{ Route::is("tempat-penyewaan.lapangan.*") ? "text-primary" : "text-dark"  }}"
            href="{{ route("tempat-penyewaan.lapangan.index", auth()->user()->tempat_penyewaan) }}"

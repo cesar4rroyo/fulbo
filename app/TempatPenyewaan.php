@@ -60,6 +60,11 @@ class TempatPenyewaan extends Model
         return $this->hasMany(FotoTempatPenyewaan::class);
     }
 
+    public function pemesanans(): HasMany
+    {
+        return $this->hasMany(Pemesanan::class);
+    }
+
     /**
      * @return array|LazyCollection
      * @throws Exception
