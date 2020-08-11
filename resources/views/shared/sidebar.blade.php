@@ -43,7 +43,7 @@
 
 
     @can(\App\Providers\AuthServiceProvider::ACTION_MANAGE_MEMBER)
-        <a class="text-decoration-none d-block {{ Route::is("tempat-penyewaan.member-tempat-penyewaan-by-tempat-penyewaan.*") ? "text-primary" : "text-dark"  }}"
+        <a class="text-decoration-none d-block {{ Route::is("*member-tempat-penyewaan-by-tempat-penyewaan.*") ? "text-primary" : "text-dark"  }}"
            href="{{ route("tempat-penyewaan.member-tempat-penyewaan-by-tempat-penyewaan.index", auth()->user()->tempat_penyewaan) }}"
             >
             Member

@@ -68,7 +68,14 @@
                         <td class="text-right"> Total: </td>
                         <td class="text-right"> {{ \App\Support\Formatter::currency($this->totalPrice) }} </td>
                     </tr>
+
+                    <tr>
+                        <td></td>
+                        <td class="text-right"> Total Bulanan (x {{ $this->multiplier }}): </td>
+                        <td class="text-right"> {{ \App\Support\Formatter::currency($this->grandTotalPrice) }} </td>
+                    </tr>
                 </tfoot>
+
             </table>
         </div>
 

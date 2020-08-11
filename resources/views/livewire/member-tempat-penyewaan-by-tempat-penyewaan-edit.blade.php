@@ -1,5 +1,23 @@
 <div>
+
+    <h1 class="feature-title">
+        <a href="{{ route("tempat-penyewaan.member-tempat-penyewaan-by-tempat-penyewaan.index", $this->memberTempatPenyewaan->tempat_penyewaan_id) }}">
+            Member
+        </a>
+        /
+        Ubah Pengajuan Member
+    </h1>
+
     @include("shared.messages")
+
+
+    <dl>
+        <dt> Penyewa:</dt>
+        <dd>
+            <div> {{ $this->memberTempatPenyewaan->penyewa->user->name }} </div>
+            <div> {{ $this->memberTempatPenyewaan->penyewa->no_telepon }} </div>
+        </dd>
+    </dl>
 
     <form wire:submit.prevent="submit">
         <div class="form-group">
@@ -22,6 +40,34 @@
                 {{ $message }}
             </span>
             @enderror
+        </div>
+
+        <div class="form-group">
+            <label for="status">
+                Status:
+            </label>
+
+            <select
+                    wire:model="status"
+                    name="status"
+                    id="status"
+                    class="form-control @error('status') is-invalid @enderror"
+            >
+                @foreach(\App\Enums\MemberTempatPenyewaanStatus::STATUSES AS $value)
+                    <option value="{{ $value }}">
+                        {{ $value }}
+                    </option>
+                @endforeach
+            </select>
+
+
+            @error('status')
+                <span class="invalid-feedback">
+                    {{ $message }}
+                </span>
+            @enderror
+
+
         </div>
 
         <div class="form-group">
@@ -56,13 +102,13 @@
                     <tfoot>
                     <tr>
                         <td></td>
-                        <td class="text-right"> Total Tarif: </td>
+                        <td class="text-right"> Total: </td>
                         <td class="text-right"> {{ \App\Support\Formatter::currency($this->currentTotalPrice) }} </td>
                     </tr>
 
                     <tr>
                         <td></td>
-                        <td class="text-right"> Total Tarif Bulanan (x {{ $this->multiplier }}): </td>
+                        <td class="text-right"> Total Bulanan (x {{ $this->multiplier }}): </td>
                         <td class="text-right font-weight-bold"> {{ \App\Support\Formatter::currency($this->currentGrandTotalPrice) }} </td>
                     </tr>
                     </tfoot>
@@ -132,13 +178,13 @@
                         <tfoot>
                         <tr>
                             <td></td>
-                            <td class="text-right"> Total Tarif: </td>
+                            <td class="text-right"> Total: </td>
                             <td class="text-right"> {{ \App\Support\Formatter::currency($this->totalPrice) }} </td>
                         </tr>
 
                         <tr>
                             <td></td>
-                            <td class="text-right"> Total Tarif Bulanan (x {{ $this->multiplier }}: </td>
+                            <td class="text-right"> Total Bulanan (x {{ $this->multiplier }}: </td>
                             <td class="text-right font-weight-bold"> {{ \App\Support\Formatter::currency($this->grandTotalPrice) }} </td>
                         </tr>
 

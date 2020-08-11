@@ -31,6 +31,7 @@ class MemberTempatPenyewaanByTempatPenyewaanEdit extends Component
     public $tempat_penyewaan_id;
     public $sesi_members;
     public $hari_dalam_minggu;
+    public $status;
     public $updates_sessions;
 
     public function mount($memberTempatPenyewaanId, $tempatPenyewaanId)
@@ -42,6 +43,7 @@ class MemberTempatPenyewaanByTempatPenyewaanEdit extends Component
         $this->member_tempat_penyewaan_id = $memberTempatPenyewaanId;
         $this->sesi_members = $this->getPossibleSessions();
         $this->hari_dalam_minggu = $this->memberTempatPenyewaan->hari_dalam_minggu;
+        $this->status = $this->memberTempatPenyewaan->status;
         $this->updates_sessions = "0";
     }
 

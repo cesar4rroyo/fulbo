@@ -21,6 +21,8 @@ use Livewire\Component;
  * @property array pickedSesiMembers
  * @property integer pickedCount
  * @property double price
+ * @property double totalPrice
+ * @property integer multiplier
  */
 class MemberTempatPenyewaanByTempatPenyewaanCreate extends Component
 {
@@ -53,6 +55,11 @@ class MemberTempatPenyewaanByTempatPenyewaanCreate extends Component
         );
     }
 
+    public function getMultiplierProperty()
+    {
+        return TempatPenyewaan::MEMBERSHIP_PRICE_MULTIPLIER;
+    }
+
     public function getPriceMapProperty(): Collection
     {
         return $this->tempatPenyewaan->harga_pemesanans()
@@ -81,6 +88,11 @@ class MemberTempatPenyewaanByTempatPenyewaanCreate extends Component
     public function getTotalPriceProperty()
     {
         return $this->pickedCount * $this->price;
+    }
+
+    public function getGrandTotalPriceProperty()
+    {
+        return $this->totalPrice * $this->multiplier;
     }
 
     public function getTempatPenyewaanProperty()
@@ -137,7 +149,7 @@ class MemberTempatPenyewaanByTempatPenyewaanCreate extends Component
         /** @var MemberTempatPenyewaan $membership */
         $membership = MemberTempatPenyewaan::query()
             ->create([
-                "status" => MemberTempatPenyewaanStatus::REQUESTED,
+                "status" => MemberTempatPenyewaanStatus::INACTIVE,
                 "penyewa_id" => auth()->user()->penyewa->id,
                 "tempat_penyewaan_id" => $this->tempat_penyewaan_id,
                 "hari_dalam_minggu" => $this->hari_dalam_minggu,
