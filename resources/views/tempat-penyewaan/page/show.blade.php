@@ -15,6 +15,30 @@
                 {{ $tempat_penyewaan->alamat }}
             </p>
 
+            @if($membership)
+                @if ($membership->status === \App\Enums\MemberTempatPenyewaanStatus::REQUESTED)
+                    <div class="alert alert-info">
+                        <i class="fas fa-exclamation-circle"></i>
+                        Anda telah membuat pengajuan member, mohon tunggu pengajuan Anda diterima.
+                    </div>
+                @endif
+
+                @if ($membership->status === \App\Enums\MemberTempatPenyewaanStatus::ACTIVE)
+                    <div class="alert alert-info">
+                        Anda merupakan member dari tempat penyewaan ini.
+                    </div>
+                @endif
+            @else
+                <div class="my-2">
+                    <a href="{{ route('tempat-penyewaan.member-tempat-penyewaan-by-tempat-penyewaan.create', $tempat_penyewaan) }}"
+                       class="btn btn-info"
+                    >
+                        Ajukan Sebagai Member
+                        <i class="fas fa-star"></i>
+                    </a>
+                </div>
+            @endif
+
             @can(\App\Providers\AuthServiceProvider::ACTION_CREATE_PEMESANAN_PENYEWA)
                 <a href="{{ route("tempat-penyewaan.pemesanan-penyewa.create", $tempat_penyewaan) }}"
                    class="btn btn-primary btn-block"

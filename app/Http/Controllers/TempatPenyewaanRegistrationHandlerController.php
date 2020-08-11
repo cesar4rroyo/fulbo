@@ -8,10 +8,13 @@ use App\Support\SessionHelper;
 use App\TempatPenyewaan;
 use App\User;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Contracts\Validation\Factory as ValidatorFactory;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -33,11 +36,12 @@ class TempatPenyewaanRegistrationHandlerController extends Controller
      * Handle the incoming request.
      *
      * @param Request $request
+     * @param ValidatorFactory $validatorFactory
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request, ValidatorFactory $validatorFactory)
     {
-        $data = $request->validate([
+        $data = $validatorFactory->make($request->all(), [
             "nama" => ["required", "string", Rule::unique(TempatPenyewaan::class)],
             "alamat" => ["required", "string"],
             "name" => ["required", "string"],
@@ -45,7 +49,19 @@ class TempatPenyewaanRegistrationHandlerController extends Controller
             "email" => ["required", "string", Rule::unique(User::class)],
             "tanggal_lahir" => ["required", "dateformat:Y-m-d"],
             "password" => ["required", "string", "confirmed"],
-        ]);
+            "waktu_buka" => ["required", "date_format:H:i"],
+            "waktu_tutup" => ["required", "date_format:H:i"],
+        ])->after(function (Validator $validator) {
+            $data = $validator->validated();
+            $waktuBuka = Date::createFromFormat("H:i", $data["waktu_buka"]);
+            $waktuTutup = Date::createFromFormat("H:i", $data["waktu_tutup"]);
+
+            if ($waktuBuka->greaterThanOrEqualTo($waktuTutup)) {
+                $validator->errors()->add(
+                    "waktu_buka", "Waktu buka wajib < waktu tutup."
+                );
+            }
+        })->validate();
 
         DB::beginTransaction();
 
@@ -59,9 +75,6 @@ class TempatPenyewaanRegistrationHandlerController extends Controller
             "password",
             "level",
         ]));
-
-        $data["waktu_buka"] = "10:00:00";
-        $data["waktu_tutup"] = "22:00:00";
 
         TempatPenyewaan::query()->create(array_merge(Arr::only($data, [
             "nama",

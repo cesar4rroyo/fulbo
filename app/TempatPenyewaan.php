@@ -10,6 +10,7 @@ use Carbon\CarbonPeriod;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\LazyCollection;
 
@@ -18,6 +19,7 @@ use Illuminate\Support\LazyCollection;
  */
 class TempatPenyewaan extends Model
 {
+    const MEMBERSHIP_PRICE_MULTIPLIER = 3;
     const WEEKDAY_DEFAULT_PRICE = 50_000;
     const WEEKEND_DEFAULT_PRICE = 75_000;
 
@@ -64,6 +66,16 @@ class TempatPenyewaan extends Model
     public function pemesanans(): HasMany
     {
         return $this->hasMany(Pemesanan::class);
+    }
+
+    public function members(): BelongsToMany
+    {
+        return $this->belongsToMany(Penyewa::class, (new MemberTempatPenyewaan)->getTable())
+            ->using(MemberTempatPenyewaan::class)
+            ->as(MemberTempatPenyewaan::PIVOT_ACCESSOR)
+            ->withPivot(MemberTempatPenyewaan::INCLUDED_FIELDS)
+            ->withTimestamps()
+            ;
     }
 
     /**

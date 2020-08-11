@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\MemberTempatPenyewaan;
+use App\Penyewa;
 use App\TempatPenyewaan;
 use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Contracts\Routing\ResponseFactory;
@@ -25,6 +27,8 @@ class TempatPenyewaanPageController extends Controller
 
     /**
      * @param Request $request
+     * @param TempatPenyewaan $tempat_penyewaan
+     * @return \Illuminate\Http\Response
      */
     public function __invoke(Request $request, TempatPenyewaan $tempat_penyewaan)
     {
@@ -35,8 +39,16 @@ class TempatPenyewaanPageController extends Controller
             "sesi_pemesanans",
         ]);
 
-        return $this->responseFactory->view("tempat-penyewaan.page.show", compact(
-            "tempat_penyewaan"
-        ));
+        $membership = MemberTempatPenyewaan::query()
+            ->where([
+                "penyewa_id" => $request->user()->penyewa->id,
+                "tempat_penyewaan_id" => $tempat_penyewaan->id,
+            ])->first();
+
+
+        return $this->responseFactory->view("tempat-penyewaan.page.show", [
+            "tempat_penyewaan" => $tempat_penyewaan,
+            "membership" => $membership,
+        ]);
     }
 }

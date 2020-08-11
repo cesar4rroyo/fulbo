@@ -24,8 +24,8 @@ class DateUtil
         $result = [];
 
         foreach ($this->dateFactory->getDays() as $index => $day) {
-            $result[$index] = $this->dateFactory->create()
-                ->weekday($index)
+            $result[$index] = $this->dateFactory
+                ->create($day)
                 ->format('l');
         }
 

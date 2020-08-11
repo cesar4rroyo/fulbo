@@ -31,4 +31,9 @@ class TempatPenyewaanObserver
 
         DB::commit();
     }
+
+    public function updated(TempatPenyewaan $tempatPenyewaan)
+    {
+        dump($tempatPenyewaan->toArray());
+    }
 }

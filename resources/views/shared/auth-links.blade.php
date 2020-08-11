@@ -16,6 +16,21 @@
            aria-expanded="false"
            v-pre>
             {{ Auth::user()->name }}
+
+            <span class="font-weight-bold text-uppercase">
+                @switch(\Illuminate\Support\Facades\Auth::user()->level)
+                    @case(\App\Enums\UserLevel::ADMIN_UTAMA)
+                        (Admin Utama)
+                    @break
+                    @case(\App\Enums\UserLevel::ADMIN_PENYEWAAN)
+                        (Admin {{ auth()->user()->tempat_penyewaan->nama }})
+                    @break
+                    @case(\App\Enums\UserLevel::PENYEWA)
+                        (Penyewa)
+                    @break
+                @endswitch
+            </span>
+
             <span class="caret"></span>
         </a>
 

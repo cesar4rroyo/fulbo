@@ -24,6 +24,7 @@ class AuthServiceProvider extends ServiceProvider
     const ACTION_VIEW_ANY_PEMESANAN_PENYEWA = 'view-any-pemesanan-penyewa';
 
     const ACTION_MANAGE_PEMESANAN_PENYEWAAN = 'manage-pemesanan-penyewaan';
+    const ACTION_MANAGE_MEMBER = 'manage-member';
 
     /**
      * The policy mappings for the application.
@@ -85,6 +86,10 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define(self::ACTION_MANAGE_PEMESANAN_PENYEWAAN, function (User $user) {
             return $user->level === UserLevel::ADMIN_PENYEWAAN;
+        });
+
+        Gate::define(self::ACTION_MANAGE_MEMBER, function (User $user) {
+            return $user->level == UserLevel::ADMIN_PENYEWAAN;
         });
 
         $this->registerPolicies();

@@ -5,6 +5,8 @@ use App\Http\Controllers\FotoTempatPenyewaanController;
 use App\Http\Controllers\FotoTempatPenyewaanImageController;
 use App\Http\Controllers\FotoTempatPenyewaanThumbController;
 use App\Http\Controllers\LapanganController;
+use App\Http\Controllers\MemberTempatPenyewaanByPenyewaController;
+use App\Http\Controllers\MemberTempatPenyewaanByTempatPenyewaanController;
 use App\Http\Controllers\PemesananPenyewaUpdateStatusController;
 use App\Http\Controllers\PemesananPenyewaController;
 use App\Http\Controllers\PemesananTempatPenyewaanUpdateStatusController;
@@ -65,6 +67,11 @@ Route::resource('tempat-penyewaan.pemesanan-penyewa', class_basename(TempatPenye
 Route::resource('tempat-penyewaan.pemesanan-by-tempat', class_basename(TempatPenyewaanPemesananController::class))
     ->parameter('pemesanan-by-tempat', 'pemesanan')
     ->only(['index', 'show'])
+    ->shallow();
+
+Route::resource('tempat-penyewaan.member-tempat-penyewaan-by-tempat-penyewaan', class_basename(MemberTempatPenyewaanByTempatPenyewaanController::class))
+    ->only(['index', 'create', 'edit', 'update'])
+    ->parameter('member-tempat-penyewaan-by-tempat-penyewaan', 'member-tempat-penyewaan')
     ->shallow();
 
 Route::resource('pemesanan-penyewa', class_basename(PemesananPenyewaController::class))
