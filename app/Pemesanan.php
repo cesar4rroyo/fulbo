@@ -11,6 +11,10 @@ class Pemesanan extends Model
     protected $table = "pemesanan";
     protected $guarded = [];
 
+    protected $casts = [
+        "tanggal" => "date:Y-m-d"
+    ];
+
     public function items(): HasMany
     {
         return $this->hasMany(ItemPemesanan::class);

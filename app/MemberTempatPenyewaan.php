@@ -29,6 +29,15 @@ class MemberTempatPenyewaan extends Pivot
         return $this->belongsTo(TempatPenyewaan::class);
     }
 
+    public function pemesanans(): HasMany
+    {
+        return $this->hasMany(
+            Pemesanan::class,
+            "member_tempat_penyewaan_id",
+            "id",
+        );
+    }
+
     public function sesi_members(): HasMany
     {
         return $this->hasMany(

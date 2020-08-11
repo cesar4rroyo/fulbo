@@ -1,5 +1,4 @@
 <div>
-
     <h1 class="feature-title">
         <a href="{{ route("tempat-penyewaan.member-tempat-penyewaan-by-tempat-penyewaan.index", $this->memberTempatPenyewaan->tempat_penyewaan_id) }}">
             Member
@@ -9,7 +8,6 @@
     </h1>
 
     @include("shared.messages")
-
 
     <dl>
         <dt> Penyewa:</dt>
@@ -60,14 +58,11 @@
                 @endforeach
             </select>
 
-
             @error('status')
                 <span class="invalid-feedback">
                     {{ $message }}
                 </span>
             @enderror
-
-
         </div>
 
         <div class="form-group">
