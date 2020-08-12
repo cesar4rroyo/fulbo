@@ -38,8 +38,18 @@
                 <tr>
                     <td> {{ $this->pemesanans->firstItem() + $loop->index }} </td>
                     <td>
-                        <span class="d-block"> {{ $pemesanan->penyewa->user->name }} </span>
+                        <span class="d-block">
+                            {{ $pemesanan->penyewa->user->name }}
+                        </span>
                         <span class="d-block"> ({{ $pemesanan->penyewa->no_telepon }}) </span>
+                        <span class="d-block">
+                            @if($pemesanan->penyewa->id === ($pemesanan->member_tempat_penyewaan->penyewa_id ?? null))
+                                <span class="badge badge-primary">
+                                    <i class="fas fa-star"></i>
+                                    Pemesanan Member
+                                </span>
+                            @endif
+                        </span>
                     </td>
                     <td>
                         {{ \App\Support\Formatter::date($pemesanan->tanggal) }}

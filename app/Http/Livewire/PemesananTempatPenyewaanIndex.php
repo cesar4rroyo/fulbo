@@ -41,6 +41,10 @@ class PemesananTempatPenyewaanIndex extends Component
     {
         return $this->getTempatPenyewaanProperty()
             ->pemesanans()
+            ->with([
+                "member_tempat_penyewaan:id,penyewa_id",
+                "penyewa.user"
+            ])
             ->when($this->showAll !== "true", function (Builder $builder) {
                 $builder->whereDate('tanggal', '>=', Date::now());
             })

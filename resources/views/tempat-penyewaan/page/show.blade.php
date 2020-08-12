@@ -16,7 +16,7 @@
             </p>
 
             @if($membership)
-                @if ($membership->status === \App\Enums\MemberTempatPenyewaanStatus::REQUESTED)
+                @if ($membership->status === \App\Enums\MemberTempatPenyewaanStatus::INACTIVE)
                     <div class="alert alert-info">
                         <i class="fas fa-exclamation-circle"></i>
                         Anda telah membuat pengajuan member, mohon tunggu pengajuan Anda diterima.

@@ -29,4 +29,9 @@ class Pemesanan extends Model
     {
         return $this->belongsTo(Penyewa::class);
     }
+
+    public function member_tempat_penyewaan(): BelongsTo
+    {
+        return $this->belongsTo(MemberTempatPenyewaan::class);
+    }
 }
