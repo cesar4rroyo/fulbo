@@ -3,17 +3,30 @@
 @section("content")
     <div class="container mt-5 vh-100">
         <div class="mb-3">
-            <h1 class="text-primary">
-                {{ $tempat_penyewaan->nama }}
+            <h1 class="feature-title">
+                <span class="text-primary">
+                    {{ $tempat_penyewaan->nama }}
+                </span>
             </h1>
 
-            <div class="text-muted font-weight-bold">
-                <i class="fas fa-phone"></i> {{ $tempat_penyewaan->no_telepon }}
-            </div>
+            <div class="card">
+                <div class="card-body">
+                    <p>
+                        {{ $tempat_penyewaan->alamat }}
+                    </p>
 
-            <p>
-                {{ $tempat_penyewaan->alamat }}
-            </p>
+                    <dl>
+                        <dt><i class="fas fa-user"></i> Waktu Operasi </dt>
+                        <dd>{{ $tempat_penyewaan->waktu_buka }} - {{ $tempat_penyewaan->waktu_tutup }} </dd>
+
+                        <dt><i class="fas fa-user  "></i> Admin </dt>
+                        <dd>{{ $tempat_penyewaan->admin->name  }}</dd>
+
+                        <dt><i class="fas fa-phone-alt"></i> No. Telepon </dt>
+                        <dd>{{ $tempat_penyewaan->no_telepon  }}</dd>
+                    </dl>
+                </div>
+            </div>
 
             @if($membership)
                 @if ($membership->status === \App\Enums\MemberTempatPenyewaanStatus::INACTIVE)

@@ -41,7 +41,7 @@ class TempatPenyewaanPageController extends Controller
 
         $membership = MemberTempatPenyewaan::query()
             ->where([
-                "penyewa_id" => $request->user()->penyewa->id,
+                "penyewa_id" => $request->user()->penyewa->id ?? null,
                 "tempat_penyewaan_id" => $tempat_penyewaan->id,
             ])->first();
 

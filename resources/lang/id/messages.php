@@ -19,6 +19,7 @@ return [
     'delete' => [
         'success' => 'Data berhasil dihapus.',
         'failure' => 'Data gagal dihapus.',
+        'failure-related-data' => 'Data gagal dihapus karena telah terdapat data terkait.',
     ],
 
     'penyewa-registration-success' => 'Selamat, akun Anda telah terdaftar.',

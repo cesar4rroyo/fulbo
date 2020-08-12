@@ -4,6 +4,7 @@ use App\Http\Controllers\FotoTempatPenyewaanCarouselController;
 use App\Http\Controllers\FotoTempatPenyewaanController;
 use App\Http\Controllers\FotoTempatPenyewaanImageController;
 use App\Http\Controllers\FotoTempatPenyewaanThumbController;
+use App\Http\Controllers\GuestTempatPenyewaanIndexController;
 use App\Http\Controllers\LapanganController;
 use App\Http\Controllers\MemberTempatPenyewaanByTempatPenyewaanController;
 use App\Http\Controllers\PembayaranMemberController;
@@ -49,6 +50,9 @@ Auth::routes([
 
 Route::get("/", class_basename(WelcomeController::class))
     ->name("welcome");
+
+Route::get("guest-tempat-penyewaan-index", class_basename(GuestTempatPenyewaanIndexController::class))
+    ->name("guest-tempat-penyewaan-index");
 
 Route::resource('tempat-penyewaan', class_basename(TempatPenyewaanController::class))
     ->only(['index']);

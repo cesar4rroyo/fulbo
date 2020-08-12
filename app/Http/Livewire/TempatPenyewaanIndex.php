@@ -98,19 +98,20 @@ class TempatPenyewaanIndex extends Component
     public function delete(int $id)
     {
         try {
-            $tempatPenyewaan = TempatPenyewaan::all()
+            $tempatPenyewaan = TempatPenyewaan::query()
                 ->findOrFail($id);
 
             $tempatPenyewaan->delete();
-        } catch (\Exception $ex) {
-            SessionHelper::flashMessage(__("messages.delete.failure"), MessageState::STATE_DANGER);
-        }
 
-        session()->flash("messages", [
-            [
-                "content" => __("messages.delete.success"),
-                "state" => MessageState::STATE_SUCCESS
-            ]
-        ]);
+            SessionHelper::flashMessage(
+                __("messages.delete.success"),
+                MessageState::STATE_SUCCESS
+            );
+        } catch (\Exception $ex) {
+            SessionHelper::flashMessage(
+            __("messages.delete.failure-related-data"),
+                MessageState::STATE_DANGER
+            );
+        }
     }
 }
