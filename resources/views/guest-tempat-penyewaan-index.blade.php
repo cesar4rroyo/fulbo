@@ -23,7 +23,7 @@
                                 </p>
 
                                 <dl>
-                                    <dt><i class="fas fa-user"></i> Waktu Operasi </dt>
+                                    <dt><i class="fas fa-clock"></i> Waktu Operasi </dt>
                                     <dd>{{ $tempat_penyewaan->waktu_buka }} - {{ $tempat_penyewaan->waktu_tutup }} </dd>
 
                                     <dt><i class="fas fa-user  "></i> Admin </dt>
