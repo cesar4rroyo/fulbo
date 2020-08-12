@@ -1,6 +1,12 @@
 <div>
     <h1 class="feature-title">
-        Tambah Pemesanan Member
+        <a href="{{ route("tempat-penyewaan.member-tempat-penyewaan-by-tempat-penyewaan.index", $this->memberTempatPenyewaan->tempat_penyewaan_id) }}">
+            Member
+        </a>
+
+        /
+
+        Tambah Pemesanan
     </h1>
 
     <form wire:submit.prevent="submit">
@@ -61,6 +67,12 @@
                 @endforeach
                 </tbody>
             </table>
+        </div>
+
+        <div class="form-group d-flex justify-content-end">
+            <button class="btn btn-primary">
+                Buat Pemesanan
+            </button>
         </div>
     </form>
 </div>

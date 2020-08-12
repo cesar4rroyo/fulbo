@@ -23,7 +23,7 @@ class Formatter
     public static function date($value)
     {
         return app(DateFactory::class)
-            ->create($value)
+            ->make($value)
             ->format("l, d F Y");
     }
 }

@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Enums\MemberTempatPenyewaanStatus;
 use App\Enums\UserLevel;
+use App\MemberTempatPenyewaan;
 use App\Policies\TempatPenyewaanPolicy;
 use App\TempatPenyewaan;
 use App\User;
@@ -25,6 +27,8 @@ class AuthServiceProvider extends ServiceProvider
 
     const ACTION_MANAGE_PEMESANAN_PENYEWAAN = 'manage-pemesanan-penyewaan';
     const ACTION_MANAGE_MEMBER = 'manage-member';
+
+    const ACTION_CREATE_PEMESANAN_MEMBER = 'create-pemesanan-member';
 
     /**
      * The policy mappings for the application.
@@ -90,6 +94,14 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define(self::ACTION_MANAGE_MEMBER, function (User $user) {
             return $user->level == UserLevel::ADMIN_PENYEWAAN;
+        });
+
+        Gate::define(self::ACTION_CREATE_PEMESANAN_MEMBER, function (User $user, MemberTempatPenyewaan $memberTempatPenyewaan) {
+            return
+                $user->level === UserLevel::ADMIN_PENYEWAAN
+                && $user->tempat_penyewaan->id === $memberTempatPenyewaan->tempat_penyewaan_id
+                && $memberTempatPenyewaan->status === MemberTempatPenyewaanStatus::ACTIVE
+                ;
         });
 
         $this->registerPolicies();

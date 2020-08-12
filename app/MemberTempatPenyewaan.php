@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
+/**
+ * @property TempatPenyewaan tempat_penyewaan
+ */
 class MemberTempatPenyewaan extends Pivot
 {
     const PIVOT_ACCESSOR = "membership";

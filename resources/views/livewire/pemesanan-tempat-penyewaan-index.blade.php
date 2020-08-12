@@ -36,7 +36,7 @@
             <tbody>
             @foreach($this->pemesanans AS $pemesanan)
                 <tr>
-                    <td> {{ $loop->iteration }} </td>
+                    <td> {{ $this->pemesanans->firstItem() + $loop->index }} </td>
                     <td>
                         <span class="d-block"> {{ $pemesanan->penyewa->user->name }} </span>
                         <span class="d-block"> ({{ $pemesanan->penyewa->no_telepon }}) </span>
@@ -62,4 +62,7 @@
         </table>
     </div>
 
+    <div class="d-flex justify-content-center">
+        {{ $this->pemesanans->links() }}
+    </div>
 </div>

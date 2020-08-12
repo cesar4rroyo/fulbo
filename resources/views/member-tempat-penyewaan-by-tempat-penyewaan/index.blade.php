@@ -5,6 +5,8 @@
         Member
     </h1>
 
+    @include("shared.messages")
+
     <div class="table-responsive">
         <table class="table table-sm table-striped">
             <thead class="thead-dark">
@@ -26,16 +28,18 @@
                     <td class="text-uppercase text-center">
                         <x-membership-status
                                 status="{{ $member->membership->status }}"
-                        />
+                        ></x-membership-status>
                     </td>
                     <td class="text-center">
-                        <a
-                                class="btn btn-info btn-sm"
-                                href="{{ route("member-tempat-penyewaan.pemesanan-by-member-tempat-penyewaan.create", $member->membership)  }}"
-                        >
-                            Tambah Pemesanan
-                            <i class="fas fa-plus"></i>
-                        </a>
+                        @can(\App\Providers\AuthServiceProvider::ACTION_CREATE_PEMESANAN_MEMBER, $member->membership)
+                            <a
+                                    class="btn btn-info btn-sm"
+                                    href="{{ route("member-tempat-penyewaan.pemesanan-by-member-tempat-penyewaan.create", $member->membership)  }}"
+                            >
+                                Tambah Pemesanan
+                                <i class="fas fa-plus"></i>
+                            </a>
+                        @endcan
 
                         <a href="{{ route("member-tempat-penyewaan-by-tempat-penyewaan.edit", $member->membership)  }}"
                            class="btn btn-info btn-sm"

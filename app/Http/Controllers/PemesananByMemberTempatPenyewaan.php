@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\MemberTempatPenyewaan;
 use App\Pemesanan;
+use App\Providers\AuthServiceProvider;
 use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
@@ -44,6 +45,11 @@ class PemesananByMemberTempatPenyewaan extends Controller
      */
     public function create(MemberTempatPenyewaan $memberTempatPenyewaan)
     {
+        $this->gate->authorize(
+            AuthServiceProvider::ACTION_CREATE_PEMESANAN_MEMBER,
+            $memberTempatPenyewaan
+        );
+
         return $this->responseFactory->view("pemesanan-by-member-tempat-penyewaan.create", [
             "member_tempat_penyewaan" => $memberTempatPenyewaan
         ]);

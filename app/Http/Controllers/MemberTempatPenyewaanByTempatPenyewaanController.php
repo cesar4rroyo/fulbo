@@ -6,7 +6,6 @@ use App\MemberTempatPenyewaan;
 use App\TempatPenyewaan;
 use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class MemberTempatPenyewaanByTempatPenyewaanController extends Controller
@@ -33,7 +32,7 @@ class MemberTempatPenyewaanByTempatPenyewaanController extends Controller
      */
     public function index(TempatPenyewaan $tempatPenyewaan)
     {
-       return $this->responseFactory
+        return $this->responseFactory
             ->view("member-tempat-penyewaan-by-tempat-penyewaan.index", [
                 "tempat_penyewaan" => $tempatPenyewaan,
                 "members" => $tempatPenyewaan->members()
@@ -63,7 +62,7 @@ class MemberTempatPenyewaanByTempatPenyewaanController extends Controller
      * @param MemberTempatPenyewaan $memberTempatPenyewaan
      * @return Response
      */
-    public function edit( MemberTempatPenyewaan $memberTempatPenyewaan)
+    public function edit(MemberTempatPenyewaan $memberTempatPenyewaan)
     {
         return $this->responseFactory->view("member-tempat-penyewaan-by-tempat-penyewaan.edit", [
             "member_tempat_penyewaan" => $memberTempatPenyewaan,

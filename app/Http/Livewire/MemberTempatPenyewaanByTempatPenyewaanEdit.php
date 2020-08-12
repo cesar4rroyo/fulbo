@@ -158,6 +158,7 @@ class MemberTempatPenyewaanByTempatPenyewaanEdit extends Component
         DB::beginTransaction();
 
         $this->memberTempatPenyewaan->update([
+            "status" => $this->status,
             "hari_dalam_minggu" => $this->hari_dalam_minggu,
         ]);
 

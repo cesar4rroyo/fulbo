@@ -2,21 +2,73 @@
 
 namespace App\Http\Livewire;
 
+use App\Enums\MessageState;
 use App\Enums\PemesananStatus;
 use App\MemberTempatPenyewaan;
+use App\Pemesanan;
+use App\Support\SessionHelper;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 /**
  * @property MemberTempatPenyewaan memberTempatPenyewaan
  * @property Date latestPemesananDate
+ * @property Date[] pemesananDates
  */
 class PemesananByMemberTempatPenyewaanCreate extends Component
 {
     const N_PEMESANANS_TO_BE_CREATED = 4;
     public $memberTempatPenyewaanId;
     public $startDate;
+
+    public function submit()
+    {
+        DB::beginTransaction();
+
+        $price = $this->memberTempatPenyewaan
+            ->tempat_penyewaan
+            ->harga_pemesanans()
+            ->where("hari_dalam_minggu", $this->memberTempatPenyewaan->hari_dalam_minggu)
+            ->value("harga");
+
+        $sesiMembers = $this->memberTempatPenyewaan
+            ->sesi_members()
+            ->get();
+
+        foreach ($this->pemesananDates as $date) {
+            /** @var Pemesanan $pemesanan */
+            $pemesanan = Pemesanan::query()
+                ->create([
+                    "tanggal" => $date,
+                    "status" => PemesananStatus::DITERIMA,
+                    "penyewa_id" => $this->memberTempatPenyewaan->penyewa_id,
+                    "tempat_penyewaan_id" => $this->memberTempatPenyewaan->tempat_penyewaan_id,
+                    "member_tempat_penyewaan_id" => $this->memberTempatPenyewaanId,
+                ]);
+
+            foreach ($sesiMembers as $sesiMember) {
+                $pemesanan->items()->create([
+                    "waktu_mulai" => $sesiMember->waktu_mulai,
+                    "waktu_selesai" => $sesiMember->waktu_selesai,
+                    "harga" => $price,
+                ]);
+            }
+        }
+
+        DB::commit();
+
+        SessionHelper::flashMessage(
+            __("messages.create.success"),
+            MessageState::STATE_SUCCESS,
+        );
+
+        $this->redirectRoute(
+            "tempat-penyewaan.member-tempat-penyewaan-by-tempat-penyewaan.index",
+            $this->memberTempatPenyewaan->tempat_penyewaan_id
+        );
+    }
 
     public function mount($memberTempatPenyewaanId)
     {
@@ -36,7 +88,9 @@ class PemesananByMemberTempatPenyewaanCreate extends Component
         $maxDate = $this->memberTempatPenyewaan
             ->pemesanans()
             ->where('status', PemesananStatus::DITERIMA)
-            ->max('tanggal');
+            ->selectRaw("MAX(tanggal) as maxDate")
+            ->withCasts(["maxDate" => "date"])
+            ->value("maxDate");
 
         return !empty($maxDate) ?
             $maxDate->next($this->memberTempatPenyewaan->hari_dalam_minggu) :
