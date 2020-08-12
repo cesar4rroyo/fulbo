@@ -28,6 +28,7 @@ class AuthServiceProvider extends ServiceProvider
     const ACTION_MANAGE_PEMESANAN_PENYEWAAN = 'manage-pemesanan-penyewaan';
     const ACTION_MANAGE_MEMBER = 'manage-member';
 
+    const ACTION_APPLY_MEMBERSHIP = 'apply-membership';
     const ACTION_CREATE_PEMESANAN_MEMBER = 'create-pemesanan-member';
 
     /**
@@ -102,6 +103,10 @@ class AuthServiceProvider extends ServiceProvider
                 && $user->tempat_penyewaan->id === $memberTempatPenyewaan->tempat_penyewaan_id
                 && $memberTempatPenyewaan->status === MemberTempatPenyewaanStatus::ACTIVE
                 ;
+        });
+
+        Gate::define(self::ACTION_APPLY_MEMBERSHIP, function (User $user) {
+            return $user->level == UserLevel::PENYEWA;
         });
 
         $this->registerPolicies();

@@ -42,30 +42,34 @@
                     </div>
                 @endif
             @else
-                <div class="my-2">
-                    <a href="{{ route('tempat-penyewaan.member-tempat-penyewaan-by-tempat-penyewaan.create', $tempat_penyewaan) }}"
-                       class="btn btn-info"
-                    >
-                        Ajukan Sebagai Member
-                        <i class="fas fa-star"></i>
-                    </a>
-                </div>
+                @can(\App\Providers\AuthServiceProvider::ACTION_APPLY_MEMBERSHIP)
+                    <div class="my-2">
+                        <a href="{{ route('tempat-penyewaan.member-tempat-penyewaan-by-tempat-penyewaan.create', $tempat_penyewaan) }}"
+                           class="btn btn-info"
+                        >
+                            Ajukan Sebagai Member
+                            <i class="fas fa-star"></i>
+                        </a>
+                    </div>
+                @endcan
             @endif
 
-            @can(\App\Providers\AuthServiceProvider::ACTION_CREATE_PEMESANAN_PENYEWA)
-                <a href="{{ route("tempat-penyewaan.pemesanan-penyewa.create", $tempat_penyewaan) }}"
-                   class="btn btn-primary btn-block"
-                >
-                    <i class="fas fa-book"></i>
-                    Buat Pemesanan
-                </a>
-            @else
-                <div class="alert alert-info">
-                    <i class="fas fa-exclamation-circle"></i>
-                    Anda hanya dapat melakukan pemesanan jika Anda telah masuk
-                    dengan menggunakan akun penyewa.
-                </div>
-            @endcan
+            <div class="my-2">
+                @can(\App\Providers\AuthServiceProvider::ACTION_CREATE_PEMESANAN_PENYEWA)
+                    <a href="{{ route("tempat-penyewaan.pemesanan-penyewa.create", $tempat_penyewaan) }}"
+                       class="btn btn-primary btn-block"
+                    >
+                        <i class="fas fa-book"></i>
+                        Buat Pemesanan
+                    </a>
+                @else
+                    <div class="alert alert-info">
+                        <i class="fas fa-exclamation-circle"></i>
+                        Anda hanya dapat melakukan pemesanan jika Anda telah masuk
+                        dengan menggunakan akun penyewa.
+                    </div>
+                @endcan
+            </div>
         </div>
 
         <div id="foto-carousel"
