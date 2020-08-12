@@ -12,6 +12,7 @@ use App\Http\Controllers\PemesananByMemberTempatPenyewaan;
 use App\Http\Controllers\PemesananPenyewaUpdateStatusController;
 use App\Http\Controllers\PemesananPenyewaController;
 use App\Http\Controllers\PemesananTempatPenyewaanUpdateStatusController;
+use App\Http\Controllers\ReviewByTempatPenyewaanController;
 use App\Http\Controllers\TempatPenyewaanPemesananController;
 use App\Http\Controllers\TempatPenyewaanPemesananPenyewaController;
 use App\Http\Controllers\PenyewaProfileManagementFormController;
@@ -68,6 +69,12 @@ Route::resource('tempat-penyewaan.foto', class_basename(FotoTempatPenyewaanContr
 Route::resource('tempat-penyewaan.pemesanan-penyewa', class_basename(TempatPenyewaanPemesananPenyewaController::class))
     ->only(['create', 'store'])
     ->shallow();
+
+Route::resource("tempat-penyewaan.review-by-tempat-penyewaan", class_basename(ReviewByTempatPenyewaanController::class))
+    ->only(['store', 'destroy'])
+    ->parameter("review-by-tempat-penyewaan", "review")
+    ->shallow();
+
 
 Route::resource('tempat-penyewaan.pemesanan-by-tempat', class_basename(TempatPenyewaanPemesananController::class))
     ->parameter('pemesanan-by-tempat', 'pemesanan')

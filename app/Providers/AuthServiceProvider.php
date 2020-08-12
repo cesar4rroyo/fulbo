@@ -31,6 +31,8 @@ class AuthServiceProvider extends ServiceProvider
     const ACTION_APPLY_MEMBERSHIP = 'apply-membership';
     const ACTION_CREATE_PEMESANAN_MEMBER = 'create-pemesanan-member';
 
+    const ACTION_CREATE_REVIEW = 'create-review';
+
     /**
      * The policy mappings for the application.
      *
@@ -107,6 +109,14 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define(self::ACTION_APPLY_MEMBERSHIP, function (User $user) {
             return $user->level == UserLevel::PENYEWA;
+        });
+
+        Gate::define(self::ACTION_CREATE_REVIEW, function (User $user, TempatPenyewaan $tempatPenyewaan) {
+            return
+                $user->level == UserLevel::PENYEWA
+                && $tempatPenyewaan->reviews()->where([
+                    "penyewa_id" => $user->penyewa->id,
+                ])->count() === 0;
         });
 
         $this->registerPolicies();

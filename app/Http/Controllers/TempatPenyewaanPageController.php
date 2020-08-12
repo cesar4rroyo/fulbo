@@ -39,16 +39,20 @@ class TempatPenyewaanPageController extends Controller
             "sesi_pemesanans",
         ]);
 
-        $membership = MemberTempatPenyewaan::query()
-            ->where([
-                "penyewa_id" => $request->user()->penyewa->id ?? null,
-                "tempat_penyewaan_id" => $tempat_penyewaan->id,
-            ])->first();
-
-
         return $this->responseFactory->view("tempat-penyewaan.page.show", [
             "tempat_penyewaan" => $tempat_penyewaan,
-            "membership" => $membership,
+            "averageRating" => $tempat_penyewaan->reviews()->avg("rating"),
+            "review" => $tempat_penyewaan->reviews()
+                ->where([
+                    "penyewa_id" => $request->user()->penyewa->id,
+                ])
+                ->first(),
+
+            "membership" => MemberTempatPenyewaan::query()
+                ->where([
+                    "penyewa_id" => $request->user()->penyewa->id ?? null,
+                    "tempat_penyewaan_id" => $tempat_penyewaan->id,
+                ])->first(),
         ]);
     }
 }

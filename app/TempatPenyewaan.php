@@ -68,6 +68,11 @@ class TempatPenyewaan extends Model
         return $this->hasMany(Pemesanan::class);
     }
 
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class);
+    }
+
     public function members(): BelongsToMany
     {
         return $this->belongsToMany(Penyewa::class, (new MemberTempatPenyewaan)->getTable())
