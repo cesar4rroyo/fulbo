@@ -32,6 +32,7 @@ class AuthServiceProvider extends ServiceProvider
     const ACTION_CREATE_PEMESANAN_MEMBER = 'create-pemesanan-member';
 
     const ACTION_CREATE_REVIEW = 'create-review';
+    const ACTION_VIEW_ANY_TEMPAT_PENYEWAAN_REVIEW = 'view-any-tempat-penyewaan-review';
 
     /**
      * The policy mappings for the application.
@@ -117,6 +118,10 @@ class AuthServiceProvider extends ServiceProvider
                 && $tempatPenyewaan->reviews()->where([
                     "penyewa_id" => $user->penyewa->id,
                 ])->count() === 0;
+        });
+
+        Gate::define(self::ACTION_VIEW_ANY_TEMPAT_PENYEWAAN_REVIEW, function (User $user, ?TempatPenyewaan $tempatPenyewaan = null) {
+            return $user->id === ($tempatPenyewaan->admin_id ?? null);
         });
 
         $this->registerPolicies();

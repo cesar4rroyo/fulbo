@@ -71,10 +71,9 @@ Route::resource('tempat-penyewaan.pemesanan-penyewa', class_basename(TempatPenye
     ->shallow();
 
 Route::resource("tempat-penyewaan.review-by-tempat-penyewaan", class_basename(ReviewByTempatPenyewaanController::class))
-    ->only(['store', 'destroy'])
+    ->only(['index', 'store', 'destroy'])
     ->parameter("review-by-tempat-penyewaan", "review")
     ->shallow();
-
 
 Route::resource('tempat-penyewaan.pemesanan-by-tempat', class_basename(TempatPenyewaanPemesananController::class))
     ->parameter('pemesanan-by-tempat', 'pemesanan')

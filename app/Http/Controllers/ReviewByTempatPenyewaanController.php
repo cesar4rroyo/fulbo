@@ -3,14 +3,31 @@
 namespace App\Http\Controllers;
 
 use App\Enums\MessageState;
+use App\Providers\AuthServiceProvider;
 use App\Review;
 use App\Support\SessionHelper;
 use App\TempatPenyewaan;
+use Illuminate\Contracts\Auth\Access\Gate;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class ReviewByTempatPenyewaanController extends Controller
 {
+    private ResponseFactory $responseFactory;
+    private Gate $gate;
+
+    /**
+     * FotoTempatPenyewaanController constructor.
+     * @param ResponseFactory $responseFactory
+     * @param Gate $gate
+     */
+    public function __construct(ResponseFactory $responseFactory, Gate $gate)
+    {
+        $this->responseFactory = $responseFactory;
+        $this->gate = $gate;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +36,16 @@ class ReviewByTempatPenyewaanController extends Controller
      */
     public function index(TempatPenyewaan $tempatPenyewaan)
     {
-        //
+        $this->gate->authorize(AuthServiceProvider::ACTION_VIEW_ANY_TEMPAT_PENYEWAAN_REVIEW, $tempatPenyewaan);
+
+        $reviews = $tempatPenyewaan->reviews()
+            ->orderByDesc("created_at")
+            ->paginate();
+
+        return $this->responseFactory->view("review-by-tempat-penyewaan.index", [
+                "tempat_penyewaan" => $tempatPenyewaan,
+                "reviews" => $reviews,
+            ]);
     }
 
     /**
