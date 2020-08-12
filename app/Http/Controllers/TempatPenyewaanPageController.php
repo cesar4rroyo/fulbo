@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\MemberTempatPenyewaan;
 use App\Penyewa;
+use App\Providers\AuthServiceProvider;
 use App\TempatPenyewaan;
 use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Contracts\Routing\ResponseFactory;
@@ -32,6 +33,8 @@ class TempatPenyewaanPageController extends Controller
      */
     public function __invoke(Request $request, TempatPenyewaan $tempat_penyewaan)
     {
+        $this->gate->authorize(AuthServiceProvider::ACTION_VIEW_ANY_TEMPAT_PENYEWAAN_PAGE);
+
         $tempat_penyewaan->load([
             "fotos",
             "lapangans",
