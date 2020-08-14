@@ -77,6 +77,8 @@ class FotoTempatPenyewaanController extends Controller
      * @param TempatPenyewaan $tempat_penyewaan
      * @return RedirectResponse
      * @throws AuthorizationException
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
      */
     public function store(Request $request, TempatPenyewaan $tempat_penyewaan)
     {
@@ -108,7 +110,6 @@ class FotoTempatPenyewaanController extends Controller
         return $this->responseFactory->redirectToRoute("tempat-penyewaan.foto.index",
             $tempat_penyewaan
         );
-
     }
 
     /**

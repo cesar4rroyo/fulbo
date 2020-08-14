@@ -1,6 +1,8 @@
 @foreach(session("messages") ?? [] as $message)
 
-    <div class="my-3 alert alert-{{ $message['state'] ?? \App\Enums\MessageState::STATE_INFO }}">
+    <div
+
+            class="my-3 alert alert-{{ $message['state'] ?? \App\Enums\MessageState::STATE_INFO }}">
         @switch($message['state'] ?? 'primary')
         @case(\App\Enums\MessageState::STATE_INFO)
         <i class="fas fa-info-circle"></i>
