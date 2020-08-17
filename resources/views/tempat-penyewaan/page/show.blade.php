@@ -26,6 +26,11 @@
                             <dt><i class="fas fa-phone-alt"></i> No. Telepon</dt>
                             <dd>{{ $tempat_penyewaan->no_telepon  }}</dd>
 
+                            <dt><i class="fas fa-building"></i> Fasilitas </dt>
+                            <dd>
+                                {{ $tempat_penyewaan->fasilitas->pluck("nama")->join(", ")  }}
+                            </dd>
+
                             <dt><i class="fas fa-star"></i> Rating</dt>
                             <dd>{{ $averageRating }}</dd>
                         </dl>

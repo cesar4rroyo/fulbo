@@ -68,6 +68,11 @@ class TempatPenyewaan extends Model
         return $this->hasMany(Pemesanan::class);
     }
 
+    public function fasilitas(): HasMany
+    {
+        return $this->hasMany(Fasilitas::class);
+    }
+
     public function reviews(): HasMany
     {
         return $this->hasMany(Review::class);

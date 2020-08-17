@@ -52,6 +52,14 @@
         </a>
     @endcan
 
+    @can(\App\Providers\AuthServiceProvider::ACTION_MANAGE_FASILITAS_TEMPAT_PENYEWAAN)
+        <a class="text-decoration-none d-block {{ Route::is("tempat-penyewaan.fasilitas-for-tempat-penyewaan.*") ? "text-primary" : "text-dark"  }}"
+           href="{{ route("tempat-penyewaan.fasilitas-for-tempat-penyewaan.index", auth()->user()->tempat_penyewaan) }}"
+        >
+            Fasilitas
+        </a>
+    @endcan
+
     @can(\App\Providers\AuthServiceProvider::ACTION_VIEW_ANY_TEMPAT_PENYEWAAN_REVIEW, auth()->user()->tempat_penyewaan)
         <a class="text-decoration-none d-block {{ Route::is("*review-by-tempat-penyewaan.*") ? "text-primary" : "text-dark"  }}"
            href="{{ route("tempat-penyewaan.review-by-tempat-penyewaan.index", auth()->user()->tempat_penyewaan) }}"

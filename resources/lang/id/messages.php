@@ -22,6 +22,7 @@ return [
         'failure-related-data' => 'Data gagal dihapus karena telah terdapat data terkait.',
     ],
 
+    'no_data' => 'Data tidak ditemukan',
     'penyewa-registration-success' => 'Selamat, akun Anda telah terdaftar.',
     'tempat-penyewaan-registration-success' => 'Selamat, akun Anda telah terdaftar, tetapi belum terverifikasi. Untuk dapat menggunakan fitur secara lengkap, Anda harus menunggu akun Anda untuk diverifikasi terlebih dahulu oleh administrator'
 ];

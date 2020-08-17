@@ -22,7 +22,12 @@
                     <li class="nav-item">
                         <a class="nav-link"
                            href="{{ \App\Providers\RouteServiceProvider::defaultRoute(auth()->user())  }}"
-                        > Administrasi
+                        >
+                            @if(auth()->user()->level === \App\Enums\UserLevel::ADMIN_UTAMA)
+                                Administrasi
+                            @else
+                                Manajemen
+                            @endif
                         </a>
                     </li>
                 @endauth

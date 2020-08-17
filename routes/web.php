@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FasilitasForTempatPenyewaanController;
 use App\Http\Controllers\FotoTempatPenyewaanCarouselController;
 use App\Http\Controllers\FotoTempatPenyewaanController;
 use App\Http\Controllers\FotoTempatPenyewaanImageController;
@@ -105,6 +106,11 @@ Route::put('pemesanan-tempat-penyewaan/{pemesanan}/update-status', class_basenam
 Route::resource('tempat-penyewaan.harga-pemesanan', class_basename(TempatPenyewaanHargaPemesananController::class))
     ->only(['index', 'edit', 'update'])
     ->shallow();
+
+Route::resource('tempat-penyewaan.fasilitas-for-tempat-penyewaan', class_basename(FasilitasForTempatPenyewaanController::class))
+    ->parameter('fasilitas-for-tempat-penyewaan', 'fasilitas')
+    ->only(['index', 'create', 'store', 'edit', 'update'])
+    ->scoped();
 
 Route::get('tempat-penyewaan/{tempat_penyewaan}/page', class_basename(TempatPenyewaanPageController::class))
     ->name('tempat-penyewaan.page');

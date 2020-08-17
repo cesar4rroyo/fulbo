@@ -34,6 +34,8 @@ class AuthServiceProvider extends ServiceProvider
     const ACTION_CREATE_REVIEW = 'create-review';
     const ACTION_VIEW_ANY_TEMPAT_PENYEWAAN_REVIEW = 'view-any-tempat-penyewaan-review';
 
+    const ACTION_MANAGE_FASILITAS_TEMPAT_PENYEWAAN = 'manage-fasilitas-tempat-penyewaan';
+
     const ACTION_VIEW_ANY_TEMPAT_PENYEWAAN_PAGE = 'view-any-tempat-penyewaan-page';
 
     /**
@@ -128,6 +130,13 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define(self::ACTION_VIEW_ANY_TEMPAT_PENYEWAAN_PAGE, function (User $user) {
             return $user->level === UserLevel::PENYEWA;
+        });
+
+        Gate::define(self::ACTION_MANAGE_FASILITAS_TEMPAT_PENYEWAAN, function (User $user) {
+            return true
+                && $user->level === UserLevel::ADMIN_PENYEWAAN
+                && $user->tempat_penyewaan->terverifikasi === 1
+                ;
         });
 
         $this->registerPolicies();

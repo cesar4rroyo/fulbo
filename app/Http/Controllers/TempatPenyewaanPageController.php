@@ -40,17 +40,18 @@ class TempatPenyewaanPageController extends Controller
             "lapangans",
             "admin",
             "sesi_pemesanans",
+            "fasilitas",
         ]);
 
         return $this->responseFactory->view("tempat-penyewaan.page.show", [
             "tempat_penyewaan" => $tempat_penyewaan,
-            "averageRating" => $tempat_penyewaan->reviews()->avg("rating"),
+            "averageRating" => $tempat_penyewaan->reviews()
+                ->avg("rating"),
             "review" => $tempat_penyewaan->reviews()
                 ->where([
                     "penyewa_id" => $request->user()->penyewa->id,
                 ])
                 ->first(),
-
             "membership" => MemberTempatPenyewaan::query()
                 ->where([
                     "penyewa_id" => $request->user()->penyewa->id ?? null,
