@@ -37,9 +37,7 @@ class TempatPenyewaanPageController extends Controller
 
         $tempat_penyewaan->load([
             "fotos",
-            "lapangans",
             "admin",
-            "sesi_pemesanans",
             "fasilitas",
         ]);
 
