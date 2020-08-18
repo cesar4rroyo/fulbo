@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Fasilitas;
 use App\TempatPenyewaan;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\Request;
 
 class GuestTempatPenyewaanIndexController extends Controller
@@ -31,6 +33,9 @@ class GuestTempatPenyewaanIndexController extends Controller
             "column_amount" => 3,
             "tempat_penyewaans" => TempatPenyewaan::query()
                 ->orderBy("nama")
+                ->with([
+                    "admin",
+                ])
                 ->paginate(9)
         ]);
     }
