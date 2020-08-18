@@ -40,27 +40,14 @@ class TempatPenyewaanSeeder extends Seeder
                 return $tempatPenyewaan;
             })
             ->each(function (TempatPenyewaan $tempatPenyewaan) {
-                $tempatPenyewaan->lapangans()->saveMany(
+                $tempatPenyewaan->fotos()->saveMany(
                     factory(FotoTempatPenyewaan::class, rand(5, 10))
                         ->make()
                         ->each(fn (FotoTempatPenyewaan $fotoTempatPenyewaan, $index) => $fotoTempatPenyewaan->fill(["urutan" => $index]))
                 )->each(Closure::fromCallable([$this, "seedImage"]));
             })
-            ->each(function (TempatPenyewaan $tempatPenyewaan) {
-                $tempatPenyewaan->getPossibleSessions()->each(function (CarbonPeriod $possibleSession) use ($tempatPenyewaan) {
-                    $tempatPenyewaan->sesi_pemesanans()->create([
-                        "waktu_mulai" => $possibleSession->getStartDate()->format("H:i:s"),
-                        "waktu_selesai" => $possibleSession->getEndDate()->format("H:i:s"),
-                    ]);
-                });
-            })
             ->each(Closure::fromCallable([$this, "seedHargaPemesanans"]))
-            ->each(function (TempatPenyewaan $tempatPenyewaan) {
-                $tempatPenyewaan->lapangans()->saveMany(
-                    factory(Lapangan::class, rand(20, 50))
-                        ->make()
-                );
-            });
+        ;
         DB::commit();
     }
 

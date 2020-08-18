@@ -7,5 +7,11 @@
       <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mariadb://localhost:3306/frms</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="frms@localhost [2]" uuid="4563cc48-94fc-45e1-be39-454a61e7abc1">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/frms</jdbc-url>
+    </data-source>
   </component>
 </project>
