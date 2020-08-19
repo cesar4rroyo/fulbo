@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use _HumbugBox3b5d526a7336\Nette\Neon\Exception;
 use App\Enums\UserLevel;
 use App\User;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -24,6 +25,20 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/tempat-penyewaan';
+
+    public static function defaultAdminRoute()
+    {
+        switch (auth()->user()->level ?? null) {
+            case UserLevel::ADMIN_UTAMA:
+                return route("tempat-penyewaan.index");
+            case UserLevel::ADMIN_PENYEWAAN:
+                return route("tempat-penyewaan-profile-management");
+            case UserLevel::PENYEWA:
+                return route("penyewa-profile-management");
+            default:
+                throw new Exception("No default admin route for user of type {$user->level}.");
+        }
+    }
 
     public static function defaultRoute(User $user = null)
     {

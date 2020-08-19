@@ -9,6 +9,7 @@ use App\TempatPenyewaan;
 use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class TempatPenyewaanPageController extends Controller
 {
@@ -29,7 +30,7 @@ class TempatPenyewaanPageController extends Controller
     /**
      * @param Request $request
      * @param TempatPenyewaan $tempat_penyewaan
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function __invoke(Request $request, TempatPenyewaan $tempat_penyewaan)
     {
