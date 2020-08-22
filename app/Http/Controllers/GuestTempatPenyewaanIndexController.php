@@ -32,6 +32,7 @@ class GuestTempatPenyewaanIndexController extends Controller
         return $this->responseFactory->view("guest-tempat-penyewaan-index", [
             "column_amount" => 3,
             "tempat_penyewaans" => TempatPenyewaan::query()
+                ->isVerified()
                 ->orderBy("nama")
                 ->with([
                     "admin",

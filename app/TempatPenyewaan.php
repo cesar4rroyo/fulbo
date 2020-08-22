@@ -26,8 +26,8 @@ class TempatPenyewaan extends Model
     protected $table = "tempat_penyewaan";
     protected $guarded = [];
 
-    /** return QueryBuilder|TempatPenyewaanBuilder */
-    public static function query()
+    /** return TempatPenyewaanBuilder */
+    public static function query(): TempatPenyewaanBuilder
     {
         return parent::query();
     }

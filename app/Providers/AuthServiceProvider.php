@@ -135,7 +135,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define(self::ACTION_MANAGE_FASILITAS_TEMPAT_PENYEWAAN, function (User $user) {
             return true
                 && $user->level === UserLevel::ADMIN_PENYEWAAN
-                && $user->tempat_penyewaan->terverifikasi === 1
+                && $user->tempat_penyewaan->terverifikasi == 1
                 ;
         });
 

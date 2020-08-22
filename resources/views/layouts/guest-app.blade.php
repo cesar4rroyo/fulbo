@@ -53,9 +53,9 @@
                 {{--                        <a href="#">Privacy Policy</a>--}}
                 {{--                    </li>--}}
                 {{--                </ul>--}}
-                <p class="text-muted small mb-4 mb-lg-0">&copy; {{ config("app.name") }} {{ now()->format("Y") }}. All
-                    Rights Reserved.</p>
-            </div>
+{{--                <p class="text-muted small mb-4 mb-lg-0">&copy; {{ config("app.name") }} {{ now()->format("Y") }}. All--}}
+{{--                    Rights Reserved.</p>--}}
+{{--            </div>--}}
 {{--            <div class="col-lg-6 h-100 text-center text-lg-right my-auto">--}}
 {{--                <ul class="list-inline mb-0">--}}
 {{--                    <li class="list-inline-item mr-3">--}}

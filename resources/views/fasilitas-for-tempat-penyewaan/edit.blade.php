@@ -8,7 +8,7 @@
 
         /
 
-        Tambah
+        Ubah
     </h1>
 
     @include("shared.messages")
