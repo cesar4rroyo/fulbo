@@ -32,7 +32,7 @@
                             </dd>
 
                             <dt><i class="fas fa-star"></i> Rating</dt>
-                            <dd>{{ $averageRating }}</dd>
+                            <dd>{{ number_format($averageRating, 2) }}</dd>
                         </dl>
                     </div>
                 </div>
@@ -59,9 +59,9 @@
                                                 class="form-control @error("rating") is-invalid @enderror"
                                                 name="rating"
                                         >
-                                            @foreach([1, 2, 3, 4, 5] as $ratingValue)
+                                            @foreach($ratingValues as $ratingValue => $ratingLabel)
                                                 <option value="{{ $ratingValue }}" {{ old("rating") === $ratingValue ? "selected" : "" }}>
-                                                    {{ $ratingValue  }}
+                                                    {{ $ratingValue }} ({{ $ratingLabel }})
                                                 </option>
                                             @endforeach
                                         </select>

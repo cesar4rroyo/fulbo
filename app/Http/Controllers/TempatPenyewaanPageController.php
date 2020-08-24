@@ -43,6 +43,13 @@ class TempatPenyewaanPageController extends Controller
         ]);
 
         return $this->responseFactory->view("tempat-penyewaan.page.show", [
+            "ratingValues" => [
+                1 => "Sangat Buruk",
+                2 => "Buruk",
+                3 => "Biasa",
+                4 => "Bagus",
+                5 => "Sangat Bagus"
+            ],
             "tempat_penyewaan" => $tempat_penyewaan,
             "averageRating" => $tempat_penyewaan->reviews()
                 ->avg("rating"),
