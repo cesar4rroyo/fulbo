@@ -100,53 +100,56 @@
                             </div>
                         </div>
                     @else
-                        <div class="card">
-                            <div class="card-body">
-                                <h5> Review Anda: </h5>
+                        @can(\App\Providers\AuthServiceProvider::ACTION_VIEW_OWN_REVIEW)
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5> Review Anda: </h5>
 
-                                <dl>
-                                    <dt>
-                                        <i class="fas fa-star"></i>
-                                        Rating ({{ $review->rating }} / 5)
-                                    </dt>
-                                    <dd>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-primary"
-                                                 role="progressbar"
-                                                 style="width: {{ $review->rating / 5 * 100 }}%;"
-                                                 aria-valuenow="{{ $review->rating }}"
-                                                 aria-valuemin="1"
-                                                 aria-valuemax="5"
-                                            >
+                                    <dl>
+                                        <dt>
+                                            <i class="fas fa-star"></i>
+                                            Rating ({{ $review->rating }} / 5)
+                                        </dt>
+                                        <dd>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-primary"
+                                                     role="progressbar"
+                                                     style="width: {{ $review->rating / 5 * 100 }}%;"
+                                                     aria-valuenow="{{ $review->rating }}"
+                                                     aria-valuemin="1"
+                                                     aria-valuemax="5"
+                                                >
+                                                </div>
                                             </div>
-                                        </div>
-                                    </dd>
+                                        </dd>
 
-                                    <dt>
-                                        Komentar
-                                    </dt>
+                                        <dt>
+                                            Komentar
+                                        </dt>
 
-                                    <dd>
-                                        {{ $review->konten }}
-                                    </dd>
+                                        <dd>
+                                            {{ $review->konten }}
+                                        </dd>
 
-                                </dl>
+                                    </dl>
+                                </div>
+
+                                <div class="card-footer text-right">
+                                    <form action="{{ route("review-by-tempat-penyewaan.destroy", $review) }}"
+                                          method="POST"
+                                    >
+                                        @csrf
+                                        @method("DELETE")
+
+                                        <button class="btn btn-sm btn-outline-danger">
+                                            Hapus Review
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
 
-                            <div class="card-footer text-right">
-                                <form action="{{ route("review-by-tempat-penyewaan.destroy", $review) }}"
-                                      method="POST"
-                                >
-                                    @csrf
-                                    @method("DELETE")
-
-                                    <button class="btn btn-sm btn-outline-danger">
-                                        Hapus Review
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
+                        @endcan
                     @endcan
 
                         @if($membership)

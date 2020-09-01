@@ -34,22 +34,18 @@
                     <div class="col-12 mb-5">
                         <h1> Selamat Datang! </h1>
                     </div>
-
-                    @can(\App\Providers\AuthServiceProvider::ACTION_VIEW_ANY_TEMPAT_PENYEWAAN_PAGE)
-                        <div class="col-md-12">
-                            <livewire:front-page-search-tempat-penyewaan/>
-                        </div>
-                    @endcan
-
-                    @can(\App\Providers\AuthServiceProvider::ACTION_VIEW_ANY_TEMPAT_PENYEWAAN_PAGE)
-                        <div class="col-md-12">
-                            <a href="{{ route("guest-tempat-penyewaan-index") }}" class="btn btn-block btn-primary">
-                                Seluruh Tempat Penyewaan
-                                <i class="fas fa-list"></i>
-                            </a>
-                        </div>
-                    @endcan
                 @endguest
+
+                <div class="col-md-12">
+                    <livewire:front-page-search-tempat-penyewaan/>
+                </div>
+
+                <div class="col-md-12">
+                    <a href="{{ route("guest-tempat-penyewaan-index") }}" class="btn btn-block btn-primary">
+                        Seluruh Tempat Penyewaan
+                        <i class="fas fa-list"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </header>

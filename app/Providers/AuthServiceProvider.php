@@ -32,11 +32,13 @@ class AuthServiceProvider extends ServiceProvider
     const ACTION_CREATE_PEMESANAN_MEMBER = 'create-pemesanan-member';
 
     const ACTION_CREATE_REVIEW = 'create-review';
-    const ACTION_VIEW_ANY_TEMPAT_PENYEWAAN_REVIEW = 'view-any-tempat-penyewaan-review';
+    const ACTION_VIEW_OWN_REVIEW = 'view-own-review';
+    const ACTION_MANAGE_OWN_REVIEW = 'view-any-tempat-penyewaan-review';
 
     const ACTION_MANAGE_FASILITAS_TEMPAT_PENYEWAAN = 'manage-fasilitas-tempat-penyewaan';
 
     const ACTION_VIEW_ANY_TEMPAT_PENYEWAAN_PAGE = 'view-any-tempat-penyewaan-page';
+
 
     /**
      * The policy mappings for the application.
@@ -97,11 +99,15 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define(self::ACTION_MANAGE_PEMESANAN_PENYEWAAN, function (User $user) {
-            return $user->level === UserLevel::ADMIN_PENYEWAAN;
+            return
+                $user->level === UserLevel::ADMIN_PENYEWAAN &&
+                $user->tempat_penyewaan->terverifikasi;
         });
 
         Gate::define(self::ACTION_MANAGE_MEMBER, function (User $user) {
-            return $user->level == UserLevel::ADMIN_PENYEWAAN;
+            return
+                $user->level === UserLevel::ADMIN_PENYEWAAN &&
+                $user->tempat_penyewaan->terverifikasi;
         });
 
         Gate::define(self::ACTION_CREATE_PEMESANAN_MEMBER, function (User $user, MemberTempatPenyewaan $memberTempatPenyewaan) {
@@ -124,12 +130,14 @@ class AuthServiceProvider extends ServiceProvider
                 ])->count() === 0;
         });
 
-        Gate::define(self::ACTION_VIEW_ANY_TEMPAT_PENYEWAAN_REVIEW, function (User $user, ?TempatPenyewaan $tempatPenyewaan = null) {
-            return $user->id === ($tempatPenyewaan->admin_id ?? null);
+        Gate::define(self::ACTION_MANAGE_OWN_REVIEW, function (User $user) {
+            return
+                $user->level === UserLevel::ADMIN_PENYEWAAN &&
+                $user->tempat_penyewaan->terverifikasi;
         });
 
-        Gate::define(self::ACTION_VIEW_ANY_TEMPAT_PENYEWAAN_PAGE, function (User $user) {
-            return $user->level === UserLevel::PENYEWA;
+        Gate::define(self::ACTION_VIEW_ANY_TEMPAT_PENYEWAAN_PAGE, function (?User $user) {
+            return true;
         });
 
         Gate::define(self::ACTION_MANAGE_FASILITAS_TEMPAT_PENYEWAAN, function (User $user) {
@@ -137,6 +145,10 @@ class AuthServiceProvider extends ServiceProvider
                 && $user->level === UserLevel::ADMIN_PENYEWAAN
                 && $user->tempat_penyewaan->terverifikasi == 1
                 ;
+        });
+
+        Gate::define(self::ACTION_VIEW_OWN_REVIEW, function (User $user) {
+            return $user->level === UserLevel::PENYEWA;
         });
 
         $this->registerPolicies();

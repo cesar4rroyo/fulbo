@@ -60,7 +60,7 @@
         </a>
     @endcan
 
-    @can(\App\Providers\AuthServiceProvider::ACTION_VIEW_ANY_TEMPAT_PENYEWAAN_REVIEW, auth()->user()->tempat_penyewaan)
+    @can(\App\Providers\AuthServiceProvider::ACTION_MANAGE_OWN_REVIEW, auth()->user()->tempat_penyewaan)
         <a class="text-decoration-none d-block {{ Route::is("*review-by-tempat-penyewaan.*") ? "text-primary" : "text-dark"  }}"
            href="{{ route("tempat-penyewaan.review-by-tempat-penyewaan.index", auth()->user()->tempat_penyewaan) }}"
         >

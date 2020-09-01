@@ -53,11 +53,14 @@ class TempatPenyewaanPageController extends Controller
             "tempat_penyewaan" => $tempat_penyewaan,
             "averageRating" => $tempat_penyewaan->reviews()
                 ->avg("rating"),
-            "review" => $tempat_penyewaan->reviews()
-                ->where([
-                    "penyewa_id" => $request->user()->penyewa->id,
-                ])
-                ->first(),
+            "review" =>
+                ($request->user()->penyewa->id ?? null) ?
+                    $tempat_penyewaan->reviews()
+                    ->where([
+                        "penyewa_id" => $request->user()->penyewa->id,
+                    ])
+                    ->first() :
+                    null,
             "membership" => MemberTempatPenyewaan::query()
                 ->where([
                     "penyewa_id" => $request->user()->penyewa->id ?? null,

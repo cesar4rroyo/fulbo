@@ -36,7 +36,7 @@ class ReviewByTempatPenyewaanController extends Controller
      */
     public function index(TempatPenyewaan $tempatPenyewaan)
     {
-        $this->gate->authorize(AuthServiceProvider::ACTION_VIEW_ANY_TEMPAT_PENYEWAAN_REVIEW, $tempatPenyewaan);
+        $this->gate->authorize(AuthServiceProvider::ACTION_MANAGE_OWN_REVIEW, $tempatPenyewaan);
 
         $reviews = $tempatPenyewaan->reviews()
             ->orderByDesc("created_at")
