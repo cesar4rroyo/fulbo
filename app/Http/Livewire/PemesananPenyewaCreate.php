@@ -8,13 +8,21 @@ use App\Pemesanan;
 use App\Providers\AuthServiceProvider;
 use App\Support\SessionHelper;
 use App\TempatPenyewaan;
+use Carbon\Carbon;
+use Carbon\CarbonInterval;
 use Carbon\CarbonPeriod;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator as ValidatorFacade;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 
+/**
+ * @property double hourlyPrice
+ */
 class PemesananPenyewaCreate extends Component
 {
     use AuthorizesRequests;
@@ -23,30 +31,62 @@ class PemesananPenyewaCreate extends Component
     public $pemesanan_data;
     public $item_pemesanans_data;
 
+    public function removeItemPemesananData($index)
+    {
+        $this->item_pemesanans_data = array_filter($this->item_pemesanans_data, function ($key) use ($index) {
+            return $key !== $index;
+        }, ARRAY_FILTER_USE_KEY);
+    }
+
+    public function tambahItemPemesanan()
+    {
+        $this->item_pemesanans_data[] = [
+            "start" => null,
+            "finish" => null,
+            "price" => null,
+        ];
+    }
+
     public function submit()
     {
         $this->authorize(AuthServiceProvider::ACTION_CREATE_PEMESANAN_PENYEWA);
 
-        $this->validate([
+        $tempatPenyewaan = TempatPenyewaan::query()
+            ->find($this->tempat_penyewaan_id);
+
+        $data = ValidatorFacade::make($this->getPublicPropertiesDefinedBySubClass(), [
             "pemesanan_data.tanggal_pemesanan" => ["required", "dateformat:Y-m-d"],
             "pemesanan_data.tempat_penyewaan_id" => ["required", Rule::exists(TempatPenyewaan::class, "id")],
-            "item_pemesanans_data" => [
-                "required",
-                "array",
-                function ($attribute, $rows, $fail) {
-                    $pickedCount = array_reduce($rows, function ($current, $next) {
-                        return $current + ($next["picked"] ? 1 : 0);
-                    }, 0);
+            "item_pemesanans_data" => ["required", "array"],
+            "item_pemesanans_data.*.start" => ["required", "dateformat:H:i", "after:{$tempatPenyewaan->waktu_buka}", "before:item_pemesanans_data.*.finish"],
+            "item_pemesanans_data.*.finish" => ["required", "dateformat:H:i", "before:{$tempatPenyewaan->waktu_tutup}"],
+        ])->after(function (Validator $validator) {
+            /** @var CarbonPeriod[]|Collection $periods */
+            $periods = collect($validator->validated()["item_pemesanans_data"])
+                ->map(function ($item) {
+                    return CarbonPeriod::between(
+                        $item["start"],
+                        $item["finish"],
+                    );
+                });
 
-                    if ($pickedCount === 0) {
-                        $fail("Anda wajib melakukan minimal satu (1) pemesanan.");
+            for ($i = 0; $i < $periods->count(); ++$i) {
+                for ($j = $i + 1; $j < $periods->count(); ++$j) {
+                    if ($periods[$i]->overlaps($periods[$j])) {
+                        $validator->errors()->add(
+                            "item_pemesanans_data",
+                            sprintf(
+                                "Rentang waktu tidak boleh saling bertabrakan: (%s-%s) dengan (%s-%s)",
+                                $periods[$i]->getStartDate()->format("H:i"),
+                                $periods[$i]->getEndDate()->format("H:i"),
+                                $periods[$j]->getStartDate()->format("H:i"),
+                                $periods[$j]->getEndDate()->format("H:i"),
+                            )
+                        );
                     }
-                },
-            ],
-            "item_pemesanans_data.*.picked" => ["required", "boolean"],
-            "item_pemesanans_data.*.start" => ["required", "dateformat:H:i:s"],
-            "item_pemesanans_data.*.finish" => ["required", "dateformat:H:i:s"],
-        ]);
+                }
+            }
+        })->validate();
 
         DB::beginTransaction();
 
@@ -57,15 +97,14 @@ class PemesananPenyewaCreate extends Component
             "tempat_penyewaan_id" => $this->pemesanan_data["tempat_penyewaan_id"],
         ]);
 
-        foreach ($this->item_pemesanans_data as $item_pemesanan_data) {
-            if (!$item_pemesanan_data["picked"]) {
-                continue;
-            }
-
+        foreach ($data["item_pemesanans_data"] as $item_pemesanan_data) {
             $pemesanan->items()->create([
                 "waktu_mulai" =>  $item_pemesanan_data["start"],
                 "waktu_selesai" =>  $item_pemesanan_data["finish"],
-                "harga" => $this->getPriceProperty(),
+                "harga" => $this->calculateItemHourLength(
+                    $item_pemesanan_data["start"],
+                    $item_pemesanan_data["finish"],
+                ) * $this->hourlyPrice,
             ]);
         }
 
@@ -89,19 +128,7 @@ class PemesananPenyewaCreate extends Component
                 ->format("Y-m-d")
         ];
 
-        /** @var TempatPenyewaan $tempatPenyewaan */
-        $tempatPenyewaan = TempatPenyewaan::query()
-            ->findOrFail($this->tempat_penyewaan_id);
-
-        $this->item_pemesanans_data = $tempatPenyewaan
-            ->getPossibleSessions()
-            ->map(function (CarbonPeriod $carbonPeriod) {
-                return [
-                    "start" => $carbonPeriod->getStartDate()->format("H:i:s"),
-                    "finish" => $carbonPeriod->getEndDate()->format("H:i:s"),
-                    "picked" => false,
-                ];
-            })->toArray();
+        $this->item_pemesanans_data = [];
     }
 
     public function getPickedItemPemesanansProperty()
@@ -111,7 +138,7 @@ class PemesananPenyewaCreate extends Component
         });
     }
 
-    public function getPriceProperty()
+    public function getHourlyPriceProperty()
     {
         /** @var TempatPenyewaan $tempatPenyewaan */
         $tempatPenyewaan = TempatPenyewaan::query()
@@ -129,12 +156,38 @@ class PemesananPenyewaCreate extends Component
     public function getTotalPriceProperty()
     {
         return array_reduce($this->item_pemesanans_data, function ($current, $next) {
-            return $current + ($next["picked"] ? $this->price : 0);
+            return $current + ($next["price"] ?? 0);
         }, 0);
+    }
+
+    private function calculateItemHourLength($start, $finish)
+    {
+        $start = Carbon::createFromFormat("H:i", $start);
+        $finish = Carbon::createFromFormat("H:i", $finish);
+        $diff = $finish->diff($start);
+        return $diff->h + ($diff->i / 60);
     }
 
     public function render()
     {
-        return view('livewire.pemesanan-penyewa-create');
+        $this->item_pemesanans_data = array_map(function ($item) {
+            if ($item["start"] === null || $item["finish"] === null) {
+                $item["hour_diff"] = 0;
+            }
+            else {
+                $item["hour_diff"] = $this->calculateItemHourLength(
+                    $item["start"],
+                    $item["finish"]
+                );
+            }
+
+            $item["price"] = $this->hourlyPrice * $item["hour_diff"];
+            return $item;
+        }, $this->item_pemesanans_data);
+
+        return view('livewire.pemesanan-penyewa-create', [
+            "tempat_penyewaan" => TempatPenyewaan::query()
+                ->find($this->tempat_penyewaan_id)
+        ]);
     }
 }

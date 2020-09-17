@@ -14,13 +14,13 @@ return [
 
     'accepted'             => 'Isian :attribute harus diterima.',
     'active_url'           => 'Isian :attribute bukan URL yang valid.',
-    'after'                => 'Isian :attribute harus tanggal setelah :date.',
+    'after'                => 'Isian :attribute setelah :date.',
     'after_or_equal'       => 'Isian :attribute harus berupa tanggal setelah atau sama dengan tanggal :date.',
     'alpha'                => 'Isian :attribute hanya boleh berisi huruf.',
     'alpha_dash'           => 'Isian :attribute hanya boleh berisi huruf, angka, dan strip.',
     'alpha_num'            => 'Isian :attribute hanya boleh berisi huruf dan angka.',
     'array'                => 'Isian :attribute harus berupa sebuah array.',
-    'before'               => 'Isian :attribute harus tanggal sebelum :date.',
+    'before'               => 'Isian :attribute sebelum :date.',
     'before_or_equal'      => 'Isian :attribute harus berupa tanggal sebelum atau sama dengan tanggal :date.',
     'between'              => [
         'numeric' => 'Isian :attribute harus antara :min dan :max.',
@@ -144,6 +144,9 @@ return [
     */
 
     'attributes' => [
+        "item_pemesanans_data.*.start" => "waktu mulai",
+        "item_pemesanans_data.*.finish" => "waktu selesai",
+
         "description" => "deskripsi",
         "title" => "judul",
         "document" => "dokumen",
