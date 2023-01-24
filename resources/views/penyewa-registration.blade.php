@@ -4,7 +4,7 @@
     <div class="container">
         <div class="card" style="width: 30rem; margin: auto">
             <div class="card-header">
-                Registrasi Penyewa
+                Registro de inquilinos
             </div>
             <div class="card-body">
                 <form action="{{ route("penyewa-registration") }}"
@@ -13,11 +13,11 @@
                     @method("POST")
 
                     <div class="form-group">
-                        <label for="name"> Nama Asli:</label>
+                        <label for="name"> Nombres:</label>
                         <input
                             id="name"
                             type="text"
-                            placeholder="Nama Asli"
+                            placeholder="Nombres"
                             class="form-control @error("name") is-invalid @enderror"
                             name="name"
                             value="{{ old("name") }}"
@@ -47,11 +47,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="no_telepon"> No. Telepon: </label>
+                        <label for="no_telepon"> No. Telefono: </label>
                         <input
                                 id="no_telepon"
                                 type="tel"
-                                placeholder="No. Telepon"
+                                placeholder="No. Telefono"
                                 class="form-control @error("no_telepon") is-invalid @enderror"
                                 name="no_telepon"
                                 value="{{ old("no_telepon") }}"
@@ -64,11 +64,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="tanggal_lahir"> Tanggal Lahir:</label>
+                        <label for="tanggal_lahir">Fecha de Nacimiento</label>
                         <input
                             id="tanggal_lahir"
                             type="date"
-                            placeholder="Tanggal Lahir"
+                            placeholder="Fecha de Nacimiento"
                             class="form-control @error("tanggal_lahir") is-invalid @enderror"
                             name="tanggal_lahir"
                             value="{{ old("tanggal_lahir") }}"
@@ -81,11 +81,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="password"> Kata Sandi:</label>
+                        <label for="password"> Contraseña:</label>
                         <input
                             id="password"
                             type="password"
-                            placeholder="Kata Sandi"
+                            placeholder="Contraseña"
                             class="form-control @error("password") is-invalid @enderror"
                             name="password"
                             value="{{ old("password") }}"
@@ -98,11 +98,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="password_confirmation"> Ulangi Kata Sandi:</label>
+                        <label for="password_confirmation"> Repita la contraseña:</label>
                         <input
                             id="password_confirmation"
                             type="password"
-                            placeholder="Ulangi Kata Sandi"
+                            placeholder="Repita la contraseña"
                             class="form-control @error("password_confirmation") is-invalid @enderror"
                             name="password_confirmation"
                             value="{{ old("password_confirmation") }}"
@@ -116,7 +116,7 @@
 
                     <div class="d-flex justify-content-end">
                         <button class="btn btn-primary">
-                            Daftar
+                            Guardar
                         </button>
                     </div>
                 </form>

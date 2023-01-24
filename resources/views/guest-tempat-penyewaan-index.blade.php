@@ -3,7 +3,7 @@
 @section("content")
     <div class="container py-5">
         <h1 class="feature-title">
-            Indeks Tempat Penyewaan
+            Lugares de Alquiler
         </h1>
 
         @foreach(collect($tempat_penyewaans->items())->chunk(3) AS $tempat_penyewaan_chunk)
@@ -23,13 +23,13 @@
                                 </p>
 
                                 <dl>
-                                    <dt><i class="fas fa-clock"></i> Waktu Operasi </dt>
+                                    <dt><i class="fas fa-clock"></i> Horario de Atención </dt>
                                     <dd>{{ $tempat_penyewaan->waktu_buka }} - {{ $tempat_penyewaan->waktu_tutup }} </dd>
 
-                                    <dt><i class="fas fa-user  "></i> Admin </dt>
+                                    <dt><i class="fas fa-user  "></i> Administrador </dt>
                                     <dd>{{ $tempat_penyewaan->admin->name  }}</dd>
 
-                                    <dt><i class="fas fa-phone-alt"></i> No. Telepon </dt>
+                                    <dt><i class="fas fa-phone-alt"></i> Nro. de Teléfono </dt>
                                     <dd>{{ $tempat_penyewaan->no_telepon  }}</dd>
                                 </dl>
                             </div>

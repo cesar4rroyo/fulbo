@@ -8,7 +8,7 @@
             x-on:focusout="window.livewire.emit('clearQuery')"
             class="form-control form-control-lg"
             id="search"
-            placeholder="Cari Tempat Penyewaan"
+            placeholder="Encuentre un lugar de alquiler"
             type="text">
     </label>
 
@@ -35,13 +35,13 @@
             <div
                 wire:loading
                 class="list-group-item list-group-item-action">
-                Melakukan pencarian...
+                Haciendo una búsqueda...
             </div>
 
             @if($query !== "")
                 <div
                     class="list-group-item list-group-item-action">
-                    Tempat Tidak Ditemukan
+                    Lugar no encontrado
                 </div>
             @endif
         @endforelse

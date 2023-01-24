@@ -17,16 +17,16 @@
                         </p>
 
                         <dl>
-                            <dt><i class="fas fa-clock"></i> Waktu Operasi</dt>
+                            <dt><i class="fas fa-clock"></i> Horario de Atención</dt>
                             <dd>{{ $tempat_penyewaan->waktu_buka }} - {{ $tempat_penyewaan->waktu_tutup }} </dd>
 
                             <dt><i class="fas fa-user  "></i> Admin</dt>
                             <dd>{{ $tempat_penyewaan->admin->name  }}</dd>
 
-                            <dt><i class="fas fa-phone-alt"></i> No. Telepon</dt>
+                            <dt><i class="fas fa-phone-alt"></i> Nro. Telefono</dt>
                             <dd>{{ $tempat_penyewaan->no_telepon  }}</dd>
 
-                            <dt><i class="fas fa-building"></i> Fasilitas </dt>
+                            <dt><i class="fas fa-building"></i> Instalaciones </dt>
                             <dd>
                                 {{ $tempat_penyewaan->fasilitas->pluck("nama")->join(", ")  }}
                             </dd>
@@ -74,7 +74,7 @@
 
                                     <div class="form-group">
                                         <label for="konten">
-                                            Komentar:
+                                            Comentarios:
                                         </label>
                                         <textarea
                                                 class="form-control @error("konten") is-invalid @enderror"
@@ -95,7 +95,7 @@
 
                             <div class="card-footer text-right">
                                 <button form="reviewForm" class="btn btn-primary">
-                                    Tambahkan Review
+                                    Agregar Reseñas
                                 </button>
                             </div>
                         </div>
@@ -103,7 +103,7 @@
                         @can(\App\Providers\AuthServiceProvider::ACTION_VIEW_OWN_REVIEW)
                             <div class="card">
                                 <div class="card-body">
-                                    <h5> Review Anda: </h5>
+                                    <h5> Tu reseña:</h5>
 
                                     <dl>
                                         <dt>
@@ -124,7 +124,7 @@
                                         </dd>
 
                                         <dt>
-                                            Komentar
+                                            Comentario
                                         </dt>
 
                                         <dd>
@@ -142,7 +142,7 @@
                                         @method("DELETE")
 
                                         <button class="btn btn-sm btn-outline-danger">
-                                            Hapus Review
+                                            Eliminar reseñas
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
@@ -156,13 +156,13 @@
                             @if ($membership->status === \App\Enums\MemberTempatPenyewaanStatus::INACTIVE)
                                 <div class="alert alert-info">
                                     <i class="fas fa-exclamation-circle"></i>
-                                    Anda telah membuat pengajuan member, mohon tunggu pengajuan Anda diterima.
+                                    Ha realizado una solicitud de miembro, espere a que se reciba su solicitud.
                                 </div>
                             @endif
 
                             @if ($membership->status === \App\Enums\MemberTempatPenyewaanStatus::ACTIVE)
                                 <div class="alert alert-info">
-                                    Anda merupakan member dari tempat penyewaan ini.
+                                    Eres miembro de este lugar de alquiler.
                                 </div>
                             @endif
                         @else
@@ -172,7 +172,7 @@
                                        class="btn btn-primary btn-block"
                                     >
                                         <i class="fas fa-star"></i>
-                                        Ajukan Sebagai Member
+                                        Aplicar como miembro
                                     </a>
                                 </div>
                             @endcan
@@ -184,13 +184,13 @@
                                    class="btn btn-primary btn-block"
                                 >
                                     <i class="fas fa-book"></i>
-                                    Buat Pemesanan
+                                    Hacer orden
                                 </a>
                             @else
                                 <div class="alert alert-info">
                                     <i class="fas fa-exclamation-circle"></i>
-                                    Anda hanya dapat melakukan pemesanan jika Anda telah masuk
-                                    dengan menggunakan akun penyewa.
+                                    Solo puede realizar un pedido si ha iniciado sesión
+                                     utilizando la cuenta del inquilino.
                                 </div>
                             @endcan
                         </div>
@@ -243,7 +243,7 @@
                 <span class="carousel-control-prev-icon"
                       aria-hidden="true"
                 ></span>
-                <span class="sr-only"> Sebelumnya </span>
+                <span class="sr-only"> Anterior </span>
             </a>
             <a class="carousel-control-next"
                href="#foto-carousel"
@@ -253,7 +253,7 @@
                 <span class="carousel-control-next-icon"
                       aria-hidden="true"
                 ></span>
-                <span class="sr-only"> Selanjutnya </span>
+                <span class="sr-only"> Próximo </span>
             </a>
         </div>
     </div>

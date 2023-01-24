@@ -9,8 +9,8 @@ $factory->define(TempatPenyewaan::class, function (Faker $faker) {
     $locationData = rand(0, 4) === 0
         ? []
         : [
-            'latitude' => rand(-50, 50) / 1000 + config("map.center.latitude"),
-            'longitude' => rand(-50, 50) / 1000 + config("map.center.longitude"),
+            'latitude' => rand(-30, 30) / 1000 + config("map.center.latitude"),
+            'longitude' => rand(-30, 30) / 1000 + config("map.center.longitude"),
         ];
 
     return array_merge([

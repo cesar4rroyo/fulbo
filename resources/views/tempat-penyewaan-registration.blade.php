@@ -5,7 +5,7 @@
         <div class="card"
              style="max-width: 50rem; margin: auto">
             <div class="card-header">
-                Registrasi Tempat Penyewaan
+                Registro de lugar de alquiler
             </div>
             <div class="card-body">
                 <form action="{{ route("tempat-penyewaan-registration") }}"
@@ -13,15 +13,15 @@
                     @csrf
                     @method("POST")
 
-                    <h2> Identitas Tempat Penyewaan </h2>
+                    <h2> Identidad del lugar de alquiler </h2>
                     <hr>
 
                     <div class="form-group">
-                        <label for="nama"> Nama Tempat Penyewaan:</label>
+                        <label for="nama"> Nombre del lugar de alquiler:</label>
                         <input
                             id="nama"
                             type="text"
-                            placeholder="Nama Tempat Penyewaan"
+                            placeholder="Nombre del lugar de alquiler"
                             class="form-control @error("nama") is-invalid @enderror"
                             name="nama"
                             value="{{ old("nama") }}"
@@ -34,11 +34,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="no_telepon"> No. Telepon: </label>
+                        <label for="no_telepon"> Nro. Telefono: </label>
                         <input
                                 id="no_telepon"
                                 type="tel"
-                                placeholder="No. Telepon"
+                                placeholder="Nro. Telefono"
                                 class="form-control @error("no_telepon") is-invalid @enderror"
                                 name="no_telepon"
                                 value="{{ old("no_telepon") }}"
@@ -51,11 +51,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="waktu_buka"> Waktu Buka: </label>
+                        <label for="waktu_buka"> Atiende desde: </label>
                         <input
                                 id="waktu_buka"
                                 type="time"
-                                placeholder="Waktu Buka"
+                                placeholder="Atiende desde"
                                 class="form-control @error("waktu_buka") is-invalid @enderror"
                                 name="waktu_buka"
                                 value="{{ old("waktu_buka") }}"
@@ -68,11 +68,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="waktu_tutup"> Waktu Tutup: </label>
+                        <label for="waktu_tutup"> Atiende hasta: </label>
                         <input
                                 id="waktu_tutup"
                                 type="time"
-                                placeholder="Waktu Tutup"
+                                placeholder="Atiende hasta"
                                 class="form-control @error("waktu_tutup") is-invalid @enderror"
                                 name="waktu_tutup"
                                 value="{{ old("waktu_tutup") }}"
@@ -86,13 +86,13 @@
 
                     <div class="form-group">
                         <label for="alamat">
-                            Alamat:
+                            Dirección:
                         </label>
                         <textarea
                             class="form-control @error("alamat") is-invalid @enderror"
                             name="alamat"
                             id="alamat"
-                            placeholder="Alamat"
+                            placeholder="Dirección"
                             cols="30"
                             rows="5">{{ old("alamat") }}</textarea>
                         @error("alamat")
@@ -102,15 +102,15 @@
                         @enderror
                     </div>
 
-                    <h2> Identitas Administrator </h2>
+                    <h2> Identificación del administrador </h2>
                     <hr>
 
                     <div class="form-group">
-                        <label for="name"> Nama Asli:</label>
+                        <label for="name"> Nombres:</label>
                         <input
                             id="name"
                             type="text"
-                            placeholder="Nama Asli"
+                            placeholder="Nombres"
                             class="form-control @error("name") is-invalid @enderror"
                             name="name"
                             value="{{ old("name") }}"
@@ -140,11 +140,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="tanggal_lahir"> Tanggal Lahir:</label>
+                        <label for="tanggal_lahir"> Fecha de nacimiento:</label>
                         <input
                             id="tanggal_lahir"
                             type="date"
-                            placeholder="Tanggal Lahir"
+                            placeholder="Fecha de nacimiento"
                             class="form-control @error("tanggal_lahir") is-invalid @enderror"
                             name="tanggal_lahir"
                             value="{{ old("tanggal_lahir") }}"
@@ -157,11 +157,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="password"> Kata Sandi:</label>
+                        <label for="password"> Contraseña:</label>
                         <input
                             id="password"
                             type="password"
-                            placeholder="Kata Sandi"
+                            placeholder="Contraseña"
                             class="form-control @error("password") is-invalid @enderror"
                             name="password"
                             value="{{ old("password") }}"
@@ -174,11 +174,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="password_confirmation"> Ulangi Kata Sandi:</label>
+                        <label for="password_confirmation"> Repita Contraseña:</label>
                         <input
                             id="password_confirmation"
                             type="password"
-                            placeholder="Ulangi Kata Sandi"
+                            placeholder="Repita Contraseña"
                             class="form-control @error("password_confirmation") is-invalid @enderror"
                             name="password_confirmation"
                             value="{{ old("password_confirmation") }}"
@@ -192,7 +192,7 @@
 
                     <div class="d-flex justify-content-end">
                         <button class="btn btn-primary">
-                            Daftar
+                            Guardar
                         </button>
                     </div>
                 </form>

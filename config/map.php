@@ -6,8 +6,8 @@
 
 return [
     "center" => [
-        "latitude" => -0.026330,
-        "longitude" => 109.342504,
+        "latitude" => -6.771500,
+        "longitude" => -79.845423,
     ],
 
     "zoom" => 15

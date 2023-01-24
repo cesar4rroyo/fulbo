@@ -12,6 +12,6 @@ return [
     |
     */
 
-    'failed'   => 'Identitas tersebut tidak cocok dengan data kami.',
-    'throttle' => 'Terlalu banyak usaha masuk. Silahkan coba lagi dalam :seconds detik.',
+    'failed'   => 'Esas identidades no coinciden con nuestros datos.',
+    'throttle' => 'Se ingresaron demasiados intentos. Vuelva a intentarlo en :seconds segundos.',
 ];
