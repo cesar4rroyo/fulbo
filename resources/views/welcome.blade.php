@@ -16,18 +16,20 @@
                     </div>
 
                     <div class="col-md-6">
-                        <a href="{{ route("penyewa-registration") }}"
+                        <a href="#"
+                        {{-- <a href="{{ route("penyewa-registration") }}" --}}
                            class="btn btn-block btn-lg btn-primary"
                         >
-                            Lista de Inquilinos
+                            Registro de Clientes
                         </a>
                     </div>
 
                     <div class="col-md-6">
-                        <a href="{{ route("tempat-penyewaan-registration") }}"
+                        <a href="#"
+                        {{-- <a href="{{ route("tempat-penyewaan-registration") }}" --}}
                            class="btn btn-block btn-lg btn-primary"
                         >
-                        Lista de lugares de alquiler
+                        Registro de canchitas
                         </a>
                     </div>
                 @else
