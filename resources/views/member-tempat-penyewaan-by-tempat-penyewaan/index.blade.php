@@ -2,7 +2,7 @@
 
 @section("content")
     <h1 class="feature-title">
-        Member
+        Miembros
     </h1>
 
     @include("shared.messages")
@@ -12,9 +12,9 @@
             <thead class="thead-dark">
             <tr>
                 <th> #</th>
-                <th> Nama / No. Telepon</th>
-                <th class="text-center"> Status</th>
-                <th class="text-center"> Kendali</th>
+                <th> Nombre/Nro. Telefono</th>
+                <th class="text-center"> Estado</th>
+                <th class="text-center"> Accio4n</th>
             </tr>
             </thead>
             <tbody>
@@ -36,7 +36,7 @@
                                     class="btn btn-info btn-sm"
                                     href="{{ route("member-tempat-penyewaan.pemesanan-by-member-tempat-penyewaan.create", $member->membership)  }}"
                             >
-                                Tambah Pemesanan
+                                Añadir Pedido
                                 <i class="fas fa-plus"></i>
                             </a>
                         @endcan
@@ -44,7 +44,7 @@
                         <a href="{{ route("member-tempat-penyewaan-by-tempat-penyewaan.edit", $member->membership)  }}"
                            class="btn btn-info btn-sm"
                         >
-                            Ubah
+                            Cambiar
                             <i class="fas fa-pencil-alt  "></i>
                         </a>
                     </td>

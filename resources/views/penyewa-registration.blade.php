@@ -4,7 +4,7 @@
     <div class="container">
         <div class="card" style="width: 30rem; margin: auto">
             <div class="card-header">
-                Registro de inquilinos
+                Registro de Clientes
             </div>
             <div class="card-body">
                 <form action="{{ route("penyewa-registration") }}"

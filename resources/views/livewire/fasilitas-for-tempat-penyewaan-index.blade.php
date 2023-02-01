@@ -1,13 +1,13 @@
 <div>
     <h1 class="feature-title">
-        Fasilitas
+        Instalaciones
     </h1>
 
     @include("shared.messages")
 
     <div class="d-flex justify-content-end my-3">
         <a href="{{ route("tempat-penyewaan.fasilitas-for-tempat-penyewaan.create", $this->tempatPenyewaanId) }}" class="btn btn-primary">
-            Tambah
+            Agregar
             <i class="fas fa-plus  "></i>
         </a>
     </div>
@@ -18,8 +18,8 @@
                 <thead class="thead-dark">
                 <tr>
                     <th> # </th>
-                    <th> Nama </th>
-                    <th class="text-center"> Kendali </th>
+                    <th> Nombre </th>
+                    <th class="text-center"> Acción </th>
                 </tr>
                 </thead>
 
@@ -30,7 +30,7 @@
                     <td> {{ $fasilitas->nama }} </td>
                     <td class="text-center">
                         <a href="{{ route("tempat-penyewaan.fasilitas-for-tempat-penyewaan.edit", [$this->tempatPenyewaan, $fasilitas]) }}" class="btn btn-sm btn-primary">
-                            Ubah
+                            Editar
                             <i class="fas fa-pencil-alt  "></i>
                         </a>
 
@@ -44,7 +44,7 @@
                                 })
 "
                                 class="btn btn-sm btn-danger">
-                            Hapus
+                            Eliminar
                             <i class="fas fa-trash"></i>
                         </button>
                     </td>

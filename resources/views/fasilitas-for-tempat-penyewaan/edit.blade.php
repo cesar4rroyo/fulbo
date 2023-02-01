@@ -3,12 +3,12 @@
 @section("content")
     <h1 class="feature-title">
         <a href="{{ route("tempat-penyewaan.fasilitas-for-tempat-penyewaan.index", $tempat_penyewaan) }}">
-            Fasilitas
+            Instalaciones
         </a>
 
         /
 
-        Ubah
+        Editar
     </h1>
 
     @include("shared.messages")
@@ -22,11 +22,11 @@
                 @method("PUT")
 
                 <div class="form-group">
-                    <label for="nama"> Nama: </label>
+                    <label for="nama"> Nombre: </label>
                     <input
                             id="nama"
                             type="text"
-                            placeholder="Nama"
+                            placeholder="Nombre"
                             class="form-control @error("nama") is-invalid @enderror"
                             name="nama"
                             value="{{ old("nama", $fasilitas->nama) }}"
@@ -40,7 +40,7 @@
 
                 <div class="d-flex justify-content-end">
                     <button class="btn btn-primary">
-                        Ubah
+                        Actualizar
                     </button>
                 </div>
             </form>

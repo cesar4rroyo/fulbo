@@ -27,13 +27,13 @@ class TempatPenyewaanSeeder extends Seeder
                 "terverifikasi" => 1,
             ])
             ->map(function (TempatPenyewaan $tempatPenyewaan, $index) {
-                $emailOrPassword = "admin_penyewaan_{$index}@test.com";
+                $emailOrPassword = "admin_cancha{$index}@test.com";
 
                 $tempatPenyewaan->admin()->associate(
                     factory(User::class)->create([
                         "email" => $emailOrPassword,
                         "level" => UserLevel::ADMIN_PENYEWAAN,
-                        "password" => Hash::make($emailOrPassword),
+                        "password" => Hash::make('admin'),
                     ])
                 )->save();
 
@@ -46,8 +46,7 @@ class TempatPenyewaanSeeder extends Seeder
                         ->each(fn (FotoTempatPenyewaan $fotoTempatPenyewaan, $index) => $fotoTempatPenyewaan->fill(["urutan" => $index]))
                 )->each(Closure::fromCallable([$this, "seedImage"]));
             })
-            ->each(Closure::fromCallable([$this, "seedHargaPemesanans"]))
-        ;
+            ->each(Closure::fromCallable([$this, "seedHargaPemesanans"]));
         DB::commit();
     }
 
@@ -65,7 +64,8 @@ class TempatPenyewaanSeeder extends Seeder
         }
     }
 
-    private function seedImage(FotoTempatPenyewaan $fotoTempatPenyewaan) {
+    private function seedImage(FotoTempatPenyewaan $fotoTempatPenyewaan)
+    {
         if (!env("seed_image")) {
             return;
         }

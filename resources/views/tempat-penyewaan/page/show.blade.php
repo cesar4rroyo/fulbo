@@ -224,7 +224,7 @@
                         <img data-src="{{ route("foto.carousel.show", $foto) }}"
                              style="filter: brightness(80%)"
                              alt="{{ $foto->nama }}"
-                             src="{{ route("foto.carousel.show", $foto) }}"
+                             src="https://elcomercio.pe/resizer/2d6h-K5Kf_VKzyfPAHJ0rbINK-4=/980x0/smart/filters:format(jpeg):quality(75)/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/YLGMR2KY7JH3BNR6Y5QVTVGZEE.jpg"
                         >
                         <div class="carousel-caption d-none d-md-block">
                             <h3> {{ $foto->nama }} </h3>

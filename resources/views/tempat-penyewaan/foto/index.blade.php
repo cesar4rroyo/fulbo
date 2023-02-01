@@ -2,14 +2,14 @@
 
 @section("content")
     <h1 class="feature-title">
-        Foto
+        Fotos
     </h1>
 
     <div class="d-flex justify-content-end my-3">
         <a
                 class="btn btn-primary"
                 href="{{ route("tempat-penyewaan.foto.create", $tempat_penyewaan)  }}">
-            Tambah
+            Agregar
             <i class="fas fa-plus"></i>
         </a>
     </div>
@@ -20,11 +20,11 @@
         <table class="table table-sm table-striped">
             <thead class="thead thead-dark">
             <tr>
-                <th> Urutan </th>
-                <th> Nama </th>
-                <th> Deskripsi </th>
-                <th> Foto </th>
-                <th class="text-center" style="width: 200px"> Kendali</th>
+                <th> Orden </th>
+                <th> Nombre </th>
+                <th> Descripción </th>
+                <th> Imagen </th>
+                <th class="text-center" style="width: 200px"> Acción</th>
             </tr>
             </thead>
 
@@ -44,7 +44,7 @@
                         <a class="btn btn-info btn-sm"
                            href="{{ route("foto.edit", $foto) }}"
                         >
-                            Ubah
+                            Cambiar
                             <i class="fas fa-pencil-alt"></i>
                         </a>
 
@@ -69,7 +69,7 @@
                             <button
 
                                     class="btn btn-danger btn-sm">
-                                Hapus
+                                Eliminar
                                 <i class="fas fa-trash"></i>
                             </button>
                         </form>

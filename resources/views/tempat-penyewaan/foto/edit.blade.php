@@ -3,10 +3,10 @@
 @section("content")
     <h1 class="feature-title">
         <a href="{{ route("tempat-penyewaan.foto.index", $foto->tempat_penyewaan_id) }}">
-            Foto
+            Fotos
         </a>
         /
-        Ubah
+        Editar
     </h1>
 
     @include("shared.messages")
@@ -21,11 +21,11 @@
                 @method("PUT")
                 @csrf
                 <div class="form-group">
-                    <label for="nama"> Nama: </label>
+                    <label for="nama"> Nombre: </label>
                     <input
                             id="nama"
                             type="text"
-                            placeholder="Nama"
+                            placeholder="Nombre"
                             class="form-control @error("nama") is-invalid @enderror"
                             name="nama"
                             value="{{ old("nama", $foto->nama) }}"
@@ -39,13 +39,13 @@
 
                 <div class="form-group">
                     <label for="deskripsi">
-                        Deskripsi:
+                        Descripción:
                     </label>
                     <textarea
                             class="form-control @error("deskripsi") is-invalid @enderror"
                             name="deskripsi"
                             id="deskripsi"
-                            placeholder="Deskripsi"
+                            placeholder="Descripción"
                             cols="30"
                             rows="5"
                     >{{ old("deskripsi", $foto->deskripsi) }}</textarea>
@@ -57,11 +57,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="urutan"> Urutan Foto: </label>
+                    <label for="urutan"> Orden: </label>
                     <input
                             id="urutan"
                             type="number"
-                            placeholder="Urutan Foto"
+                            placeholder="Orden"
                             class="form-control @error("urutan") is-invalid @enderror"
                             name="urutan"
                             value="{{ old("urutan", $foto->urutan) }}"
@@ -74,7 +74,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="image"> Gambar Baru: </label>
+                    <label for="image"> Nuevas Fotos: </label>
                     <input
                             id="image"
                             type="file"
@@ -92,11 +92,11 @@
                 <div class="alert alert-info">
                     <i class="fas fa-exclamation-circle"></i>
 
-                    Kosongkan kolom gambar baru jika Anda tidak ingin mengubah gambar yang telah ada sekarang
+                    Deje el campo de la nueva imagen en blanco si no desea cambiar la imagen existente
                 </div>
 
                 <div class="form-group">
-                    <div class="h4"> Gambar Sekarang:</div>
+                    <div class="h4"> Imagen:</div>
 
                     <img src="{{ route("foto.image.show", $foto) }}"
                          class="img-fluid rounded-top"
@@ -106,7 +106,7 @@
 
                 <div class="d-flex justify-content-end">
                     <button class="btn btn-primary">
-                        Ubah
+                        Actualizar
                     </button>
                 </div>
             </form>

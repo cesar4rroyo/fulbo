@@ -1,13 +1,13 @@
 <div>
     <h1 class="feature-title">
-        Pemesanan
+        Reserva
     </h1>
 
     @include("shared.messages")
 
     <div class="form-group">
         <label for="filter_show_all">
-            Filter Tampilan:
+            Ver filtros:
         </label>
 
         <select
@@ -15,8 +15,8 @@
                 id="filter_show_all"
                 class="form-control form-control-sm"
         >
-            <option value="true"> Semua</option>
-            <option value="false"> Hari ini Keatas</option>
+            <option value="true"> Todos</option>
+            <option value="false"> Hasta el dia</option>
         </select>
     </div>
 
@@ -25,11 +25,11 @@
             <thead class="thead-dark">
             <tr>
                 <th> #</th>
-                <th> Tempat</th>
-                <th> Hari, Tanggal</th>
-                <th class="text-center"> Status</th>
+                <th> Lugar</th>
+                <th> Fecha y Hora</th>
+                <th class="text-center"> Estado</th>
                 <th class="text-center">
-                    Kendali
+                    Acciones
                 </th>
             </tr>
             </thead>
@@ -50,7 +50,7 @@
                                 class="btn btn-info btn-sm"
                                 href="{{ route("pemesanan-penyewa.show", $pemesanan) }}"
                         >
-                            Detail
+                            Detalle
                         </a>
                     </td>
                 </tr>

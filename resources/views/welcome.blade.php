@@ -16,8 +16,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <a href="#"
-                        {{-- <a href="{{ route("penyewa-registration") }}" --}}
+                        <a href="{{ route("penyewa-registration") }}"
                            class="btn btn-block btn-lg btn-primary"
                         >
                             Registro de Clientes
@@ -25,11 +24,10 @@
                     </div>
 
                     <div class="col-md-6">
-                        <a href="#"
-                        {{-- <a href="{{ route("tempat-penyewaan-registration") }}" --}}
+                        <a href="{{ route("tempat-penyewaan-registration") }}"
                            class="btn btn-block btn-lg btn-primary"
                         >
-                        Registro de canchitas
+                        Registro de Canchitas
                         </a>
                     </div>
                 @else

@@ -13,8 +13,8 @@
                         <div class="card h-100">
                             <div class="card-body">
                                 <h2 class="h4 text-primary">
-                                    <a href="#">
-                                    {{-- <a href="{{ route("tempat-penyewaan.page", $tempat_penyewaan)  }}"> --}}
+                                    {{-- <a href="#"> --}}
+                                    <a href="{{ route("tempat-penyewaan.page", $tempat_penyewaan)  }}">
                                         {{ $tempat_penyewaan->nama }}
                                     </a>
                                 </h2>

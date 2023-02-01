@@ -1,6 +1,6 @@
 <div class="font-weight-bold">
     <span class="text-uppercase">
-        Manajemen
+        Gestión
     </span>
     <hr class="mt-0">
 
@@ -8,7 +8,7 @@
         <a class="text-decoration-none d-block {{ Route::is("tempat-penyewaan.*") ? "text-primary" : "text-dark"  }}"
            href="{{ route("tempat-penyewaan.index") }}"
         >
-            Tempat Penyewaan
+            Lugar de alquiler
         </a>
     @endcan
 
@@ -16,7 +16,7 @@
         <a class="text-decoration-none d-block {{ Route::is("tempat-penyewaan-profile-management") ? "text-primary" : "text-dark"  }}"
            href="{{ route("tempat-penyewaan-profile-management") }}"
         >
-            Profil
+            Perfil
         </a>
     @endcan
 
@@ -24,7 +24,7 @@
         <a class="text-decoration-none d-block {{ Route::is("*pemesanan-by-tempat.*") ? "text-primary" : "text-dark"  }}"
            href="{{ route("tempat-penyewaan.pemesanan-by-tempat.index", auth()->user()->tempat_penyewaan) }}"
         >
-            Pemesanan
+            Reservas
         </a>
     @endcan
 
@@ -32,7 +32,7 @@
         <a class="text-decoration-none d-block {{ Route::is("*harga-pemesanan.*") ? "text-primary" : "text-dark"  }}"
            href="{{ route("tempat-penyewaan.harga-pemesanan.index", auth()->user()->tempat_penyewaan) }}"
         >
-            Harga Pemesanan
+            Precios
         </a>
     @endcan
 
@@ -40,7 +40,7 @@
         <a class="text-decoration-none d-block {{ Route::is("*member-tempat-penyewaan-by-tempat-penyewaan.*") ? "text-primary" : "text-dark"  }}"
            href="{{ route("tempat-penyewaan.member-tempat-penyewaan-by-tempat-penyewaan.index", auth()->user()->tempat_penyewaan) }}"
             >
-            Member
+            Miembros
         </a>
     @endcan
 
@@ -48,7 +48,7 @@
         <a class="text-decoration-none d-block {{ Route::is("*foto.*") ? "text-primary" : "text-dark"  }}"
            href="{{ route("tempat-penyewaan.foto.index", auth()->user()->tempat_penyewaan) }}"
         >
-            Foto
+            Fotos
         </a>
     @endcan
 
@@ -56,7 +56,7 @@
         <a class="text-decoration-none d-block {{ Route::is("tempat-penyewaan.fasilitas-for-tempat-penyewaan.*") ? "text-primary" : "text-dark"  }}"
            href="{{ route("tempat-penyewaan.fasilitas-for-tempat-penyewaan.index", auth()->user()->tempat_penyewaan) }}"
         >
-            Fasilitas
+            Instalaciones
         </a>
     @endcan
 
@@ -72,7 +72,7 @@
         <a class="text-decoration-none d-block {{ Route::is("penyewa-profile-management") ? "text-primary" : "text-dark" }}"
            href="{{ route("penyewa-profile-management") }}"
         >
-            Profil
+            Perfil
         </a>
     @endcan
 
@@ -80,7 +80,7 @@
         <a class="text-decoration-none d-block {{ Route::is("pemesanan-penyewa.*") ? "text-primary" : "text-dark"  }}"
            href="{{ route("pemesanan-penyewa.index") }}"
         >
-            Pemesanan
+            Reserva
         </a>
     @endcan
 </div>

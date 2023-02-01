@@ -2,7 +2,7 @@
 
 @section("content")
     <h1 class="feature-title">
-        Harga Pemesanan
+        Precios
     </h1>
 
     @include("shared.messages")
@@ -12,9 +12,9 @@
             <thead class="thead thead-dark">
             <tr>
                 <th> # </th>
-                <th> Hari </th>
-                <th class="text-right"> Harga </th>
-                <th class="text-center"> Kendali</th>
+                <th> Día </th>
+                <th class="text-right"> Precio </th>
+                <th class="text-center"> Control</th>
             </tr>
             </thead>
 
@@ -26,7 +26,7 @@
                     <td class="text-right"> {{ number_format($harga_pemesanan->harga) }} </td>
                     <td class="text-center">
                         <a href="{{ route("harga-pemesanan.edit", $harga_pemesanan) }}" class="btn btn-info btn-sm">
-                            Ubah
+                            Cambiar
                             <i class="fas fa-pencil-alt  "></i>
                         </a>
                     </td>

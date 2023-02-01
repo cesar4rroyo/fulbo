@@ -1,13 +1,13 @@
 <div>
     <h1 class="feature-title">
-        Pemesanan
+        Reservas
     </h1>
 
     @include("shared.messages")
 
     <div class="form-group">
         <label for="filter_show_all">
-            Filter Tampilan:
+            Ver filtros:
         </label>
 
         <select
@@ -15,8 +15,8 @@
                 id="filter_show_all"
                 class="form-control form-control-sm"
         >
-            <option value="true"> Semua</option>
-            <option value="false"> Hari ini Keatas</option>
+            <option value="true"> Todos</option>
+            <option value="false"> Hasta el día</option>
         </select>
     </div>
 
@@ -25,11 +25,11 @@
             <thead class="thead-dark">
             <tr>
                 <th> # </th>
-                <th> Penyewa </th>
-                <th> Hari, Tanggal </th>
-                <th class="text-center"> Status </th>
+                <th> Inquilino </th>
+                <th> Fecha y Hora </th>
+                <th class="text-center"> Estado </th>
                 <th class="text-center">
-                    Kendali
+                    Acciones
                 </th>
             </tr>
             </thead>
@@ -46,7 +46,7 @@
                             @if($pemesanan->penyewa->id === ($pemesanan->member_tempat_penyewaan->penyewa_id ?? null))
                                 <span class="badge badge-primary">
                                     <i class="fas fa-star"></i>
-                                    Pemesanan Member
+                                    Pedidos de miembros
                                 </span>
                             @endif
                         </span>
@@ -63,7 +63,7 @@
                         <a
                                 class="btn btn-info btn-sm"
                                 href="{{ route("pemesanan-by-tempat.show", $pemesanan) }}">
-                            Detail
+                            Detalle
                         </a>
                     </td>
                 </tr>

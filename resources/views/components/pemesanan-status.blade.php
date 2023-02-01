@@ -1,7 +1,7 @@
 @switch($status)
     @case(\App\Enums\PemesananStatus::DRAFT)
     <span class="badge badge-pill badge-primary">
-        Belum Diproses
+        Sin Procesar
     </span>
     @break
     @case(\App\Enums\PemesananStatus::DITERIMA)

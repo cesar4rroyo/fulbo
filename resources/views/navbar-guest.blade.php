@@ -24,9 +24,9 @@
                            href="{{ \App\Providers\RouteServiceProvider::defaultAdminRoute()  }}"
                         >
                             @if(auth()->user()->level === \App\Enums\UserLevel::ADMIN_UTAMA)
-                                Administrasi
+                            Administración
                             @else
-                                Manajemen
+                                Gestión
                             @endif
                         </a>
                     </li>

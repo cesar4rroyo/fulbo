@@ -2,7 +2,7 @@
 
 @section("content")
     <h1 class="feature-title">
-        Review
+        Reviews
     </h1>
 
     @include("shared.messages")
@@ -12,9 +12,9 @@
             <thead class="thead thead-dark">
             <tr>
                 <th> # </th>
-                <th style="width: 200px"> Waktu </th>
-                <th> Penyewa </th>
-                <th> Komentar </th>
+                <th style="width: 200px"> Hora </th>
+                <th> Cliente </th>
+                <th> Comentario </th>
                 <th class="text-right"> Rating </th>
             </tr>
             </thead>

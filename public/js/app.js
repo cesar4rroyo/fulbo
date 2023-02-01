@@ -80431,13 +80431,13 @@ var app = new Vue({
 
 window.confirmDialog = function (attributes) {
   return sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire(_objectSpread({
-    title: "Konfirmasi",
-    titleText: "Konfirmasi Tindakan",
-    text: "Apakah Anda yakin ingin melakukan tindakan ini?",
+    title: "Confirmación",
+    titleText: "Confirmación de acción",
+    text: "¿Está seguro de que desea realizar esta acción?",
     icon: "warning",
     showCancelButton: true,
-    confirmButtonText: "Ya",
-    cancelButtonText: "Tidak"
+    confirmButtonText: "Si",
+    cancelButtonText: "Cancelar"
   }, attributes));
 };
 

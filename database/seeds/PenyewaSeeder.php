@@ -21,7 +21,7 @@ class PenyewaSeeder extends Seeder
         factory(Penyewa::class, 100)
             ->make()
             ->each(function (Penyewa $penyewa, $index) {
-                $emailOrPassword = "penyewa_{$index}@test.com";
+                $emailOrPassword = "cliente_{$index}@test.com";
 
                 $penyewa->user()->associate(
                     factory(User::class)->create([

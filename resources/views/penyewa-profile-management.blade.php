@@ -3,7 +3,7 @@
 @section("content")
     <div class="container">
         <h1 class="feature-title">
-            Manajemen Profil
+            Gestión de perfiles
         </h1>
 
         @include("shared.messages")
@@ -16,11 +16,11 @@
                     @method("PUT")
 
                     <div class="form-group">
-                        <label for="name"> Nama Asli:</label>
+                        <label for="name"> Nombre Original:</label>
                         <input
                             id="name"
                             type="text"
-                            placeholder="Nama Asli"
+                            placeholder="Nombre Original"
                             class="form-control @error("name") is-invalid @enderror"
                             name="name"
                             value="{{ old("name", $user->name) }}"
@@ -50,11 +50,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="no_telepon"> No. Telepon: </label>
+                        <label for="no_telepon"> Nro. de Teléfono: </label>
                         <input
                                 id="no_telepon"
                                 type="tel"
-                                placeholder="No. Telepon"
+                                placeholder="Nro. de Teléfono"
                                 class="form-control @error("no_telepon") is-invalid @enderror"
                                 name="no_telepon"
                                 value="{{ old("no_telepon", $user->penyewa->no_telepon) }}"
@@ -67,11 +67,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="tanggal_lahir"> Tanggal Lahir:</label>
+                        <label for="tanggal_lahir"> Fecha de Nacimiento:</label>
                         <input
                             id="tanggal_lahir"
                             type="date"
-                            placeholder="Tanggal Lahir"
+                            placeholder="Fecha de Nacimiento"
                             class="form-control @error("tanggal_lahir") is-invalid @enderror"
                             name="tanggal_lahir"
                             value="{{ old("tanggal_lahir", $user->tanggal_lahir) }}"
@@ -84,11 +84,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="password"> Kata Sandi Baru:</label>
+                        <label for="password"> Nueva contraseña:</label>
                         <input
                             id="password"
                             type="password"
-                            placeholder="Kata Sandi Baru"
+                            placeholder="Nueva contraseña"
                             class="form-control @error("password") is-invalid @enderror"
                             name="password"
                             value="{{ old("password") }}"
@@ -101,11 +101,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="password_confirmation"> Ulangi Kata Sandi Baru:</label>
+                        <label for="password_confirmation"> Confirmar Nueva Contraseña:</label>
                         <input
                             id="password_confirmation"
                             type="password"
-                            placeholder="Ulangi Kata Sandi Baru"
+                            placeholder="Confirmar Nueva Contraseña"
                             class="form-control @error("password_confirmation") is-invalid @enderror"
                             name="password_confirmation"
                             value="{{ old("password_confirmation") }}"
@@ -119,7 +119,7 @@
 
                     <div class="d-flex justify-content-end">
                         <button class="btn btn-primary">
-                            Ubah
+                            Guardar
                         </button>
                     </div>
 

@@ -58,13 +58,13 @@ const app = new Vue({
 
 window.confirmDialog = (attributes) => {
     return Swal.fire({
-        title: `Konfirmasi`,
-        titleText: `Konfirmasi Tindakan`,
-        text: `Apakah Anda yakin ingin melakukan tindakan ini?`,
+        title: `Confirmación`,
+        titleText: `Confirmación de acción`,
+        text: `¿Está seguro de que desea realizar esta acción?`,
         icon: `warning`,
         showCancelButton: true,
-        confirmButtonText: `Ya`,
-        cancelButtonText: `Tidak`,
+        confirmButtonText: `Sí`,
+        cancelButtonText: `Cancelar`,
         ...attributes,
     })
 }
