@@ -1,6 +1,6 @@
 <div class="container">
     <h1 class="feature-title">
-        Tempat Penyewaan
+        Canchitas
     </h1>
 
     @include("shared.messages")
@@ -8,7 +8,7 @@
     <div class="d-flex align-items-center">
         <div class="form-inline my-3">
             <label for="filter_items" class="mr-3">
-                Filter:
+                Filtros:
             </label>
 
             <select
@@ -38,12 +38,12 @@
                 <thead class="thead-dark">
                 <tr>
                     <th class="align-middle"> # </th>
-                    <th class="align-middle"> Nama Tempat</th>
+                    <th class="align-middle"> Nombre</th>
                     <th class="align-middle"> Admin </th>
-                    <th class="align-middle"> No. Telepon </th>
-                    <th class="align-middle" style="width: 100px"> Alamat</th>
-                    <th class="align-middle text-center"> Status Verifikasi</th>
-                    <th class="align-middle text-center"> Kendali</th>
+                    <th class="align-middle"> Nro. Telefono </th>
+                    <th class="align-middle" style="width: 100px"> Dirección</th>
+                    <th class="align-middle text-center"> Estado de Verificación</th>
+                    <th class="align-middle text-center"> Acciones</th>
                 </tr>
                 </thead>
 
@@ -75,7 +75,7 @@
                             <a
                                 class="btn btn-info btn-sm my-2 d-inline-block mx-auto"
                                 href="{{ route("tempat-penyewaan.location.edit", $tempatPenyewaan) }}">
-                                Lokasi
+                                Localización
                                 <i class="fas fa-pencil-alt  "></i>
                             </a>
 

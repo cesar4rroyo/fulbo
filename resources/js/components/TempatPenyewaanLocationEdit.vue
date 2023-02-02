@@ -57,10 +57,10 @@
         <div class="card-body">
 
           <dl>
-            <dt> Nama Tempat Penyewaan </dt>
+            <dt> Nombre </dt>
             <dd> {{ tempat_penyewaan.nama }} </dd>
 
-            <dt> Alamat </dt>
+            <dt> Dirección </dt>
             <dd> {{ tempat_penyewaan.alamat }} </dd>
           </dl>
 

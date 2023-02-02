@@ -11,6 +11,6 @@
     "
     type="button"
     class="btn btn-sm {{ $status ? "btn-dark" : "btn-success" }} ">
-    {{ $status ? "Batalkan Verifikasi" : "Verifikasi" }}
+    {{ $status ? "Cancelar Verificación" : "Verificación" }}
     <i class="fas {{ $status ? "fa-times" : "fa-check" }}"></i>
 </button>

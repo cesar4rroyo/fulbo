@@ -4,10 +4,10 @@
     <div class="container">
         <h1 class="feature-title">
             <a href="{{ route("tempat-penyewaan.index") }}">
-                Tempat Penyewaan
+                Canchitas
             </a>
             /
-            Edit Lokasi
+            Editar Ubicación
         </h1>
 
         @include("shared.messages")

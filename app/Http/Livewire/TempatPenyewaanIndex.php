@@ -26,9 +26,9 @@ class TempatPenyewaanIndex extends Component
         "selectedOption",
     ];
 
-    const OPTION_TERVERIFIKASI = "Terverifikasi";
-    const OPTION_TIDAK_TERVERIFIKASI = "Tidak Terverifikasi";
-    const OPTION_ALL = "Semua";
+    const OPTION_TERVERIFIKASI = "Verificado";
+    const OPTION_TIDAK_TERVERIFIKASI = "No verificado";
+    const OPTION_ALL = "Todos";
 
     public $options = [
         self::OPTION_TERVERIFIKASI,
@@ -82,9 +82,11 @@ class TempatPenyewaanIndex extends Component
             ->when($this->selectedOption, function (Builder $builder, $option) {
                 switch ($option) {
                     case self::OPTION_TERVERIFIKASI:
-                        $builder->where('terverifikasi', 1); break;
+                        $builder->where('terverifikasi', 1);
+                        break;
                     case self::OPTION_TIDAK_TERVERIFIKASI:
-                        $builder->where('terverifikasi', 0); break;
+                        $builder->where('terverifikasi', 0);
+                        break;
                 }
             })
             ->orderBy('nama')
@@ -109,7 +111,7 @@ class TempatPenyewaanIndex extends Component
             );
         } catch (\Exception $ex) {
             SessionHelper::flashMessage(
-            __("messages.delete.failure-related-data"),
+                __("messages.delete.failure-related-data"),
                 MessageState::STATE_DANGER
             );
         }

@@ -10,6 +10,6 @@
                     window.livewire.emit('delete', id)
                 })
         ">
-    Hapus
+    Eliminar
     <i class="fas fa-trash"></i>
 </button>

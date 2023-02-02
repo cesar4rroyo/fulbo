@@ -6,7 +6,7 @@
             Foto
         </a>
         /
-        Tambah
+        Crear
     </h1>
 
     @include("shared.messages")
@@ -20,11 +20,11 @@
             >
                 @csrf
                 <div class="form-group">
-                    <label for="nama"> Nama: </label>
+                    <label for="nama"> Nombre: </label>
                     <input
                             id="nama"
                             type="text"
-                            placeholder="Nama"
+                            placeholder="Nombre"
                             class="form-control @error("nama") is-invalid @enderror"
                             name="nama"
                             value="{{ old("nama") }}"
@@ -38,13 +38,13 @@
 
                 <div class="form-group">
                     <label for="deskripsi">
-                        Deskripsi:
+                        Descripcion:
                     </label>
                     <textarea
                             class="form-control @error("deskripsi") is-invalid @enderror"
                             name="deskripsi"
                             id="deskripsi"
-                            placeholder="Deskripsi"
+                            placeholder="Descripcion"
                             cols="30"
                             rows="5"
                     >{{ old("deskripsi") }}</textarea>
@@ -56,11 +56,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="urutan"> Urutan: </label>
+                    <label for="urutan"> Orden: </label>
                     <input
                             id="urutan"
                             type="number"
-                            placeholder="Urutan"
+                            placeholder="Orden"
                             class="form-control @error("urutan") is-invalid @enderror"
                             name="urutan"
                             value="{{ old("urutan") }}"
@@ -73,7 +73,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="image"> Gambar Baru: </label>
+                    <label for="image"> Foto: </label>
                     <input
                             id="image"
                             type="file"
@@ -90,7 +90,7 @@
 
                 <div class="d-flex justify-content-end">
                     <button class="btn btn-primary">
-                        Tambah
+                        Guardar
                     </button>
                 </div>
             </form>

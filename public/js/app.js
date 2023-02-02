@@ -65449,11 +65449,11 @@ var render = function() {
       _c("div", { staticClass: "card" }, [
         _c("div", { staticClass: "card-body" }, [
           _c("dl", [
-            _c("dt", [_vm._v(" Nama Tempat Penyewaan ")]),
+            _c("dt", [_vm._v(" Nombre del lugar de alquiler ")]),
             _vm._v(" "),
             _c("dd", [_vm._v(" " + _vm._s(_vm.tempat_penyewaan.nama) + " ")]),
             _vm._v(" "),
-            _c("dt", [_vm._v(" Alamat ")]),
+            _c("dt", [_vm._v(" Dirección ")]),
             _vm._v(" "),
             _c("dd", [_vm._v(" " + _vm._s(_vm.tempat_penyewaan.alamat) + " ")])
           ]),
@@ -65475,7 +65475,7 @@ var render = function() {
                 _c("div", { staticClass: "col-md-6" }, [
                   _c("div", { staticClass: "form-group" }, [
                     _c("label", { attrs: { for: "latitude" } }, [
-                      _vm._v("\n                  Latitude:\n                ")
+                      _vm._v("\n                  Latitud:\n                ")
                     ]),
                     _vm._v(" "),
                     _c("input", {
@@ -65535,7 +65535,7 @@ var render = function() {
                 _c("div", { staticClass: "col-md-6" }, [
                   _c("div", { staticClass: "form-group" }, [
                     _c("label", { attrs: { for: "longitude" } }, [
-                      _vm._v("\n                  Longitude:\n                ")
+                      _vm._v("\n                  Longitud:\n                ")
                     ]),
                     _vm._v(" "),
                     _c("input", {
@@ -65608,7 +65608,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-group d-flex justify-content-end" }, [
       _c("button", { staticClass: "btn btn-primary" }, [
-        _vm._v("\n              Perbarui Data\n            ")
+        _vm._v("\n              Actualizar\n            ")
       ])
     ])
   }
