@@ -44,23 +44,22 @@ class TempatPenyewaanPageController extends Controller
 
         return $this->responseFactory->view("tempat-penyewaan.page.show", [
             "ratingValues" => [
-                1 => "Sangat Buruk",
-                2 => "Buruk",
-                3 => "Biasa",
-                4 => "Bagus",
-                5 => "Sangat Bagus"
+                1 => "Muy Malo",
+                2 => "Malo",
+                3 => "Normal",
+                4 => "Bueno",
+                5 => "Muy Bueno"
             ],
             "tempat_penyewaan" => $tempat_penyewaan,
             "averageRating" => $tempat_penyewaan->reviews()
                 ->avg("rating"),
-            "review" =>
-                ($request->user()->penyewa->id ?? null) ?
-                    $tempat_penyewaan->reviews()
-                    ->where([
-                        "penyewa_id" => $request->user()->penyewa->id,
-                    ])
-                    ->first() :
-                    null,
+            "review" => ($request->user()->penyewa->id ?? null) ?
+                $tempat_penyewaan->reviews()
+                ->where([
+                    "penyewa_id" => $request->user()->penyewa->id,
+                ])
+                ->first() :
+                null,
             "membership" => MemberTempatPenyewaan::query()
                 ->where([
                     "penyewa_id" => $request->user()->penyewa->id ?? null,

@@ -1,11 +1,11 @@
 <div>
     <form wire:submit.prevent="submit">
         <div class="form-group">
-            <label for="tanggal_pemesanan"> Tanggal Pemesanan: </label>
+            <label for="tanggal_pemesanan"> Fecha de Reserva: </label>
             <input
                     id="tanggal_pemesanan"
                     type="date"
-                    placeholder="Tanggal Pemesanan"
+                    placeholder="Fecha de Reserva"
                     class="form-control @error("tanggal_pemesanan") is-invalid @enderror"
                     name="tanggal_pemesanan"
                     wire:model="pemesanan_data.tanggal_pemesanan"
@@ -18,29 +18,29 @@
         </div>
 
         <dl>
-            <dt> Waktu Buka: </dt>
+            <dt> Tiempo Abierto: </dt>
             <dd> {{ $tempat_penyewaan->waktu_buka }} </dd>
         </dl>
 
         <dl>
-            <dt> Waktu Tutup: </dt>
+            <dt> Hora de Cierre: </dt>
             <dd> {{ $tempat_penyewaan->waktu_tutup }} </dd>
         </dl>
 
         <div class="form-group">
             <div>
-                Item Pemesanan:
+                Items:
             </div>
 
             <table class="table table-sm table-striped">
                 <thead class="thead-dark">
                 <tr>
                     <th> #</th>
-                    <th> Waktu Mulai</th>
-                    <th> Waktu Selesai</th>
-                    <th class="text-right"> Total Jam </th>
-                    <th class="text-right"> Harga</th>
-                    <th class="text-center"> Kendali</th>
+                    <th> Hora de Inicio</th>
+                    <th> Tiempo de Fin</th>
+                    <th class="text-right"> Total de Horas </th>
+                    <th class="text-right"> Precio</th>
+                    <th class="text-center"> Control</th>
                 </tr>
                 </thead>
 
@@ -57,7 +57,7 @@
                                         wire:key="item_pemesanans_data.{{ $index }}.start"
                                         wire:model.defer="item_pemesanans_data.{{ $index }}.start"
                                         type="time"
-                                        placeholder="Waktu Mulai"
+                                        placeholder="Hora de Inicio"
                                         class="form-control form-control-sm @error("item_pemesanans_data.{$index}.start") is-invalid @enderror"
                                         name="start"
                                         value="{{ old("start") }}"
@@ -78,7 +78,7 @@
                                         wire:key="item_pemesanans_data.{{ $index }}.finish"
                                         wire:model.defer="item_pemesanans_data.{{ $index }}.finish"
                                         type="time"
-                                        placeholder="Waktu Selesai"
+                                        placeholder="Hora de Acabar"
                                         class="form-control form-control-sm @error("item_pemesanans_data.{$index}.finish") is-invalid @enderror"
                                         name="finish"
                                         value="{{ old("finish") }}"
@@ -102,7 +102,7 @@
                                     class="btn btn-danger btn-sm"
                                     wire:click="removeItemPemesananData({{ $index }})"
                             >
-                                Hapus
+                                Eliminar
                             </button>
                         </td>
 
@@ -136,7 +136,7 @@
                     class="btn btn-dark btn-sm"
                     type="button"
             >
-                Tambah Item Pemesanan
+                Añadir Items
             </button>
         </div>
 
@@ -144,7 +144,7 @@
 
         <div class="form-group d-flex justify-content-end">
             <button class="btn btn-lg btn-primary">
-                Pesan
+                Mensaje
                 <i class="fas fa-book  "></i>
             </button>
         </div>

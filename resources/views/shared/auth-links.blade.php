@@ -26,7 +26,7 @@
                         (Admin {{ auth()->user()->tempat_penyewaan->nama }})
                     @break
                     @case(\App\Enums\UserLevel::PENYEWA)
-                        (Penyewa)
+                        (Cliente)
                     @break
                 @endswitch
             </span>

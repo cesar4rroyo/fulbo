@@ -7,7 +7,7 @@
                 {{ $tempat_penyewaan->nama }}
             </a>
             /
-            Buat Pemesanan
+            Crear Reserva
         </h1>
 
         <div class="card" id="app">

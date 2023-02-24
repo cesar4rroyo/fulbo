@@ -6,9 +6,9 @@ namespace App\Enums;
 
 class PemesananStatus
 {
-    const DRAFT = "DRAFT";
-    const DITERIMA = "DITERIMA";
-    const BATAL = "BATAL";
+    const DRAFT = "SIN PROCESAR";
+    const DITERIMA = "ACEPTADO";
+    const BATAL = "CANCELADO";
 
     const LEVELS = [
         self::DRAFT,

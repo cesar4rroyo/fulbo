@@ -3,19 +3,19 @@
 @section("content")
     <h1 class="feature-title">
         <a href="{{ route("tempat-penyewaan.pemesanan-by-tempat.index", $pemesanan->tempat_penyewaan_id) }}">
-            Pemesanan
+            Reservas
         </a>
         /
-        Detail
+        Detalles
     </h1>
 
     @include("shared.messages")
 
     <dl>
-        <dt> Hari, Tanggal:</dt>
+        <dt> Fecha y Hora:</dt>
         <dd> {{ \App\Support\Formatter::date($pemesanan->tanggal) }} </dd>
 
-        <dt> Status:</dt>
+        <dt> Estado:</dt>
         <dt>
             <x-pemesanan-status
                     status="{{ $pemesanan->status }}"
@@ -28,8 +28,8 @@
             <thead class="thead-dark">
             <tr>
                 <th> #</th>
-                <th> Waktu</th>
-                <th> Harga</th>
+                <th> Tiempo</th>
+                <th> Precio</th>
             </tr>
             </thead>
             <tbody>
@@ -54,26 +54,26 @@
 
 
             <div class="form-group">
-                <label for="status"> Status Baru: </label>
+                <label for="status"> Nuevo Estado: </label>
                 <select class="form-control"
                         name="status"
                         id="status"
                 >
                     <option value="{{ \App\Enums\PemesananStatus::BATAL }}" {{ old("status", $pemesanan->status) == \App\Enums\PemesananStatus::BATAL ? "selected" : ""  }}>
-                        Batal
+                        Cancelado
                     </option>
                     <option value="{{ \App\Enums\PemesananStatus::DRAFT }}" {{ old("status", $pemesanan->status) == \App\Enums\PemesananStatus::DRAFT ? "selected" : ""  }}>
-                        Draft
+                        Sin Procesar
                     </option>
                     <option value="{{ \App\Enums\PemesananStatus::DITERIMA }}" {{ old("status", $pemesanan->status) == \App\Enums\PemesananStatus::DITERIMA ? "selected" : ""  }}>
-                        Diterima
+                        Aceptado
                     </option>
                 </select>
             </div>
 
             <div class="form-group d-flex justify-content-end">
                 <button class="btn btn-primary">
-                    Ubah
+                    Cambiar
                 </button>
             </div>
         </form>

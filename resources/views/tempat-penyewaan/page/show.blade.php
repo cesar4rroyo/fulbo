@@ -80,7 +80,7 @@
                                                 class="form-control @error("konten") is-invalid @enderror"
                                                 name="konten"
                                                 id="konten"
-                                                placeholder="Komentar"
+                                                placeholder="Comentarios"
                                                 cols="30"
                                                 rows="3"
                                         ></textarea>
@@ -184,7 +184,7 @@
                                    class="btn btn-primary btn-block"
                                 >
                                     <i class="fas fa-book"></i>
-                                    Hacer orden
+                                    Hacer Reserva
                                 </a>
                             @else
                                 <div class="alert alert-info">

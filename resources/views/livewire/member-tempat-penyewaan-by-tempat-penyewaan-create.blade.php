@@ -1,7 +1,7 @@
 <div>
     <form wire:submit.prevent="submit">
         <div class="form-group">
-            <label for="hari_dalam_minggu"> Hari: </label>
+            <label for="hari_dalam_minggu"> Día: </label>
             <select
                     wire:model="hari_dalam_minggu"
                     id="hari_dalam_minggu"
@@ -27,9 +27,9 @@
                 <thead class="thead-dark">
                 <tr>
                     <th> # </th>
-                    <th> Waktu </th>
-                    <th class="text-right"> Harga </th>
-                    <th class="text-center"> Pilih? </th>
+                    <th> Tiempo </th>
+                    <th class="text-right"> Precio </th>
+                    <th class="text-center"> Seleccionar? </th>
                 </tr>
                 </thead>
 
@@ -71,7 +71,7 @@
 
                     <tr>
                         <td></td>
-                        <td class="text-right"> Total Bulanan (x {{ $this->multiplier }}): </td>
+                        <td class="text-right"> Total Mensual (x {{ $this->multiplier }}): </td>
                         <td class="text-right"> {{ \App\Support\Formatter::currency($this->grandTotalPrice) }} </td>
                     </tr>
                 </tfoot>
@@ -88,7 +88,7 @@
 
         <div class="form-group text-right">
             <button class="btn btn-primary">
-                Ajukan
+                Aplicar
             </button>
         </div>
     </form>

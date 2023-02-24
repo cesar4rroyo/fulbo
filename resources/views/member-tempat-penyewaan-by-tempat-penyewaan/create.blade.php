@@ -3,11 +3,11 @@
 @section("content")
     <div class="container py-3">
         <h1 class="feature-title">
-            Buat Pengajuan Member
+            Crear una presentación de Miembro
         </h1>
 
         <dl>
-            <dt> Tempat Penyewaan: </dt>
+            <dt> Lugar de Alquiler: </dt>
             <dd> {{ $tempat_penyewaan->nama }} </dd>
         </dl>
 
