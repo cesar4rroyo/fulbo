@@ -79797,7 +79797,7 @@ var loadGmapApi = exports.loadGmapApi = function (options, loadCn) {
     var baseUrl = 'https://maps.googleapis.com/';
 
     if (typeof loadCn === 'boolean' && loadCn === true) {
-      baseUrl = 'https://maps.google.cn/';
+      baseUrl = 'https://maps.google.com/';
     }
 
     var url = baseUrl + 'maps/api/js?' + Object.keys(options).map(function (key) {
