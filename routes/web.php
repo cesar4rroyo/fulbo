@@ -29,8 +29,10 @@ use App\Http\Controllers\TempatPenyewaanProfileManagementHandlerController;
 use App\Http\Controllers\TempatPenyewaanRegistrationFormController;
 use App\Http\Controllers\TempatPenyewaanRegistrationHandlerController;
 use App\Http\Controllers\WelcomeController;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\URL;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +44,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+if (App::environment('production')) {
+    URL::forceScheme('https');
+}
 
 Auth::routes([
     "register" => false,
