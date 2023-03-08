@@ -24,26 +24,27 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-//    public function login(Request $request)
-//    {
-////        dd($request->all());
-//
-//        $pass =  User::query()
-//            ->where([
-//                "email" => $request->get("email"),
-//            ])
-//            ->first()
-//            ->makeVisible("password")
-//            ->password;
-//
-//        $pass2 = Hash::check($request->get("password"), $pass);
-//
-//        return compact("pass", "pass2");
-//    }
+    //    public function login(Request $request)
+    //    {
+    ////        dd($request->all());
+    //
+    //        $pass =  User::query()
+    //            ->where([
+    //                "email" => $request->get("email"),
+    //            ])
+    //            ->first()
+    //            ->makeVisible("password")
+    //            ->password;
+    //
+    //        $pass2 = Hash::check($request->get("password"), $pass);
+    //
+    //        return compact("pass", "pass2");
+    //    }
 
 
     public function redirectTo()
     {
+        \Log::info("Login User: " . auth()->user()->name);
         return RouteServiceProvider::defaultRoute(auth()->user());
     }
 

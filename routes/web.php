@@ -45,6 +45,10 @@ use Illuminate\Support\Facades\URL;
 |
 */
 
+Route::get('/debug-sentry', function () {
+    throw new Exception('My first Sentry error!');
+});
+
 
 if (App::environment('production')) {
     URL::forceScheme('https');
