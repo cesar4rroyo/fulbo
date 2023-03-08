@@ -58,7 +58,8 @@ class TempatPenyewaanRegistrationHandlerController extends Controller
 
             if ($waktuBuka->greaterThanOrEqualTo($waktuTutup)) {
                 $validator->errors()->add(
-                    "waktu_buka", "Waktu buka wajib < waktu tutup."
+                    "waktu_buka",
+                    "Waktu buka wajib < waktu tutup."
                 );
             }
         })->validate();
@@ -94,6 +95,8 @@ class TempatPenyewaanRegistrationHandlerController extends Controller
             __("messages.tempat-penyewaan-registration-success"),
             MessageState::STATE_SUCCESS
         );
+
+        \Log::debug('Registro de Nuevo dueño de Canchas: ' . $user->name);
 
         return $this->responseFactory
             ->redirectToRoute("tempat-penyewaan-profile-management");

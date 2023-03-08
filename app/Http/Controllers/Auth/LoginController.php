@@ -44,7 +44,7 @@ class LoginController extends Controller
 
     public function redirectTo()
     {
-        \Log::info("Login User: " . auth()->user()->name);
+        \Log::debug('Login User: ' . auth()->user()->name);
         return RouteServiceProvider::defaultRoute(auth()->user());
     }
 

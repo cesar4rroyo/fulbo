@@ -99,6 +99,13 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+        'sentry' => [
+            'driver' => 'sentry',
+            //report all logs level including log info
+            'level' => 'debug',
+            'bubble' => true,
+        ],
     ],
 
 ];

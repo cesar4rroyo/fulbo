@@ -68,6 +68,8 @@ class PenyewaRegistrationHandlerController extends Controller
             MessageState::STATE_SUCCESS
         );
 
+        \Log::debug("Cliente Nuevo {$user->name} registrado ");
+
         return $this->responseFactory->redirectTo(RouteServiceProvider::defaultRoute($user));
     }
 }
