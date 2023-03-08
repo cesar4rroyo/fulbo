@@ -38,8 +38,14 @@
                     @if($user->tempat_penyewaan->terverifikasi == 0)
                         <div class="alert alert-warning">
                             <i class="fas fa-exclamation-triangle"></i>
-                            Las cuentas que no han sido verificadas no pueden usar las funciones completas.
+                            Las cuentas que no han sido verificadas no pueden usar las funciones completas, para eso asegurese de realizar el pago.
+                            <br>
+                            <a href="https://api.whatsapp.com/send?phone=51926710473&text=Hola%20quisiera%20validar%20mi%20pago:%20" target="_blank">
+                                Enviar comprobante de pago
+                            </a>
                         </div>
+
+                        
                     @endif
 
                     <div class="form-group">
